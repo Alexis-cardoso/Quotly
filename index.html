@@ -616,6 +616,29 @@ input, textarea, select, button { font-family: inherit; }
   .page-content { padding: 16px; }
 }
 
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: Figtree, sans-serif;
+  transition: all 0.15s;
+  margin-bottom: 4px;
+}
+.back-btn:hover {
+  background: #eef2ff;
+  color: #4f46e5;
+  border-color: #c7d2fe;
+}
+
 /* ── RESPONSIVE MOBILE ── */
 @media (max-width: 767px) {
   .sidebar { display: none; }
@@ -1045,8 +1068,8 @@ input, textarea, select, button { font-family: inherit; }
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
         <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Revenu net mensuel souhaité (€)</label><input id="tjm-revenu-free" type="number" value="4000" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
         <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Jours travaillés par mois</label><input id="tjm-jours-free" type="number" value="18" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
-        <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Charges estimées (%)</label><input id="tjm-charges" type="number" value="45" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
-        <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Semaines de congé/an</label><input id="tjm-conges" type="number" value="5" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
+        <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Charges estimées (%)</label><input id="tjm-charges-free" type="number" value="45" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
+        <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Semaines de congé/an</label><input id="tjm-conges-free" type="number" value="5" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
       </div>
     </div>
     <!-- Result -->
@@ -1182,7 +1205,7 @@ input, textarea, select, button { font-family: inherit; }
             </div>
             <div style="font-size:13px;color:rgba(255,255,255,0.4);max-width:400px;line-height:1.6;">Votre espace freelance. Créez, gérez et envoyez vos devis en quelques clics.</div>
           </div>
-          <div style="display:flex;gap:10px;flex-shrink:0;position:relative;z-index:1;">
+          <div class="dash-banner-btns" style="display:flex;gap:10px;flex-shrink:0;position:relative;z-index:1;">
             <button onclick="goTo('nouveau-devis')" style="padding:10px 18px;background:#4f46e5;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;white-space:nowrap;">+ Nouveau devis</button>
             <button onclick="goTo('nouveau-contrat')" style="padding:10px 18px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.12);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:Figtree,sans-serif;white-space:nowrap;">+ Contrat</button>
           </div>
@@ -1452,7 +1475,8 @@ input, textarea, select, button { font-family: inherit; }
     <div class="page" id="page-nouveau-devis">
       <div class="topbar">
         <div class="topbar-left">
-          <div class="topbar-title" data-fr="Nouveau devis" data-en="New quote">Nouveau devis</div>
+          <button onclick="goTo('devis')" style="background:none;border:none;cursor:pointer;font-size:22px;color:#9191aa;padding:0 8px 0 0;line-height:1;">&#8592;</button>
+          <button class="back-btn" onclick="goTo('devis')">← Retour</button><div class="topbar-title" data-fr="Nouveau devis" data-en="New quote">Nouveau devis</div>
           <div class="topbar-sub" data-fr="Remplissez les informations ou laissez l'IA vous aider" data-en="Fill in the info or let AI help you">Remplissez les informations ou laissez l'IA vous aider</div>
         </div>
         <div class="topbar-actions">
@@ -1687,7 +1711,8 @@ input, textarea, select, button { font-family: inherit; }
     <div class="page" id="page-nouveau-contrat">
       <div class="topbar">
         <div class="topbar-left">
-          <div class="topbar-title" data-fr="Nouveau contrat" data-en="New contract">Nouveau contrat</div>
+          <button onclick="goTo('contrats')" style="background:none;border:none;cursor:pointer;font-size:22px;color:#9191aa;padding:0 8px 0 0;line-height:1;">&#8592;</button>
+          <button class="back-btn" onclick="goTo('contrats')">← Retour</button><div class="topbar-title" data-fr="Nouveau contrat" data-en="New contract">Nouveau contrat</div>
           <div class="topbar-sub" data-fr="Choisissez un type et remplissez les informations" data-en="Choose a type and fill in the information">Choisissez un type et remplissez les informations</div>
         </div>
         <div class="topbar-actions">
@@ -1986,6 +2011,24 @@ input, textarea, select, button { font-family: inherit; }
               </div>
               <button class="btn btn-primary" style="width:100%;" onclick="goTo('tarifs')" data-fr="⭐ Passer en Pro — 19€/mois" data-en="⭐ Upgrade to Pro — €19/mo">⭐ Passer en Pro — 19€/mois</button>
             </div>
+            <!-- Password change -->
+            <div class="card" style="margin-bottom:16px;">
+              <div style="font-size:15px;font-weight:700;margin-bottom:16px;">Sécurité du compte</div>
+              <div class="field">
+                <label class="field-label">Nouveau mot de passe</label>
+                <input class="field-input" id="p-new-pwd" type="password" placeholder="Nouveau mot de passe (8 min.)">
+              </div>
+              <div class="field">
+                <label class="field-label">Confirmer le mot de passe</label>
+                <input class="field-input" id="p-confirm-pwd" type="password" placeholder="Confirmer le mot de passe">
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
+                <input type="checkbox" id="p-stay-logged" style="width:16px;height:16px;accent-color:#4f46e5;">
+                <label for="p-stay-logged" style="font-size:13px;color:var(--ink);cursor:pointer;">Rester connecté automatiquement</label>
+              </div>
+              <button onclick="changePassword()" style="margin-top:14px;width:100%;padding:10px;background:#eef2ff;color:#4f46e5;border:1px solid #c7d2fe;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;">🔒 Changer le mot de passe</button>
+            </div>
+
             <div class="card">
               <div style="font-size:15px;font-weight:700;margin-bottom:16px;" data-fr="Crédits IA" data-en="AI Credits">Crédits IA</div>
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
@@ -2079,7 +2122,6 @@ input, textarea, select, button { font-family: inherit; }
 
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://js.stripe.com/v3/"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -2300,6 +2342,7 @@ function enterApp(email, plan, name, company) {
   var sbp=document.getElementById('sb-plan'); if(sbp) sbp.textContent=label;
   var sbp2=document.getElementById('sb-plan-profil'); if(sbp2) sbp2.textContent=label;
   if (plan!=='free') { var ub=document.getElementById('upgrade-box'); if(ub) ub.style.display='none'; }
+  saveSession(email, plan, name||'', company||'');
   updateSidebar(); updatePDF(); goTo('dashboard');
 }
 
@@ -2369,6 +2412,28 @@ function goTo(page) {
   const bnPages = ['dashboard','devis','nouveau-devis','calculateur'];
   if (typeof setBN === 'function' && bnPages.includes(page)) setBN(page);
   if (typeof closeMore === 'function') closeMore();
+  // Refresh page-specific content
+  if (page === 'nouveau-devis' || page === 'nouveau-contrat') {
+    setTimeout(function() { if (typeof renderItems === 'function') renderItems(); }, 50);
+  }
+  if (page === 'calculateur') {
+    setTimeout(function() { if (typeof calcTJM === 'function') calcTJM(); }, 50);
+  }
+  if (page === 'dashboard') {
+    var d = new Date();
+    var days = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+    var months = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+    var dateEl = document.getElementById('dash-date');
+    if (dateEl) dateEl.textContent = days[d.getDay()] + ' ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+  }
+  // Update mobile nav highlight
+  document.querySelectorAll('.mobile-nav-item').forEach(function(el) { el.classList.remove('active'); });
+  var mobileNavMap = { 'dashboard': 0, 'devis': 1, 'nouveau-devis': 2, 'contrats': 3, 'profil': 4 };
+  var mIdx = mobileNavMap[page];
+  if (mIdx !== undefined) {
+    var items = document.querySelectorAll('.mobile-nav-item');
+    if (items[mIdx]) items[mIdx].classList.add('active');
+  }
 }
 
 // ══════════════════════════════
@@ -2416,6 +2481,14 @@ function fmt(n) {
 // ══════════════════════════════
 // ITEMS
 // ══════════════════════════════
+
+// ══════════════════════════════
+// ITEMS ARRAY (devis lines)
+// ══════════════════════════════
+var items = [
+  { desc: '', qty: 1, unit: 'jour(s)', price: 550 }
+];
+
 function renderItems() {
   const body = document.getElementById('items-body');
   if (!body) return;
@@ -2618,25 +2691,31 @@ function importFromDevis() {
 // CALCULATEUR TJM
 // ══════════════════════════════
 function calcTJM() {
-  const revenu = parseFloat(document.getElementById('tjm-revenu')?.value) || 4000;
-  const jours = parseFloat(document.getElementById('tjm-jours')?.value) || 18;
-  const charges = (parseFloat(document.getElementById('tjm-charges')?.value) || 45) / 100;
-  const conges = parseFloat(document.getElementById('tjm-conges')?.value) || 5;
+  var revenuEl = document.getElementById('tjm-revenu');
+  var joursEl = document.getElementById('tjm-jours');
+  var chargesEl = document.getElementById('tjm-charges');
+  var congesEl = document.getElementById('tjm-conges');
+  
+  var revenu = parseFloat(revenuEl ? revenuEl.value : 4000) || 4000;
+  var jours = parseFloat(joursEl ? joursEl.value : 18) || 18;
+  var chargesPct = parseFloat(chargesEl ? chargesEl.value : 45) || 45;
+  var conges = parseFloat(congesEl ? congesEl.value : 5) || 5;
+  var charges = chargesPct / 100;
 
-  const moisTrav = 12 - conges / 4.33;
-  const joursAn = jours * moisTrav;
-  const caNeeded = (revenu / (1 - charges)) * 12;
-  const tjm = Math.round(caNeeded / joursAn);
-  const ca = Math.round(tjm * joursAn);
-  const netAn = Math.round(revenu * 12);
-  const eqSalaire = Math.round(ca * 0.65);
+  var moisTrav = 12 - (conges / 52 * 12);
+  var joursAn = jours * moisTrav;
+  var caNeeded = (revenu * 12) / (1 - charges);
+  var tjm = Math.round(caNeeded / joursAn);
+  var ca = Math.round(tjm * joursAn);
+  var netAn = Math.round(revenu * 12);
+  var eqSalaire = Math.round(netAn * 0.65);
 
-  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-  set('tjm-result', tjm.toLocaleString('fr-FR') + ' €');
-  set('tjm-ca', ca.toLocaleString('fr-FR') + ' €');
-  set('tjm-net', netAn.toLocaleString('fr-FR') + ' €');
-  set('tjm-mensuel', revenu.toLocaleString('fr-FR') + ' €');
-  set('tjm-eq-salaire', eqSalaire.toLocaleString('fr-FR') + ' €');
+  function setEl(id, val) { var el = document.getElementById(id); if (el) el.textContent = val; }
+  setEl('tjm-result', tjm.toLocaleString('fr-FR') + ' €');
+  setEl('tjm-ca', ca.toLocaleString('fr-FR') + ' €');
+  setEl('tjm-net', netAn.toLocaleString('fr-FR') + ' €');
+  setEl('tjm-mensuel', revenu.toLocaleString('fr-FR') + ' €');
+  setEl('tjm-eq-salaire', eqSalaire.toLocaleString('fr-FR') + ' €');
 }
 
 function useTJM() {
@@ -2746,9 +2825,28 @@ function viewDevis(id) {
 // ══════════════════════════════
 // INIT
 // ══════════════════════════════
+
+// ── Session persistence ──
+function saveSession(email, plan, name, company) {
+  try { localStorage.setItem('quotly_session', JSON.stringify({email:email,plan:plan,name:name,company:company,ts:Date.now()})); } catch(e) {}
+}
+function loadSession() {
+  try {
+    var s = localStorage.getItem('quotly_session');
+    if (!s) return null;
+    var d = JSON.parse(s);
+    if (Date.now() - d.ts > 7*24*60*60*1000) { localStorage.removeItem('quotly_session'); return null; }
+    return d;
+  } catch(e) { return null; }
+}
 document.addEventListener('DOMContentLoaded', () => {
-  if (typeof checkPaymentReturn === 'function') checkPaymentReturn();
-  renderItems()
+  initSupabase();
+  checkPaymentReturn();
+  var saved=loadSession(); if(saved){enterApp(saved.email,saved.plan,saved.name||'',saved.company||'');} else {checkExistingSession();}
+  renderItems();
+  calcTJM();
+  setTimeout(applyMobileLayout, 200);
+});
 
 // ══════════════════════════════
 // LEGAL PAGES
@@ -2877,7 +2975,7 @@ function closeLegal(page) {
   <button onclick="document.getElementById('ios-install-banner').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,0.4);font-size:20px;cursor:pointer;padding:4px;line-height:1;flex-shrink:0;">×</button>
 </div>
 
-
+<script>
 // ══════════════════════════════
 // PDF EXPORT
 // ══════════════════════════════
@@ -3026,6 +3124,33 @@ function sendContratEmail() {
 // ══════════════════════════════
 // RESPONSIVE MOBILE FIXES
 // ══════════════════════════════
+
+async function changePassword() {
+  var newPwd = (document.getElementById('p-new-pwd')||{}).value || '';
+  var confirmPwd = (document.getElementById('p-confirm-pwd')||{}).value || '';
+  if (!newPwd) { toast('⚠️ Entrez un nouveau mot de passe','error'); return; }
+  if (newPwd.length < 8) { toast('⚠️ Mot de passe trop court (8 min.)','error'); return; }
+  if (newPwd !== confirmPwd) { toast('⚠️ Les mots de passe ne correspondent pas','error'); return; }
+  
+  if (_supabase) {
+    try {
+      var r = await _supabase.auth.updateUser({ password: newPwd });
+      if (r.error) throw r.error;
+      toast('✅ Mot de passe changé !','success');
+      document.getElementById('p-new-pwd').value = '';
+      document.getElementById('p-confirm-pwd').value = '';
+    } catch(e) {
+      toast('⚠️ ' + (e.message||'Erreur'),'error');
+    }
+  } else {
+    toast('✅ Mot de passe changé !','success');
+  }
+  
+  // Save stay logged preference
+  var stay = (document.getElementById('p-stay-logged')||{}).checked;
+  localStorage.setItem('quotly_stay_logged', stay ? '1' : '0');
+}
+
 function setMobileNav(el) {
   document.querySelectorAll('.mobile-nav-item').forEach(function(i) { i.classList.remove('active'); });
   if (el) el.classList.add('active');
@@ -3060,6 +3185,7 @@ function applyMobileLayout() {
 
 window.addEventListener('resize', applyMobileLayout);
 window.addEventListener('load', function() { setTimeout(applyMobileLayout, 300); });
+</script>
 
 </body>
 </html>
