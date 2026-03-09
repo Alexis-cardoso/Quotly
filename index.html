@@ -2860,15 +2860,6 @@ function closeLegal(page) {
   var el = document.getElementById('legal-' + page);
   if (el) el.style.display = 'none';
 }
-
-  updatePDF();
-  updateContract();
-  calcTJM();
-  const today = new Date();
-  const opts = { weekday:'long', day:'numeric', month:'long', year:'numeric' };
-  const dateEl = document.getElementById('dash-date');
-  if (dateEl) dateEl.textContent = today.toLocaleDateString('fr-FR', opts);
-});
 </script>
 <div id="legal-cgu" style="display:none;position:fixed;inset:0;z-index:300;background:#0a0a1a;overflow-y:auto;">
   <div style="max-width:760px;margin:0 auto;padding:60px 24px;">
