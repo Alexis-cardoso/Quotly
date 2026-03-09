@@ -2813,7 +2813,8 @@ function removeLogo() {
   toast('Logo supprimé', 'info');
 }
 
-function saveProfil() {
+// duplicate removed - saveProfil already defined above
+function _saveProfil_duplicate() {
   updateSidebar();
   toast('💾 Profil sauvegardé !', 'success');
 }
@@ -3125,7 +3126,7 @@ function sendContratEmail() {
 // RESPONSIVE MOBILE FIXES
 // ══════════════════════════════
 
-async function changePassword() {
+async async function changePassword() {
   var newPwd = (document.getElementById('p-new-pwd')||{}).value || '';
   var confirmPwd = (document.getElementById('p-confirm-pwd')||{}).value || '';
   if (!newPwd) { toast('⚠️ Entrez un nouveau mot de passe','error'); return; }
