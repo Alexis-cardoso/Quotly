@@ -615,135 +615,6 @@ input, textarea, select, button { font-family: inherit; }
   .kpi-grid { grid-template-columns: 1fr 1fr; }
   .page-content { padding: 16px; }
 }
-
-
-.back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--muted);
-  cursor: pointer;
-  font-family: Figtree, sans-serif;
-  transition: all 0.15s;
-  margin-bottom: 4px;
-}
-.back-btn:hover {
-  background: #eef2ff;
-  color: #4f46e5;
-  border-color: #c7d2fe;
-}
-
-/* ── RESPONSIVE MOBILE ── */
-@media (max-width: 767px) {
-  .sidebar { display: none; }
-  .main-content { margin-left: 0 !important; }
-  
-  .topbar { 
-    padding: 12px 16px; 
-    flex-wrap: wrap; 
-    gap: 8px;
-  }
-  .topbar-actions { 
-    width: 100%; 
-    display: flex; 
-    gap: 6px; 
-    flex-wrap: wrap;
-  }
-  .topbar-actions .btn { 
-    flex: 1; 
-    min-width: 80px; 
-    font-size: 12px; 
-    padding: 8px 10px;
-  }
-  
-  .two-pane { flex-direction: column !important; }
-  .form-col, .preview-col { width: 100% !important; }
-  .preview-col { display: none; }
-  
-  .page-content { padding: 12px 16px; }
-  
-  /* KPI cards 2 columns on mobile */
-  [style*="grid-template-columns:repeat(4"] {
-    grid-template-columns: 1fr 1fr !important;
-  }
-  
-  /* Dashboard bottom grid */
-  [style*="grid-template-columns:1.4fr"] {
-    grid-template-columns: 1fr !important;
-  }
-  
-  /* Profile grid */
-  [style*="grid-template-columns:1fr 1fr"] {
-    grid-template-columns: 1fr !important;
-  }
-  
-  /* Welcome banner */
-  [style*="justify-content:space-between"] > div:last-child {
-    display: none;
-  }
-  
-  /* Bottom mobile nav */
-  .mobile-nav {
-    display: flex !important;
-  }
-  
-  .main-content {
-    padding-bottom: 70px;
-  }
-}
-
-@media (min-width: 768px) {
-  .mobile-nav { display: none !important; }
-}
-
-/* Mobile bottom navigation */
-.mobile-nav {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  background: #fff;
-  border-top: 1px solid #ece9e0;
-  z-index: 100;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0 8px;
-  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
-}
-.mobile-nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  padding: 8px 12px;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: all 0.15s;
-  flex: 1;
-}
-.mobile-nav-item:hover, .mobile-nav-item.active {
-  background: #eef2ff;
-}
-.mobile-nav-item span:first-child {
-  font-size: 18px;
-}
-.mobile-nav-item span:last-child {
-  font-size: 10px;
-  font-weight: 600;
-  color: #9191aa;
-}
-.mobile-nav-item.active span:last-child {
-  color: #4f46e5;
-}
-
 </style>
 
   <!-- PWA -->
@@ -1066,10 +937,10 @@ input, textarea, select, button { font-family: inherit; }
     </div>
     <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;margin-bottom:20px;">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-        <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Revenu net mensuel souhaité (€)</label><input id="tjm-revenu-free" type="number" value="4000" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
-        <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Jours travaillés par mois</label><input id="tjm-jours-free" type="number" value="18" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
-        <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Charges estimées (%)</label><input id="tjm-charges-free" type="number" value="45" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
-        <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Semaines de congé/an</label><input id="tjm-conges-free" type="number" value="5" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
+        <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Revenu net mensuel souhaité (€)</label><input id="tjm-revenu" type="number" value="4000" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
+        <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Jours travaillés par mois</label><input id="tjm-jours" type="number" value="18" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
+        <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Charges estimées (%)</label><input id="tjm-charges" type="number" value="45" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
+        <div><label style="display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;">Semaines de congé/an</label><input id="tjm-conges" type="number" value="5" oninput="calcTJMFree()" style="width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;background:rgba(255,255,255,0.06);color:#fff;"></div>
       </div>
     </div>
     <!-- Result -->
@@ -1205,7 +1076,7 @@ input, textarea, select, button { font-family: inherit; }
             </div>
             <div style="font-size:13px;color:rgba(255,255,255,0.4);max-width:400px;line-height:1.6;">Votre espace freelance. Créez, gérez et envoyez vos devis en quelques clics.</div>
           </div>
-          <div class="dash-banner-btns" style="display:flex;gap:10px;flex-shrink:0;position:relative;z-index:1;">
+          <div style="display:flex;gap:10px;flex-shrink:0;position:relative;z-index:1;">
             <button onclick="goTo('nouveau-devis')" style="padding:10px 18px;background:#4f46e5;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;white-space:nowrap;">+ Nouveau devis</button>
             <button onclick="goTo('nouveau-contrat')" style="padding:10px 18px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.12);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:Figtree,sans-serif;white-space:nowrap;">+ Contrat</button>
           </div>
@@ -1475,14 +1346,13 @@ input, textarea, select, button { font-family: inherit; }
     <div class="page" id="page-nouveau-devis">
       <div class="topbar">
         <div class="topbar-left">
-          <button onclick="goTo('devis')" style="background:none;border:none;cursor:pointer;font-size:22px;color:#9191aa;padding:0 8px 0 0;line-height:1;">&#8592;</button>
-          <button class="back-btn" onclick="goTo('devis')">← Retour</button><div class="topbar-title" data-fr="Nouveau devis" data-en="New quote">Nouveau devis</div>
+          <div class="topbar-title" data-fr="Nouveau devis" data-en="New quote">Nouveau devis</div>
           <div class="topbar-sub" data-fr="Remplissez les informations ou laissez l'IA vous aider" data-en="Fill in the info or let AI help you">Remplissez les informations ou laissez l'IA vous aider</div>
         </div>
         <div class="topbar-actions">
           <button class="btn btn-ghost" onclick="toast('💾 Brouillon sauvegardé !','success')" data-fr="💾 Sauvegarder" data-en="💾 Save">💾 Sauvegarder</button>
-          <button class="btn btn-ghost" onclick="exportDevisPDF()" data-fr="📄 PDF" data-en="📄 PDF">📄 PDF</button>
-          <button class="btn btn-green" onclick="sendDevisEmail()" data-fr="📧 Envoyer" data-en="📧 Send">📧 Envoyer</button>
+          <button class="btn btn-ghost" onclick="toast('📄 Export PDF en cours...','info')" data-fr="📄 PDF" data-en="📄 PDF">📄 PDF</button>
+          <button class="btn btn-green" onclick="toast('📧 Devis envoyé !','success')" data-fr="📧 Envoyer" data-en="📧 Send">📧 Envoyer</button>
         </div>
       </div>
       <div class="two-pane">
@@ -1711,8 +1581,7 @@ input, textarea, select, button { font-family: inherit; }
     <div class="page" id="page-nouveau-contrat">
       <div class="topbar">
         <div class="topbar-left">
-          <button onclick="goTo('contrats')" style="background:none;border:none;cursor:pointer;font-size:22px;color:#9191aa;padding:0 8px 0 0;line-height:1;">&#8592;</button>
-          <button class="back-btn" onclick="goTo('contrats')">← Retour</button><div class="topbar-title" data-fr="Nouveau contrat" data-en="New contract">Nouveau contrat</div>
+          <div class="topbar-title" data-fr="Nouveau contrat" data-en="New contract">Nouveau contrat</div>
           <div class="topbar-sub" data-fr="Choisissez un type et remplissez les informations" data-en="Choose a type and fill in the information">Choisissez un type et remplissez les informations</div>
         </div>
         <div class="topbar-actions">
@@ -2011,24 +1880,6 @@ input, textarea, select, button { font-family: inherit; }
               </div>
               <button class="btn btn-primary" style="width:100%;" onclick="goTo('tarifs')" data-fr="⭐ Passer en Pro — 19€/mois" data-en="⭐ Upgrade to Pro — €19/mo">⭐ Passer en Pro — 19€/mois</button>
             </div>
-            <!-- Password change -->
-            <div class="card" style="margin-bottom:16px;">
-              <div style="font-size:15px;font-weight:700;margin-bottom:16px;">Sécurité du compte</div>
-              <div class="field">
-                <label class="field-label">Nouveau mot de passe</label>
-                <input class="field-input" id="p-new-pwd" type="password" placeholder="Nouveau mot de passe (8 min.)">
-              </div>
-              <div class="field">
-                <label class="field-label">Confirmer le mot de passe</label>
-                <input class="field-input" id="p-confirm-pwd" type="password" placeholder="Confirmer le mot de passe">
-              </div>
-              <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
-                <input type="checkbox" id="p-stay-logged" style="width:16px;height:16px;accent-color:#4f46e5;">
-                <label for="p-stay-logged" style="font-size:13px;color:var(--ink);cursor:pointer;">Rester connecté automatiquement</label>
-              </div>
-              <button onclick="changePassword()" style="margin-top:14px;width:100%;padding:10px;background:#eef2ff;color:#4f46e5;border:1px solid #c7d2fe;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;">🔒 Changer le mot de passe</button>
-            </div>
-
             <div class="card">
               <div style="font-size:15px;font-weight:700;margin-bottom:16px;" data-fr="Crédits IA" data-en="AI Credits">Crédits IA</div>
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
@@ -2123,6 +1974,7 @@ input, textarea, select, button { font-family: inherit; }
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://js.stripe.com/v3/"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 // ══════════════════════════════
@@ -2162,10 +2014,10 @@ function closeTJM() {
   if (s) s.style.display = 'none';
 }
 function calcTJMFree() {
-  var revenu = parseFloat((document.getElementById('tjm-revenu-free')||document.getElementById('tjm-revenu')||{}).value||4000)||4000;
-  var jours = parseFloat((document.getElementById('tjm-jours-free')||document.getElementById('tjm-jours')||{}).value||18)||18;
-  var charges = parseFloat((document.getElementById('tjm-charges-free')||document.getElementById('tjm-charges')||{}).value||45)||45;
-  var conges = parseFloat((document.getElementById('tjm-conges-free')||document.getElementById('tjm-conges')||{}).value||5)||5;
+  var revenu = parseFloat((document.getElementById('tjm-revenu')||{}).value||4000)||4000;
+  var jours = parseFloat((document.getElementById('tjm-jours')||{}).value||18)||18;
+  var charges = parseFloat((document.getElementById('tjm-charges')||{}).value||45)||45;
+  var conges = parseFloat((document.getElementById('tjm-conges')||{}).value||5)||5;
   var joursAn = jours * (12 - conges * 12/52);
   var caAnnuel = (revenu * 12) / (1 - charges/100);
   var tjm = caAnnuel / joursAn;
@@ -2342,7 +2194,6 @@ function enterApp(email, plan, name, company) {
   var sbp=document.getElementById('sb-plan'); if(sbp) sbp.textContent=label;
   var sbp2=document.getElementById('sb-plan-profil'); if(sbp2) sbp2.textContent=label;
   if (plan!=='free') { var ub=document.getElementById('upgrade-box'); if(ub) ub.style.display='none'; }
-  saveSession(email, plan, name||'', company||'');
   updateSidebar(); updatePDF(); goTo('dashboard');
 }
 
@@ -2412,28 +2263,6 @@ function goTo(page) {
   const bnPages = ['dashboard','devis','nouveau-devis','calculateur'];
   if (typeof setBN === 'function' && bnPages.includes(page)) setBN(page);
   if (typeof closeMore === 'function') closeMore();
-  // Refresh page-specific content
-  if (page === 'nouveau-devis' || page === 'nouveau-contrat') {
-    setTimeout(function() { if (typeof renderItems === 'function') renderItems(); }, 50);
-  }
-  if (page === 'calculateur') {
-    setTimeout(function() { if (typeof calcTJM === 'function') calcTJM(); }, 50);
-  }
-  if (page === 'dashboard') {
-    var d = new Date();
-    var days = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-    var months = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-    var dateEl = document.getElementById('dash-date');
-    if (dateEl) dateEl.textContent = days[d.getDay()] + ' ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
-  }
-  // Update mobile nav highlight
-  document.querySelectorAll('.mobile-nav-item').forEach(function(el) { el.classList.remove('active'); });
-  var mobileNavMap = { 'dashboard': 0, 'devis': 1, 'nouveau-devis': 2, 'contrats': 3, 'profil': 4 };
-  var mIdx = mobileNavMap[page];
-  if (mIdx !== undefined) {
-    var items = document.querySelectorAll('.mobile-nav-item');
-    if (items[mIdx]) items[mIdx].classList.add('active');
-  }
 }
 
 // ══════════════════════════════
@@ -2481,14 +2310,6 @@ function fmt(n) {
 // ══════════════════════════════
 // ITEMS
 // ══════════════════════════════
-
-// ══════════════════════════════
-// ITEMS ARRAY (devis lines)
-// ══════════════════════════════
-var items = [
-  { desc: '', qty: 1, unit: 'jour(s)', price: 550 }
-];
-
 function renderItems() {
   const body = document.getElementById('items-body');
   if (!body) return;
@@ -2691,31 +2512,25 @@ function importFromDevis() {
 // CALCULATEUR TJM
 // ══════════════════════════════
 function calcTJM() {
-  var revenuEl = document.getElementById('tjm-revenu');
-  var joursEl = document.getElementById('tjm-jours');
-  var chargesEl = document.getElementById('tjm-charges');
-  var congesEl = document.getElementById('tjm-conges');
-  
-  var revenu = parseFloat(revenuEl ? revenuEl.value : 4000) || 4000;
-  var jours = parseFloat(joursEl ? joursEl.value : 18) || 18;
-  var chargesPct = parseFloat(chargesEl ? chargesEl.value : 45) || 45;
-  var conges = parseFloat(congesEl ? congesEl.value : 5) || 5;
-  var charges = chargesPct / 100;
+  const revenu = parseFloat(document.getElementById('tjm-revenu')?.value) || 4000;
+  const jours = parseFloat(document.getElementById('tjm-jours')?.value) || 18;
+  const charges = (parseFloat(document.getElementById('tjm-charges')?.value) || 45) / 100;
+  const conges = parseFloat(document.getElementById('tjm-conges')?.value) || 5;
 
-  var moisTrav = 12 - (conges / 52 * 12);
-  var joursAn = jours * moisTrav;
-  var caNeeded = (revenu * 12) / (1 - charges);
-  var tjm = Math.round(caNeeded / joursAn);
-  var ca = Math.round(tjm * joursAn);
-  var netAn = Math.round(revenu * 12);
-  var eqSalaire = Math.round(netAn * 0.65);
+  const moisTrav = 12 - conges / 4.33;
+  const joursAn = jours * moisTrav;
+  const caNeeded = (revenu / (1 - charges)) * 12;
+  const tjm = Math.round(caNeeded / joursAn);
+  const ca = Math.round(tjm * joursAn);
+  const netAn = Math.round(revenu * 12);
+  const eqSalaire = Math.round(ca * 0.65);
 
-  function setEl(id, val) { var el = document.getElementById(id); if (el) el.textContent = val; }
-  setEl('tjm-result', tjm.toLocaleString('fr-FR') + ' €');
-  setEl('tjm-ca', ca.toLocaleString('fr-FR') + ' €');
-  setEl('tjm-net', netAn.toLocaleString('fr-FR') + ' €');
-  setEl('tjm-mensuel', revenu.toLocaleString('fr-FR') + ' €');
-  setEl('tjm-eq-salaire', eqSalaire.toLocaleString('fr-FR') + ' €');
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set('tjm-result', tjm.toLocaleString('fr-FR') + ' €');
+  set('tjm-ca', ca.toLocaleString('fr-FR') + ' €');
+  set('tjm-net', netAn.toLocaleString('fr-FR') + ' €');
+  set('tjm-mensuel', revenu.toLocaleString('fr-FR') + ' €');
+  set('tjm-eq-salaire', eqSalaire.toLocaleString('fr-FR') + ' €');
 }
 
 function useTJM() {
@@ -2813,8 +2628,7 @@ function removeLogo() {
   toast('Logo supprimé', 'info');
 }
 
-// duplicate removed - saveProfil already defined above
-function _saveProfil_duplicate() {
+function saveProfil() {
   updateSidebar();
   toast('💾 Profil sauvegardé !', 'success');
 }
@@ -2826,28 +2640,9 @@ function viewDevis(id) {
 // ══════════════════════════════
 // INIT
 // ══════════════════════════════
-
-// ── Session persistence ──
-function saveSession(email, plan, name, company) {
-  try { localStorage.setItem('quotly_session', JSON.stringify({email:email,plan:plan,name:name,company:company,ts:Date.now()})); } catch(e) {}
-}
-function loadSession() {
-  try {
-    var s = localStorage.getItem('quotly_session');
-    if (!s) return null;
-    var d = JSON.parse(s);
-    if (Date.now() - d.ts > 7*24*60*60*1000) { localStorage.removeItem('quotly_session'); return null; }
-    return d;
-  } catch(e) { return null; }
-}
 document.addEventListener('DOMContentLoaded', () => {
-  initSupabase();
-  checkPaymentReturn();
-  var saved=loadSession(); if(saved){enterApp(saved.email,saved.plan,saved.name||'',saved.company||'');} else {checkExistingSession();}
-  renderItems();
-  calcTJM();
-  setTimeout(applyMobileLayout, 200);
-});
+  if (typeof checkPaymentReturn === 'function') checkPaymentReturn();
+  renderItems()
 
 // ══════════════════════════════
 // LEGAL PAGES
@@ -2860,6 +2655,15 @@ function closeLegal(page) {
   var el = document.getElementById('legal-' + page);
   if (el) el.style.display = 'none';
 }
+
+  updatePDF();
+  updateContract();
+  calcTJM();
+  const today = new Date();
+  const opts = { weekday:'long', day:'numeric', month:'long', year:'numeric' };
+  const dateEl = document.getElementById('dash-date');
+  if (dateEl) dateEl.textContent = today.toLocaleDateString('fr-FR', opts);
+});
 </script>
 <div id="legal-cgu" style="display:none;position:fixed;inset:0;z-index:300;background:#0a0a1a;overflow-y:auto;">
   <div style="max-width:760px;margin:0 auto;padding:60px 24px;">
@@ -2914,25 +2718,6 @@ function closeLegal(page) {
       <p>Données conservées pendant la durée du compte + 3 ans. Données de facturation conservées 10 ans (obligation légale).</p>
     </div>
   </div>
-
-  <!-- Mobile Bottom Nav -->
-  <nav class="mobile-nav" id="mobile-nav">
-    <div class="mobile-nav-item active" onclick="goTo('dashboard');setMobileNav(this)">
-      <span>🏠</span><span>Accueil</span>
-    </div>
-    <div class="mobile-nav-item" onclick="goTo('devis');setMobileNav(this)">
-      <span>📄</span><span>Devis</span>
-    </div>
-    <div class="mobile-nav-item" onclick="goTo('nouveau-devis');setMobileNav(this)">
-      <span style="font-size:22px;background:#4f46e5;color:#fff;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;">+</span><span>Créer</span>
-    </div>
-    <div class="mobile-nav-item" onclick="goTo('contrats');setMobileNav(this)">
-      <span>📋</span><span>Contrats</span>
-    </div>
-    <div class="mobile-nav-item" onclick="goTo('profil');setMobileNav(this)">
-      <span>👤</span><span>Profil</span>
-    </div>
-  </nav>
 </div>
 
 <!-- PWA Service Worker -->
@@ -2966,218 +2751,6 @@ function closeLegal(page) {
   </div>
   <button onclick="document.getElementById('ios-install-banner').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,0.4);font-size:20px;cursor:pointer;padding:4px;line-height:1;flex-shrink:0;">×</button>
 </div>
-
-<script>
-// ══════════════════════════════
-// PDF EXPORT
-// ══════════════════════════════
-function exportDevisPDF() {
-  var preview = document.getElementById('pdf-sheet') || document.querySelector('.pdf-sheet');
-  if (!preview) { toast('⚠️ Aperçu PDF introuvable','error'); return; }
-  
-  var client = (document.getElementById('f-client-name')||{}).value || 'Client';
-  var num = (document.getElementById('f-num')||{}).value || 'DEVIS';
-  
-  // Use browser print with print-only styles
-  var printContent = '<html><head><meta charset="UTF-8"><title>Devis ' + num + '</title><style>';
-  printContent += 'body{margin:0;padding:20px;font-family:Figtree,Arial,sans-serif;background:#fff;color:#16162a;}';
-  printContent += '.pdf-sheet{max-width:700px;margin:0 auto;}';
-  printContent += 'table{width:100%;border-collapse:collapse;}';
-  printContent += 'th,td{padding:8px 12px;text-align:left;}';
-  printContent += 'th{background:#f8f7f4;font-weight:700;font-size:12px;}';
-  printContent += 'tr{border-bottom:1px solid #f0ede6;}';
-  printContent += '@media print{body{padding:0;}}';
-  printContent += '</style></head><body>';
-  printContent += preview.innerHTML;
-  printContent += '</body></html>';
-  
-  var win = window.open('', '_blank');
-  if (win) {
-    win.document.write(printContent);
-    win.document.close();
-    win.focus();
-    setTimeout(function() { win.print(); }, 500);
-    toast('📄 PDF ouvert — faites Enregistrer comme PDF','info');
-  } else {
-    // Fallback: print current page
-    window.print();
-  }
-}
-
-function exportContratPDF() {
-  var preview = document.getElementById('contrat-preview') || document.querySelector('.contrat-preview');
-  if (!preview) {
-    // Try to use the contract content
-    var content = (document.getElementById('contrat-content')||{}).innerHTML || '';
-    if (!content) { toast('⚠️ Aucun contenu à exporter','error'); return; }
-    preview = { innerHTML: content };
-  }
-  
-  var type = (document.getElementById('c-type')||{}).value || 'Contrat';
-  var client = (document.getElementById('c-client')||{}).value || 'Client';
-  
-  var printContent = '<html><head><meta charset="UTF-8"><title>' + type + ' — ' + client + '</title><style>';
-  printContent += 'body{margin:0;padding:30px;font-family:Figtree,Arial,sans-serif;background:#fff;color:#16162a;line-height:1.6;}';
-  printContent += 'h1,h2,h3{font-family:Georgia,serif;}';
-  printContent += '@media print{body{padding:20px;}}';
-  printContent += '</style></head><body>';
-  printContent += preview.innerHTML || preview;
-  printContent += '</body></html>';
-  
-  var win = window.open('', '_blank');
-  if (win) {
-    win.document.write(printContent);
-    win.document.close();
-    win.focus();
-    setTimeout(function() { win.print(); }, 500);
-    toast('📄 PDF ouvert — faites Enregistrer comme PDF','info');
-  }
-}
-
-// ══════════════════════════════
-// ENVOI EMAIL
-// ══════════════════════════════
-function sendDevisEmail() {
-  var clientEmail = (document.getElementById('f-client-email')||{}).value || '';
-  var clientName = (document.getElementById('f-client-name')||{}).value || 'votre client';
-  var num = (document.getElementById('f-num')||{}).value || 'DEVIS-001';
-  var totalTTC = (document.getElementById('total-ttc')||{}).textContent || '';
-  var userEmail = (document.getElementById('p-email')||{}).value || '';
-  var userName = (document.getElementById('p-fullname')||{}).value || '';
-  var company = (document.getElementById('p-company')||{}).value || '';
-  
-  if (!clientEmail) {
-    toast('⚠️ Ajoutez l'email de votre client d'abord','error');
-    // Focus the client email field
-    var emailField = document.getElementById('f-client-email');
-    if (emailField) emailField.focus();
-    return;
-  }
-  
-  var subject = encodeURIComponent('Devis ' + num + (company ? ' — ' + company : ''));
-  var body = encodeURIComponent(
-    'Bonjour ' + clientName + ',
-
-' +
-    'Veuillez trouver ci-joint votre devis ' + num + (totalTTC ? ' d'un montant de ' + totalTTC : '') + '.
-
-' +
-    'N'hésitez pas à me contacter pour toute question.
-
-' +
-    'Cordialement,
-' +
-    userName + (company ? '
-' + company : '')
-  );
-  
-  var mailtoLink = 'mailto:' + clientEmail + '?subject=' + subject + '&body=' + body;
-  window.location.href = mailtoLink;
-  toast('📧 Application mail ouverte !','success');
-}
-
-function sendContratEmail() {
-  var clientEmail = (document.getElementById('c-client-email')||{}).value || '';
-  var clientName = (document.getElementById('c-client')||{}).value || 'votre client';
-  var type = (document.getElementById('c-type')||{}).value || 'Contrat';
-  var userEmail = (document.getElementById('p-email')||{}).value || '';
-  var userName = (document.getElementById('p-fullname')||{}).value || '';
-  var company = (document.getElementById('p-company')||{}).value || '';
-  
-  if (!clientEmail) {
-    toast('⚠️ Ajoutez l'email de votre client d'abord','error');
-    var f = document.getElementById('c-client-email');
-    if (f) f.focus();
-    return;
-  }
-  
-  var subject = encodeURIComponent(type + (company ? ' — ' + company : ''));
-  var body = encodeURIComponent(
-    'Bonjour ' + clientName + ',
-
-' +
-    'Veuillez trouver ci-joint le ' + type.toLowerCase() + ' pour notre collaboration.
-
-' +
-    'N'hésitez pas à me contacter pour toute question.
-
-' +
-    'Cordialement,
-' +
-    userName + (company ? '
-' + company : '')
-  );
-  
-  var mailtoLink = 'mailto:' + clientEmail + '?subject=' + subject + '&body=' + body;
-  window.location.href = mailtoLink;
-  toast('📧 Application mail ouverte !','success');
-}
-
-// ══════════════════════════════
-// RESPONSIVE MOBILE FIXES
-// ══════════════════════════════
-
-async async function changePassword() {
-  var newPwd = (document.getElementById('p-new-pwd')||{}).value || '';
-  var confirmPwd = (document.getElementById('p-confirm-pwd')||{}).value || '';
-  if (!newPwd) { toast('⚠️ Entrez un nouveau mot de passe','error'); return; }
-  if (newPwd.length < 8) { toast('⚠️ Mot de passe trop court (8 min.)','error'); return; }
-  if (newPwd !== confirmPwd) { toast('⚠️ Les mots de passe ne correspondent pas','error'); return; }
-  
-  if (_supabase) {
-    try {
-      var r = await _supabase.auth.updateUser({ password: newPwd });
-      if (r.error) throw r.error;
-      toast('✅ Mot de passe changé !','success');
-      document.getElementById('p-new-pwd').value = '';
-      document.getElementById('p-confirm-pwd').value = '';
-    } catch(e) {
-      toast('⚠️ ' + (e.message||'Erreur'),'error');
-    }
-  } else {
-    toast('✅ Mot de passe changé !','success');
-  }
-  
-  // Save stay logged preference
-  var stay = (document.getElementById('p-stay-logged')||{}).checked;
-  localStorage.setItem('quotly_stay_logged', stay ? '1' : '0');
-}
-
-function setMobileNav(el) {
-  document.querySelectorAll('.mobile-nav-item').forEach(function(i) { i.classList.remove('active'); });
-  if (el) el.classList.add('active');
-}
-
-function applyMobileLayout() {
-  var isMobile = window.innerWidth < 768;
-  
-  // Dashboard KPI grid
-  var kpiGrid = document.querySelector('[style*="grid-template-columns:repeat(4"]');
-  if (kpiGrid) {
-    kpiGrid.style.gridTemplateColumns = isMobile ? '1fr 1fr' : 'repeat(4,1fr)';
-  }
-  
-  // Dashboard bottom grid
-  var bottomGrid = document.querySelector('[style*="grid-template-columns:1.4fr 1fr"]');
-  if (bottomGrid) {
-    bottomGrid.style.gridTemplateColumns = isMobile ? '1fr' : '1.4fr 1fr';
-  }
-  
-  // Welcome banner buttons
-  var bannerBtns = document.querySelector('[style*="radial-gradient"] + div + div');
-  if (bannerBtns && isMobile) {
-    bannerBtns.style.display = 'none';
-  }
-  
-  // Two-pane layout
-  document.querySelectorAll('.two-pane').forEach(function(el) {
-    el.style.flexDirection = isMobile ? 'column' : 'row';
-  });
-}
-
-window.addEventListener('resize', applyMobileLayout);
-window.addEventListener('load', function() { setTimeout(applyMobileLayout, 300); });
-</script>
 
 </body>
 </html>
