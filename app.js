@@ -1,0 +1,407 @@
+// ══════════════════════════════
+// GLOBALS
+// ══════════════════════════════
+var items = [];
+var lang = 'fr';
+var userLogoData = null;
+
+// ══════════════════════════════
+// NAVIGATION
+// ══════════════════════════════
+function goTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const pageEl = document.getElementById('page-' + page);
+  if (pageEl) pageEl.classList.add('active');
+  const navEl = document.getElementById('nav-' + page);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo(0, 0);
+  const bnPages = ['dashboard','devis','nouveau-devis','calculateur'];
+  if (typeof setBN === 'function' && bnPages.includes(page)) setBN(page);
+  if (typeof closeMore === 'function') closeMore();
+}
+
+// ══════════════════════════════
+// TOAST
+// ══════════════════════════════
+function toast(msg, type = 'info') {
+  const el = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  el.className = 'toast ' + type;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2800);
+}
+
+// ══════════════════════════════
+// LANG
+// ══════════════════════════════
+function setLang(l) {
+  lang = l;
+  document.getElementById('lang-fr').classList.toggle('active', l === 'fr');
+  document.getElementById('lang-en').classList.toggle('active', l === 'en');
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-' + l + ']').forEach(el => {
+    const val = el.getAttribute('data-' + l);
+    if (!val) return;
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      // skip values, only placeholders
+    } else if (el.tagName === 'OPTION') {
+      el.textContent = val;
+    } else {
+      el.textContent = val;
+    }
+  });
+  document.querySelectorAll('[data-' + l + '-placeholder]').forEach(el => {
+    el.placeholder = el.getAttribute('data-' + l + '-placeholder');
+  });
+}
+
+// ══════════════════════════════
+// FORMAT CURRENCY
+// ══════════════════════════════
+function fmt(n) {
+  return n.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+}
+
+// ══════════════════════════════
+// ITEMS
+// ══════════════════════════════
+function renderItems() {
+  const body = document.getElementById('items-body');
+  if (!body) return;
+  body.innerHTML = items.map((item, i) => `
+    <div class="items-row">
+      <input class="field-input" value="${item.desc}" placeholder="Description..." oninput="items[${i}].desc=this.value;updatePDF()">
+      <input class="field-input" type="number" value="${item.qty}" min="0" oninput="items[${i}].qty=parseFloat(this.value)||0;updateTotals()" style="text-align:center">
+      <input class="field-input" value="${item.unit}" oninput="items[${i}].unit=this.value">
+      <input class="field-input" type="number" value="${item.price}" min="0" oninput="items[${i}].price=parseFloat(this.value)||0;updateTotals()" style="text-align:right">
+      <div class="item-total">${fmt(item.qty * item.price)}</div>
+      <button class="del-btn" onclick="delItem(${i})">×</button>
+    </div>
+  `).join('');
+  updateTotals();
+}
+
+function addItem() {
+  const tjm = parseFloat(document.getElementById('f-tjm')?.value) || 550;
+  items.push({ desc: '', qty: 1, unit: 'jour(s)', price: tjm });
+  renderItems();
+}
+
+function delItem(i) {
+  items.splice(i, 1);
+  renderItems();
+}
+
+function recalcItems() {
+  const tjm = parseFloat(document.getElementById('f-tjm')?.value) || 550;
+  items = items.map(item => item.unit === 'jour(s)' ? { ...item, price: tjm } : item);
+  renderItems();
+}
+
+function updateTotals() {
+  const tvaRate = parseFloat(document.getElementById('f-tva-rate')?.value) / 100 || 0.2;
+  const ht = items.reduce((s, i) => s + i.qty * i.price, 0);
+  const tva = ht * tvaRate;
+  const ttc = ht + tva;
+
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set('t-ht', fmt(ht));
+  set('t-tva', fmt(tva));
+  set('t-ttc', fmt(ttc));
+  const tl = document.getElementById('t-tva-label');
+  if (tl) tl.textContent = `TVA (${Math.round(tvaRate * 100)}%)`;
+
+  // PDF
+  set('pt-ht', fmt(ht));
+  set('pt-tva', fmt(tva));
+  set('pt-ttc', fmt(ttc));
+  const ptl = document.getElementById('pt-tva-lbl');
+  if (ptl) ptl.textContent = `TVA (${Math.round(tvaRate * 100)}%)`;
+
+  // PDF items
+  const pdfItems = document.getElementById('pdf-items');
+  if (pdfItems) {
+    pdfItems.innerHTML = items.map(item => `
+      <tr>
+        <td>${item.desc || '—'}</td>
+        <td style="text-align:right">${item.qty}</td>
+        <td style="text-align:right">${item.unit}</td>
+        <td style="text-align:right">${fmt(item.price)}</td>
+        <td>${fmt(item.qty * item.price)}</td>
+      </tr>
+    `).join('');
+  }
+}
+
+// ══════════════════════════════
+// PDF UPDATE
+// ══════════════════════════════
+function g(id) { return document.getElementById(id)?.value || ''; }
+
+function updatePDF() {
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.innerHTML = val; };
+  set('p-name', g('f-name'));
+  set('p-contact', g('f-email') + ' · ' + g('f-phone'));
+  set('p-siret', g('f-siret'));
+  set('p-num', g('q-num'));
+  set('p-date', g('q-date'));
+  set('p-valid', g('q-valid'));
+  set('p-fname', g('f-name'));
+  set('p-fdetail', g('f-addr') + '<br>SIRET : ' + g('f-siret') + '<br>TVA : ' + g('f-tva-num'));
+  set('p-cname', g('c-name'));
+  set('p-cdetail', g('c-addr') + '<br>SIRET : ' + g('c-siret') + '<br>' + g('c-contact'));
+  set('p-note', g('f-note'));
+  set('p-footer', g('f-email') + ' · ' + g('f-phone') + '<br>' + g('f-addr'));
+  set('p-sign-client', g('c-name'));
+  updateTotals();
+}
+
+// ══════════════════════════════
+// AI GENERATION
+// ══════════════════════════════
+function generateDevisAI() {
+  toast('✦ Fonctionnalité IA bientôt disponible', 'info');
+}
+
+// ══════════════════════════════
+// CONTRAT
+// ══════════════════════════════
+function selectContractType(type) {
+  contractType = type;
+  ['prestation', 'cgv', 'nda'].forEach(t => {
+    document.getElementById('ct-' + t)?.classList.toggle('active', t === type);
+  });
+  const titles = {
+    prestation: { fr: 'Contrat de prestation de services', en: 'Service Agreement' },
+    cgv: { fr: 'Conditions Générales de Vente (CGV)', en: 'General Terms of Sale (GTS)' },
+    nda: { fr: 'Accord de Confidentialité (NDA)', en: 'Non-Disclosure Agreement (NDA)' }
+  };
+  const el = document.getElementById('ct-title');
+  if (el) el.textContent = titles[type][lang];
+  updateContract();
+}
+
+function updateContract() {
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  const prov = g('ct-provider');
+  const cli = g('ct-client');
+  set('ct-subtitle', `Entre ${prov} et ${cli}`);
+  set('ct-p-prov', prov);
+  set('ct-p-cli', cli);
+  set('ct-p-prov-detail', 'SIRET : ' + g('ct-prov-siret'));
+  set('ct-p-cli-detail', 'SIRET : ' + g('ct-cli-siret'));
+  set('ct-p-object', g('ct-object'));
+  set('ct-p-amount', g('ct-amount'));
+  set('ct-p-amount2', g('ct-amount'));
+  set('ct-p-start', g('ct-start'));
+  set('ct-p-end', g('ct-end'));
+  set('ct-p-deliverables', g('ct-deliverables'));
+  set('ct-sign-prov', prov);
+  set('ct-sign-cli', cli);
+}
+
+function importFromDevis() {
+  const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
+  setVal('ct-provider', g('f-name') || 'Jean Dupont');
+  setVal('ct-client', g('c-name') || 'Acme Corp.');
+  setVal('ct-prov-siret', g('f-siret') || '123 456 789 00012');
+  setVal('ct-cli-siret', g('c-siret') || '987 654 321 00034');
+  const ttc = document.getElementById('t-ttc')?.textContent || '4 920 €';
+  setVal('ct-amount', ttc);
+  updateContract();
+  toast('✅ Données du devis importées !', 'success');
+}
+
+// ══════════════════════════════
+// CALCULATEUR TJM
+// ══════════════════════════════
+function goToTJM() {
+  var s = document.getElementById('tjm-free-screen');
+  if (s) { s.style.display = 'block'; calcTJMFree(); }
+}
+function closeTJM() {
+  var s = document.getElementById('tjm-free-screen');
+  if (s) s.style.display = 'none';
+}
+function calcTJMFree() {
+  var revenu = parseFloat((document.getElementById('tjm-revenu')||{}).value||4000)||4000;
+  var jours = parseFloat((document.getElementById('tjm-jours')||{}).value||18)||18;
+  var charges = parseFloat((document.getElementById('tjm-charges')||{}).value||45)||45;
+  var conges = parseFloat((document.getElementById('tjm-conges')||{}).value||5)||5;
+  var joursAn = jours * (12 - conges * 12/52);
+  var caAnnuel = (revenu * 12) / (1 - charges/100);
+  var tjm = caAnnuel / joursAn;
+  var r = document.getElementById('tjm-result-free'); if (r) r.textContent = Math.round(tjm) + ' €';
+  var ca = document.getElementById('tjm-ca-free'); if (ca) ca.textContent = Math.round(caAnnuel).toLocaleString('fr-FR') + ' €';
+  var net = document.getElementById('tjm-net-free'); if (net) net.textContent = Math.round(revenu*12).toLocaleString('fr-FR') + ' €';
+}
+
+function calcTJM() {
+  const revenu = parseFloat(document.getElementById('tjm-revenu')?.value) || 4000;
+  const jours = parseFloat(document.getElementById('tjm-jours')?.value) || 18;
+  const charges = (parseFloat(document.getElementById('tjm-charges')?.value) || 45) / 100;
+  const conges = parseFloat(document.getElementById('tjm-conges')?.value) || 5;
+
+  const moisTrav = 12 - conges / 4.33;
+  const joursAn = jours * moisTrav;
+  const caNeeded = (revenu / (1 - charges)) * 12;
+  const tjm = Math.round(caNeeded / joursAn);
+  const ca = Math.round(tjm * joursAn);
+  const netAn = Math.round(revenu * 12);
+  const eqSalaire = Math.round(ca * 0.65);
+
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set('tjm-result', tjm.toLocaleString('fr-FR') + ' €');
+  set('tjm-ca', ca.toLocaleString('fr-FR') + ' €');
+  set('tjm-net', netAn.toLocaleString('fr-FR') + ' €');
+  set('tjm-mensuel', revenu.toLocaleString('fr-FR') + ' €');
+  set('tjm-eq-salaire', eqSalaire.toLocaleString('fr-FR') + ' €');
+}
+
+function useTJM() {
+  const tjmVal = document.getElementById('tjm-result')?.textContent?.replace(' €','').replace(/\s/g,'') || '541';
+  const tjmInput = document.getElementById('f-tjm');
+  if (tjmInput) tjmInput.value = tjmVal;
+  goTo('nouveau-devis');
+  toast('🧮 TJM appliqué à vos devis !', 'success');
+}
+
+// ══════════════════════════════
+// PROFIL
+// ══════════════════════════════
+function updateSidebar() {
+  const name = document.getElementById('p-fullname')?.value || '';
+  const company = document.getElementById('p-company')?.value || '';
+  const display = company || name || 'Mon espace';
+
+  // Sidebar name + avatar
+  const sbName = document.getElementById('sb-username');
+  const sbCompany = document.getElementById('sb-company');
+  const sbAvatar = document.getElementById('sb-avatar');
+  const sbAvatarImg = document.getElementById('sb-avatar-img');
+  if (sbName) sbName.textContent = name || display;
+  if (sbCompany) sbCompany.textContent = company;
+  var sbLetter = document.getElementById('sb-avatar-letter'); if (sbLetter && !userLogoData) sbLetter.textContent = (company || name).charAt(0).toUpperCase() || 'Q';
+  if (sbAvatarImg && userLogoData) { sbAvatarImg.src = userLogoData; sbAvatarImg.style.display = 'block'; if (sbAvatar) sbAvatar.style.display = 'none'; }
+
+  // Dashboard welcome
+  updateDashWelcome();
+
+  // Update PDF header with company info
+  updatePDF();
+}
+
+function updateDashWelcome() {
+  const name = document.getElementById('p-fullname')?.value || '';
+  const company = document.getElementById('p-company')?.value || '';
+
+  const welcomeEl = document.getElementById('dash-welcome');
+  const companyEl = document.getElementById('dash-company');
+  const initialsEl = document.getElementById('dash-logo-initials');
+  const logoPreview = document.getElementById('dash-logo-preview');
+
+  const firstName = name.split(' ')[0] || '';
+  if (welcomeEl) welcomeEl.textContent = firstName ? 'Bonjour, ' + firstName + ' 👋' : 'Bonjour 👋';
+  if (companyEl) companyEl.textContent = company || '';
+
+  // Logo or initials in dashboard banner
+  if (userLogoData && logoPreview) {
+    logoPreview.innerHTML = '<img src="' + userLogoData + '" style="width:100%;height:100%;object-fit:contain;border-radius:10px;">';
+  } else if (initialsEl) {
+    const initials = company ? company.substring(0, 2).toUpperCase() : (name ? name.charAt(0).toUpperCase() : 'Q');
+    initialsEl.textContent = initials;
+  }
+}
+
+function handleLogoUpload(input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    userLogoData = e.target.result;
+
+    // Update profil preview
+    const img = document.getElementById('logo-preview-img');
+    const placeholder = document.getElementById('logo-preview-placeholder');
+    const removeBtn = document.getElementById('logo-remove-btn');
+    if (img) { img.src = userLogoData; img.style.display = 'block'; }
+    if (placeholder) placeholder.style.display = 'none';
+    if (removeBtn) removeBtn.style.display = 'inline-block';
+
+    // Refresh everywhere
+    updateSidebar();
+    updatePDF();
+    toast('✅ Logo importé avec succès !', 'success');
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeLogo() {
+  userLogoData = null;
+  const img = document.getElementById('logo-preview-img');
+  const placeholder = document.getElementById('logo-preview-placeholder');
+  const removeBtn = document.getElementById('logo-remove-btn');
+  const input = document.getElementById('logo-input');
+  if (img) { img.src = ''; img.style.display = 'none'; }
+  if (placeholder) placeholder.style.display = 'block';
+  if (removeBtn) removeBtn.style.display = 'none';
+  if (input) input.value = '';
+  updateSidebar();
+  updatePDF();
+  toast('Logo supprimé', 'info');
+}
+
+async function saveProfil() {
+  var name=(document.getElementById('p-fullname')||{}).value||'';
+  var email=(document.getElementById('p-email')||{}).value||'';
+  var company=(document.getElementById('p-company')||{}).value||'';
+  var siret=(document.getElementById('p-siret')||{}).value||'';
+  var address=(document.getElementById('p-address')||{}).value||'';
+  var tva=(document.getElementById('p-tva')||{}).value||'';
+  if (_supabase && currentUser) {
+    try {
+      var r = await _supabase.from('profiles').upsert({ id:currentUser.id, full_name:name, email, company, siret, address, tva, updated_at:new Date().toISOString() });
+      if (r.error) throw r.error;
+    } catch(e) {
+      toast('⚠️ Erreur lors de la sauvegarde : '+(e.message||'inconnue'),'error');
+      return;
+    }
+  }
+  toast('💾 Profil sauvegardé !','success');
+  updateSidebar(); updatePDF();
+}
+
+function viewDevis(id) {
+  goTo('nouveau-devis');
+}
+
+// ══════════════════════════════
+// LEGAL PAGES
+// ══════════════════════════════
+function openLegal(page) {
+  var el = document.getElementById('legal-' + page);
+  if (el) { el.style.display = 'block'; el.scrollTop = 0; }
+}
+function closeLegal(page) {
+  var el = document.getElementById('legal-' + page);
+  if (el) el.style.display = 'none';
+}
+
+// ══════════════════════════════
+// INIT
+// ══════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof initSupabase === 'function') initSupabase();
+  if (typeof checkPaymentReturn === 'function') checkPaymentReturn();
+  if (typeof checkExistingSession === 'function') checkExistingSession();
+  renderItems()
+
+  updatePDF();
+  updateContract();
+  calcTJM();
+  const today = new Date();
+  const opts = { weekday:'long', day:'numeric', month:'long', year:'numeric' };
+  const dateEl = document.getElementById('dash-date');
+  if (dateEl) dateEl.textContent = today.toLocaleDateString('fr-FR', opts);
+});
