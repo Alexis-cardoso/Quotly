@@ -11,6 +11,53 @@
 .icon-fill { fill: currentColor; stroke: none; }
 
 /* ═══════════════════════════════════
+   LANDING — REUSABLE HOVER PATTERNS
+   (was JS onmouseover/onmouseout, now plain CSS :hover)
+═══════════════════════════════════ */
+.btn-block { width: 100%; }
+
+.nav-link-fade {
+  font-size: 13px; color: rgba(255,255,255,0.55); text-decoration: none;
+  font-weight: 500; transition: color 0.15s;
+}
+.nav-link-fade:hover { color: #fff; }
+
+.footer-link-fade {
+  color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.15s;
+}
+.footer-link-fade:hover { color: #818cf8; }
+
+.nav-btn-ghost {
+  font-size: 13px; color: rgba(255,255,255,0.7); background: none; border: none;
+  cursor: pointer; font-family: Figtree, sans-serif; font-weight: 600;
+  padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12);
+  transition: all 0.15s;
+}
+.nav-btn-ghost:hover { background: rgba(255,255,255,0.06); }
+
+.hero-btn-ghost {
+  padding: 14px 32px; background: rgba(255,255,255,0.06); color: #fff;
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 10px;
+  font-size: 15px; font-weight: 600; cursor: pointer;
+  font-family: Figtree, sans-serif; transition: all 0.2s;
+}
+.hero-btn-ghost:hover { background: rgba(255,255,255,0.1); }
+
+.feature-card {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px; padding: 28px; transition: all 0.2s;
+}
+.feature-card:hover { background: rgba(79,70,229,0.08); border-color: rgba(129,140,248,0.3); }
+
+.quick-action-btn {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+  background: #f8f7f4; border: 1px solid #ece9e0; border-radius: 10px;
+  cursor: pointer; font-family: Figtree, sans-serif; transition: all 0.15s;
+  text-align: left; width: 100%;
+}
+.quick-action-btn:hover { background: #eef2ff; border-color: #c7d2fe; }
+
+/* ═══════════════════════════════════
    VARIABLES & RESET
 ═══════════════════════════════════ */
 :root {

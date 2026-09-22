@@ -59,10 +59,10 @@
 <nav style="position:fixed;top:0;left:0;right:0;z-index:100;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,26,0.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);">
   <div style="font-family:'Instrument Serif',serif;font-size:24px;color:#fff;letter-spacing:-0.5px;">Quot<span style="color:#818cf8;">ly</span></div>
   <div style="display:flex;align-items:center;gap:24px;">
-    <a href="#features" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none;font-weight:500;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Fonctionnalités</a>
-    <a href="#pricing" style="font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none;font-weight:500;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Tarifs</a>
-    <button onclick="showAuth('login')" style="font-size:13px;color:rgba(255,255,255,0.7);background:none;border:none;cursor:pointer;font-family:Figtree,sans-serif;font-weight:600;padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.12);transition:all 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.06)'" onmouseout="this.style.background='none'">Se connecter</button>
-    <button onclick="showAuth('register')" style="font-size:13px;color:#fff;background:#4f46e5;border:none;cursor:pointer;font-family:Figtree,sans-serif;font-weight:700;padding:9px 20px;border-radius:8px;transition:all 0.15s;" onmouseover="this.style.background='#4338ca'" onmouseout="this.style.background='#4f46e5'">Créer un compte</button>
+    <a href="#features" class="nav-link-fade">Fonctionnalités</a>
+    <a href="#pricing" class="nav-link-fade">Tarifs</a>
+    <button onclick="showAuth('login')" class="nav-btn-ghost">Se connecter</button>
+    <button onclick="showAuth('register')" class="btn btn-primary">Créer un compte</button>
   </div>
 </nav>
 
@@ -87,10 +87,10 @@
       Devis, contrats et CA — tout en un. Calculateur TJM, génération IA, contrats juridiques et suivi de vos paiements en temps réel.
     </p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:56px;">
-      <button onclick="showAuth('register')" style="padding:14px 32px;background:#4f46e5;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;box-shadow:0 8px 32px rgba(79,70,229,0.4);transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 40px rgba(79,70,229,0.5)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 32px rgba(79,70,229,0.4)'">
+      <button onclick="showAuth('register')" class="btn btn-primary btn-lg" style="box-shadow:0 8px 32px rgba(79,70,229,0.4);">
         Créer un compte →
       </button>
-      <button onclick="goToTJM()" style="padding:14px 32px;background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.12);border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+      <button onclick="goToTJM()" class="hero-btn-ghost">
         <svg class="icon"><use href="#icon-calculator"></use></svg> Calculateur TJM gratuit
       </button>
     </div>
@@ -138,37 +138,37 @@
       <p style="font-size:16px;color:rgba(255,255,255,0.45);max-width:480px;margin:0 auto;line-height:1.7;">Conçu spécifiquement pour les freelances français. Simple, rapide, professionnel.</p>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;transition:all 0.2s;" onmouseover="this.style.background='rgba(79,70,229,0.08)';this.style.borderColor='rgba(129,140,248,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)'">
+      <div class="feature-card">
         <div style="font-size:28px;margin-bottom:16px;color:#fff;"><svg class="icon"><use href="#icon-calculator"></use></svg></div>
         <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Calculateur TJM</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;">Calculez votre tarif journalier idéal selon vos charges, congés et revenus souhaités.</div>
         <div style="margin-top:16px;"><span style="font-size:11px;font-weight:700;color:#34d399;background:rgba(52,211,153,0.1);padding:3px 10px;border-radius:100px;">Gratuit</span></div>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;transition:all 0.2s;" onmouseover="this.style.background='rgba(79,70,229,0.08)';this.style.borderColor='rgba(129,140,248,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)'">
+      <div class="feature-card">
         <div style="font-size:28px;margin-bottom:16px;color:#fff;"><svg class="icon"><use href="#icon-sparkles"></use></svg></div>
         <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Devis IA</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;">Décrivez votre mission, l'IA génère les lignes de prestation avec votre TJM automatiquement.</div>
         <div style="margin-top:16px;"><span style="font-size:11px;font-weight:700;color:#818cf8;background:rgba(129,140,248,0.1);padding:3px 10px;border-radius:100px;">Pro</span></div>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;transition:all 0.2s;" onmouseover="this.style.background='rgba(79,70,229,0.08)';this.style.borderColor='rgba(129,140,248,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)'">
+      <div class="feature-card">
         <div style="font-size:28px;margin-bottom:16px;color:#fff;"><svg class="icon"><use href="#icon-file-text"></use></svg></div>
         <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Export PDF</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;">Aperçu en temps réel et export PDF professionnel avec votre logo et vos couleurs.</div>
         <div style="margin-top:16px;"><span style="font-size:11px;font-weight:700;color:#818cf8;background:rgba(129,140,248,0.1);padding:3px 10px;border-radius:100px;">Pro</span></div>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;transition:all 0.2s;" onmouseover="this.style.background='rgba(79,70,229,0.08)';this.style.borderColor='rgba(129,140,248,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)'">
+      <div class="feature-card">
         <div style="font-size:28px;margin-bottom:16px;color:#fff;"><svg class="icon"><use href="#icon-clipboard"></use></svg></div>
         <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Contrats juridiques</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;">Prestation de services, CGV, NDA. Générés en quelques secondes, conformes au droit français.</div>
         <div style="margin-top:16px;"><span style="font-size:11px;font-weight:700;color:#818cf8;background:rgba(129,140,248,0.1);padding:3px 10px;border-radius:100px;">Pro</span></div>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;transition:all 0.2s;" onmouseover="this.style.background='rgba(79,70,229,0.08)';this.style.borderColor='rgba(129,140,248,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)'">
+      <div class="feature-card">
         <div style="font-size:28px;margin-bottom:16px;color:#fff;"><svg class="icon"><use href="#icon-bar-chart"></use></svg></div>
         <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Tableau de bord</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;">Suivez votre CA, vos devis en attente et votre activité en un coup d'œil.</div>
         <div style="margin-top:16px;"><span style="font-size:11px;font-weight:700;color:#818cf8;background:rgba(129,140,248,0.1);padding:3px 10px;border-radius:100px;">Pro</span></div>
       </div>
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;transition:all 0.2s;" onmouseover="this.style.background='rgba(79,70,229,0.08)';this.style.borderColor='rgba(129,140,248,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)'">
+      <div class="feature-card">
         <div style="font-size:28px;margin-bottom:16px;color:#fff;"><svg class="icon"><use href="#icon-globe"></use></svg></div>
         <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Bilingue FR / EN</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;">Basculez en anglais en un clic pour vos clients internationaux.</div>
@@ -250,7 +250,7 @@
 <footer style="background:#070712;padding:32px 24px;border-top:1px solid rgba(255,255,255,0.05);">
   <div style="max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
     <div style="font-family:'Instrument Serif',serif;font-size:20px;color:#fff;">Quot<span style="color:#818cf8;">ly</span></div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.25);">© 2026 Quotly · <a href="#" onclick="openLegal('cgu');return false;" style="color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='#818cf8'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">CGU</a> · <a href="#" onclick="openLegal('privacy');return false;" style="color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='#818cf8'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Confidentialité</a></div>
+    <div style="font-size:12px;color:rgba(255,255,255,0.25);">© 2026 Quotly · <a href="#" onclick="openLegal('cgu');return false;" class="footer-link-fade">CGU</a> · <a href="#" onclick="openLegal('privacy');return false;" class="footer-link-fade">Confidentialité</a></div>
   </div>
 </footer>
 
@@ -286,7 +286,7 @@
       <div style="text-align:right;margin-bottom:24px;">
         <a href="#" onclick="showTab('forgot');return false;" style="font-size:12px;color:#4f46e5;text-decoration:none;font-weight:600;">Mot de passe oublié ?</a>
       </div>
-      <button onclick="doLogin()" style="width:100%;padding:13px;background:#4f46e5;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.15s;box-shadow:0 4px 16px rgba(79,70,229,0.3);" onmouseover="this.style.background='#4338ca'" onmouseout="this.style.background='#4f46e5'">Se connecter</button>
+      <button onclick="doLogin()" class="btn btn-primary btn-block" style="box-shadow:0 4px 16px rgba(79,70,229,0.3);">Se connecter</button>
       <div style="text-align:center;margin-top:16px;font-size:13px;color:#9191aa;">Pas encore de compte ? <a href="#" onclick="showTab('register');return false;" style="color:#4f46e5;text-decoration:none;font-weight:700;">Créer un compte</a></div>
     </div>
 
@@ -333,7 +333,7 @@
         <input type="checkbox" id="reg-cgu" style="margin-top:2px;accent-color:#4f46e5;width:14px;height:14px;flex-shrink:0;cursor:pointer;">
         <label for="reg-cgu" style="font-size:12px;color:#9191aa;cursor:pointer;line-height:1.5;">J'accepte les <a href="#" onclick="openLegal('cgu');return false;" style="color:#4f46e5;text-decoration:none;font-weight:700;">CGU</a> et la <a href="#" onclick="openLegal('privacy');return false;" style="color:#4f46e5;text-decoration:none;font-weight:700;">Politique de confidentialité</a></label>
       </div>
-      <button id="reg-btn" onclick="doRegister()" style="width:100%;padding:13px;background:#4f46e5;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.15s;box-shadow:0 4px 16px rgba(79,70,229,0.3);" onmouseover="this.style.background='#4338ca'" onmouseout="this.style.background='#4f46e5'">Créer mon compte gratuitement</button>
+      <button id="reg-btn" onclick="doRegister()" class="btn btn-primary btn-block" style="box-shadow:0 4px 16px rgba(79,70,229,0.3);">Créer mon compte gratuitement</button>
       <div style="text-align:center;margin-top:16px;font-size:13px;color:#9191aa;">Déjà un compte ? <a href="#" onclick="showTab('login');return false;" style="color:#4f46e5;text-decoration:none;font-weight:700;">Se connecter</a></div>
     </div>
 
@@ -570,15 +570,15 @@
             <div style="background:#fff;border-radius:16px;border:1px solid #ece9e0;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
               <div style="font-size:15px;font-weight:700;color:#16162a;margin-bottom:16px;">Actions rapides</div>
               <div style="display:flex;flex-direction:column;gap:8px;">
-                <button onclick="newDevis()" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#f8f7f4;border:1px solid #ece9e0;border-radius:10px;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.15s;text-align:left;" onmouseover="this.style.background='#eef2ff';this.style.borderColor='#c7d2fe'" onmouseout="this.style.background='#f8f7f4';this.style.borderColor='#ece9e0'">
+                <button onclick="newDevis()" class="quick-action-btn">
                   <div style="width:34px;height:34px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;"><svg class="icon"><use href="#icon-file-text"></use></svg></div>
                   <div><div style="font-size:13px;font-weight:700;color:#16162a;">Nouveau devis</div><div style="font-size:11px;color:#9191aa;margin-top:1px;">Créer et envoyer</div></div>
                 </button>
-                <button onclick="newContrat()" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#f8f7f4;border:1px solid #ece9e0;border-radius:10px;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.15s;text-align:left;" onmouseover="this.style.background='#eef2ff';this.style.borderColor='#c7d2fe'" onmouseout="this.style.background='#f8f7f4';this.style.borderColor='#ece9e0'">
+                <button onclick="newContrat()" class="quick-action-btn">
                   <div style="width:34px;height:34px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;"><svg class="icon"><use href="#icon-clipboard"></use></svg></div>
                   <div><div style="font-size:13px;font-weight:700;color:#16162a;">Nouveau contrat</div><div style="font-size:11px;color:#9191aa;margin-top:1px;">Prestation, NDA, CGV</div></div>
                 </button>
-                <button onclick="goTo('calculateur')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#f8f7f4;border:1px solid #ece9e0;border-radius:10px;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.15s;text-align:left;" onmouseover="this.style.background='#eef2ff';this.style.borderColor='#c7d2fe'" onmouseout="this.style.background='#f8f7f4';this.style.borderColor='#ece9e0'">
+                <button onclick="goTo('calculateur')" class="quick-action-btn">
                   <div style="width:34px;height:34px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;"><svg class="icon"><use href="#icon-calculator"></use></svg></div>
                   <div><div style="font-size:13px;font-weight:700;color:#16162a;">Calculateur TJM</div><div style="font-size:11px;color:#9191aa;margin-top:1px;">Optimiser mon tarif</div></div>
                 </button>
