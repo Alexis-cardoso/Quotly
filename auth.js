@@ -90,6 +90,10 @@ async function doLogin() {
       if (r.error) throw r.error;
       currentUser = r.data.user;
       var prof = await _supabase.from('profiles').select('*').eq('id', currentUser.id).single();
+      if (prof.error) {
+        await new Promise(function(res){ setTimeout(res, 400); });
+        prof = await _supabase.from('profiles').select('*').eq('id', currentUser.id).single();
+      }
       var p = prof.data || {};
       enterApp(email, p.plan||'free', p.full_name||'', p.company||'');
       toast('✅ Connecté !','success');
@@ -222,6 +226,10 @@ async function checkExistingSession() {
     if (r.data && r.data.session) {
       currentUser = r.data.session.user;
       var prof = await _supabase.from('profiles').select('*').eq('id',currentUser.id).single();
+      if (prof.error) {
+        await new Promise(function(res){ setTimeout(res, 400); });
+        prof = await _supabase.from('profiles').select('*').eq('id',currentUser.id).single();
+      }
       var p = prof.data || {};
       enterApp(currentUser.email, p.plan||'free', p.full_name||'', p.company||'');
     }

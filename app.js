@@ -21,6 +21,7 @@ function goTo(page) {
   window.scrollTo(0, 0);
   if (page === 'devis') loadQuotesList();
   if (page === 'contrats') loadContractsList();
+  if (page === 'dashboard') loadDashboardStats();
   const bnPages = ['dashboard','devis','nouveau-devis','calculateur'];
   if (typeof setBN === 'function' && bnPages.includes(page)) setBN(page);
   if (typeof closeMore === 'function') closeMore();
@@ -461,6 +462,59 @@ async function loadQuotesList() {
   } catch(e) {
     tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--red);padding:32px;">Erreur de chargement</td></tr>';
   }
+}
+
+// ══════════════════════════════
+// DASHBOARD STATS
+// ══════════════════════════════
+async function loadDashboardStats() {
+  if (!_supabase || !currentUser) return;
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  try {
+    const r = await _supabase.from('quotes').select('*').eq('user_id', currentUser.id);
+    if (r.error) throw r.error;
+    const quotes = r.data || [];
+    const thisYear = new Date().getFullYear();
+    const quotesThisYear = quotes.filter(q => q.created_at && new Date(q.created_at).getFullYear() === thisYear);
+    const ca = quotesThisYear.reduce((s, q) => s + (q.total_ttc || 0), 0);
+    set('kpi-ca', fmt(ca));
+    set('kpi-ca-sub', quotesThisYear.length + ' devis cette année');
+
+    set('kpi-quotes-count', quotes.length);
+    const accepted = quotes.filter(q => q.status === 'accepte');
+    const sent = quotes.filter(q => q.status !== 'brouillon');
+    const rate = sent.length ? Math.round(accepted.length / sent.length * 100) : 0;
+    set('kpi-quotes-accepted', accepted.length + (accepted.length > 1 ? ' acceptés' : ' accepté'));
+    set('kpi-quotes-rate', rate + '% taux');
+
+    const pending = quotes.filter(q => q.status === 'envoye');
+    const pendingSum = pending.reduce((s, q) => s + (q.total_ttc || 0), 0);
+    set('kpi-pending', fmt(pendingSum));
+    set('kpi-pending-sub', pending.length + ' à relancer');
+
+    const tbody = document.getElementById('dash-recent-devis');
+    if (tbody) {
+      const recent = quotes.slice().sort((a,b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 4);
+      if (recent.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3" style="padding:20px 22px;color:#9191aa;font-size:13px;">Aucun devis pour l\'instant.</td></tr>';
+      } else {
+        const statusStyle = {
+          brouillon: ['#eef2ff','#4f46e5','Brouillon'],
+          envoye: ['#fffbeb','#d97706','Envoyé'],
+          accepte: ['#ecfdf5','#059669','Accepté'],
+          refuse: ['#fef2f2','#dc2626','Refusé']
+        };
+        tbody.innerHTML = recent.map(q => {
+          const st = statusStyle[q.status] || statusStyle.brouillon;
+          return '<tr style="border-top:1px solid #f0ede6;">' +
+            '<td style="padding:13px 22px;"><div style="font-size:13px;font-weight:700;color:#16162a;">' + escapeHtml(q.client_name || '—') + '</div></td>' +
+            '<td style="padding:13px 16px;font-size:14px;font-weight:700;color:#16162a;">' + fmt(q.total_ttc || 0) + '</td>' +
+            '<td style="padding:13px 22px;text-align:right;"><span style="background:' + st[0] + ';color:' + st[1] + ';padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;">' + st[2] + '</span></td>' +
+          '</tr>';
+        }).join('');
+      }
+    }
+  } catch(e) { console.error(e); }
 }
 
 async function viewDevis(id) {
