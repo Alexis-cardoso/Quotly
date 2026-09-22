@@ -163,6 +163,11 @@ function g(id) { return document.getElementById(id)?.value || ''; }
 
 function updatePDF() {
   const set = (id, val) => { const el = document.getElementById(id); if (el) el.innerHTML = val; };
+  const pLogo = document.getElementById('p-logo');
+  if (pLogo) {
+    if (userLogoData) { pLogo.src = userLogoData; pLogo.style.display = 'block'; }
+    else { pLogo.style.display = 'none'; }
+  }
   set('p-name', g('f-name'));
   set('p-contact', g('f-email') + ' · ' + g('f-phone'));
   set('p-siret', g('f-siret'));
