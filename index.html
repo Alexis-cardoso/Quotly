@@ -20,6 +20,36 @@
 </head>
 <body>
 
+<!-- Icon sprite — Feather-style, stroke-based, currentColor -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="icon-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+<symbol id="icon-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+<symbol id="icon-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol>
+<symbol id="icon-file-text" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
+<symbol id="icon-send" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
+<symbol id="icon-calculator" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="18"/><line x1="8" y1="18" x2="8" y2="18"/><line x1="12" y1="18" x2="12" y2="18"/></symbol>
+<symbol id="icon-clipboard" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></symbol>
+<symbol id="icon-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.6 4.8L18 9.5l-4.4 1.7L12 16l-1.6-4.8L6 9.5l4.4-1.7L12 3z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7.7-2z"/></symbol>
+<symbol id="icon-bar-chart" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></symbol>
+<symbol id="icon-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+<symbol id="icon-edit" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></symbol>
+<symbol id="icon-scale" viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><path d="M5 7l-3 7a3 3 0 0 0 6 0z"/><path d="M19 7l-3 7a3 3 0 0 0 6 0z"/><path d="M5 7h14"/><path d="M9 21h6"/></symbol>
+<symbol id="icon-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+<symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+<symbol id="icon-credit-card" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></symbol>
+<symbol id="icon-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></symbol>
+<symbol id="icon-crown" viewBox="0 0 24 24"><path d="M3 18h18l-1.5-9-4.5 4-3-7-3 7-4.5-4z"/><line x1="4.5" y1="21" x2="19.5" y2="21"/></symbol>
+<symbol id="icon-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="8" y1="6" x2="8" y2="6"/><line x1="12" y1="6" x2="12" y2="6"/><line x1="16" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/><line x1="9" y1="22" x2="9" y2="18"/><line x1="15" y1="22" x2="15" y2="18"/></symbol>
+<symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+<symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+<symbol id="icon-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+<symbol id="icon-alert-triangle" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></symbol>
+<symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="8"/></symbol>
+</defs>
+</svg>
+
 <!-- ══════════════════════════════════
      LANDING PAGE + AUTH
 ══════════════════════════════════ -->
@@ -61,7 +91,7 @@
         Créer un compte →
       </button>
       <button onclick="goToTJM()" style="padding:14px 32px;background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.12);border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
-        🧮 Calculateur TJM gratuit
+        <svg class="icon"><use href="#icon-calculator"></use></svg> Calculateur TJM gratuit
       </button>
     </div>
 
@@ -109,37 +139,37 @@
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;transition:all 0.2s;" onmouseover="this.style.background='rgba(79,70,229,0.08)';this.style.borderColor='rgba(129,140,248,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)'">
-        <div style="font-size:28px;margin-bottom:16px;">🧮</div>
+        <div style="font-size:28px;margin-bottom:16px;color:#fff;"><svg class="icon"><use href="#icon-calculator"></use></svg></div>
         <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Calculateur TJM</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;">Calculez votre tarif journalier idéal selon vos charges, congés et revenus souhaités.</div>
         <div style="margin-top:16px;"><span style="font-size:11px;font-weight:700;color:#34d399;background:rgba(52,211,153,0.1);padding:3px 10px;border-radius:100px;">Gratuit</span></div>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;transition:all 0.2s;" onmouseover="this.style.background='rgba(79,70,229,0.08)';this.style.borderColor='rgba(129,140,248,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)'">
-        <div style="font-size:28px;margin-bottom:16px;">✦</div>
+        <div style="font-size:28px;margin-bottom:16px;color:#fff;"><svg class="icon"><use href="#icon-sparkles"></use></svg></div>
         <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Devis IA</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;">Décrivez votre mission, l'IA génère les lignes de prestation avec votre TJM automatiquement.</div>
         <div style="margin-top:16px;"><span style="font-size:11px;font-weight:700;color:#818cf8;background:rgba(129,140,248,0.1);padding:3px 10px;border-radius:100px;">Pro</span></div>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;transition:all 0.2s;" onmouseover="this.style.background='rgba(79,70,229,0.08)';this.style.borderColor='rgba(129,140,248,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)'">
-        <div style="font-size:28px;margin-bottom:16px;">📄</div>
+        <div style="font-size:28px;margin-bottom:16px;color:#fff;"><svg class="icon"><use href="#icon-file-text"></use></svg></div>
         <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Export PDF</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;">Aperçu en temps réel et export PDF professionnel avec votre logo et vos couleurs.</div>
         <div style="margin-top:16px;"><span style="font-size:11px;font-weight:700;color:#818cf8;background:rgba(129,140,248,0.1);padding:3px 10px;border-radius:100px;">Pro</span></div>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;transition:all 0.2s;" onmouseover="this.style.background='rgba(79,70,229,0.08)';this.style.borderColor='rgba(129,140,248,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)'">
-        <div style="font-size:28px;margin-bottom:16px;">📋</div>
+        <div style="font-size:28px;margin-bottom:16px;color:#fff;"><svg class="icon"><use href="#icon-clipboard"></use></svg></div>
         <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Contrats juridiques</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;">Prestation de services, CGV, NDA. Générés en quelques secondes, conformes au droit français.</div>
         <div style="margin-top:16px;"><span style="font-size:11px;font-weight:700;color:#818cf8;background:rgba(129,140,248,0.1);padding:3px 10px;border-radius:100px;">Pro</span></div>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;transition:all 0.2s;" onmouseover="this.style.background='rgba(79,70,229,0.08)';this.style.borderColor='rgba(129,140,248,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)'">
-        <div style="font-size:28px;margin-bottom:16px;">📊</div>
+        <div style="font-size:28px;margin-bottom:16px;color:#fff;"><svg class="icon"><use href="#icon-bar-chart"></use></svg></div>
         <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Tableau de bord</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;">Suivez votre CA, vos devis en attente et votre activité en un coup d'œil.</div>
         <div style="margin-top:16px;"><span style="font-size:11px;font-weight:700;color:#818cf8;background:rgba(129,140,248,0.1);padding:3px 10px;border-radius:100px;">Pro</span></div>
       </div>
       <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px;transition:all 0.2s;" onmouseover="this.style.background='rgba(79,70,229,0.08)';this.style.borderColor='rgba(129,140,248,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)'">
-        <div style="font-size:28px;margin-bottom:16px;">🌍</div>
+        <div style="font-size:28px;margin-bottom:16px;color:#fff;"><svg class="icon"><use href="#icon-globe"></use></svg></div>
         <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;">Bilingue FR / EN</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;">Basculez en anglais en un clic pour vos clients internationaux.</div>
         <div style="margin-top:16px;"><span style="font-size:11px;font-weight:700;color:#34d399;background:rgba(52,211,153,0.1);padding:3px 10px;border-radius:100px;">Tous plans</span></div>
@@ -163,11 +193,11 @@
         <div style="font-family:'Instrument Serif',serif;font-size:40px;color:#fff;letter-spacing:-1px;margin-bottom:4px;">0€</div>
         <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-bottom:24px;">Pour découvrir Quotly</div>
         <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;font-weight:700;">✓</span>Calculateur TJM</div>
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;font-weight:700;">✓</span>3 devis manuels/mois</div>
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.25);"><span style="font-weight:700;">✗</span>Génération IA</div>
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.25);"><span style="font-weight:700;">✗</span>Contrats</div>
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.25);"><span style="font-weight:700;">✗</span>Export PDF</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>Calculateur TJM</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>3 devis manuels/mois</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.25);"><span><svg class="icon"><use href="#icon-x"></use></svg></span>Génération IA</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.25);"><span><svg class="icon"><use href="#icon-x"></use></svg></span>Contrats</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.25);"><span><svg class="icon"><use href="#icon-x"></use></svg></span>Export PDF</div>
         </div>
         <button onclick="showAuth('register')" style="width:100%;padding:11px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;">Commencer</button>
       </div>
@@ -178,11 +208,11 @@
         <div style="font-family:'Instrument Serif',serif;font-size:40px;color:#fff;letter-spacing:-1px;margin-bottom:4px;">19€<span style="font-size:16px;color:rgba(255,255,255,0.4);font-family:Figtree,sans-serif;">/mois</span></div>
         <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-bottom:24px;">Sans engagement</div>
         <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.7);"><span style="color:#34d399;font-weight:700;">✓</span>Devis illimités</div>
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.7);"><span style="color:#34d399;font-weight:700;">✓</span>30 crédits IA/mois</div>
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.7);"><span style="color:#34d399;font-weight:700;">✓</span>Contrats juridiques</div>
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.7);"><span style="color:#34d399;font-weight:700;">✓</span>Export PDF avec logo</div>
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.7);"><span style="color:#34d399;font-weight:700;">✓</span>Tableau de bord</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.7);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>Devis illimités</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.7);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>30 crédits IA/mois</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.7);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>Contrats juridiques</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.7);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>Export PDF avec logo</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.7);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>Tableau de bord</div>
         </div>
         <button onclick="showAuth('register')" style="width:100%;padding:11px;background:#4f46e5;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;box-shadow:0 4px 16px rgba(79,70,229,0.4);">Choisir Pro</button>
       </div>
@@ -192,9 +222,9 @@
         <div style="font-family:'Instrument Serif',serif;font-size:40px;color:#fff;letter-spacing:-1px;margin-bottom:4px;">149€<span style="font-size:16px;color:rgba(255,255,255,0.4);font-family:Figtree,sans-serif;">/an</span></div>
         <div style="font-size:12px;color:#34d399;font-weight:600;margin-bottom:24px;">12,40€/mois — économisez 35%</div>
         <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;font-weight:700;">✓</span>Tout du plan Pro</div>
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;font-weight:700;">✓</span>Facturé une fois/an</div>
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;font-weight:700;">✓</span>30 crédits IA/mois</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>Tout du plan Pro</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>Facturé une fois/an</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>30 crédits IA/mois</div>
         </div>
         <button onclick="showAuth('register')" style="width:100%;padding:11px;background:rgba(52,211,153,0.15);color:#34d399;border:1px solid rgba(52,211,153,0.3);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;">Choisir l'annuel</button>
       </div>
@@ -204,10 +234,10 @@
         <div style="font-family:'Instrument Serif',serif;font-size:40px;color:#fff;letter-spacing:-1px;margin-bottom:4px;">497€<span style="font-size:16px;color:rgba(255,255,255,0.4);font-family:Figtree,sans-serif;"> unique</span></div>
         <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-bottom:24px;">Accès permanent</div>
         <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;font-weight:700;">✓</span>Tout du plan Pro</div>
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;font-weight:700;">✓</span>30 crédits IA permanent</div>
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;font-weight:700;">✓</span>Futures fonctionnalités</div>
-          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;font-weight:700;">✓</span>Support prioritaire</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>Tout du plan Pro</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>30 crédits IA permanent</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>Futures fonctionnalités</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:13px;color:rgba(255,255,255,0.6);"><span style="color:#34d399;"><svg class="icon"><use href="#icon-check"></use></svg></span>Support prioritaire</div>
         </div>
         <button onclick="showAuth('register')" style="width:100%;padding:11px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;">Accès permanent</button>
         <div style="margin-top:10px;font-size:10px;color:rgba(255,255,255,0.25);line-height:1.5;">* L'accès permanent est valable pour la durée d'exploitation du service Quotly. Voir CGU.</div>
@@ -285,19 +315,19 @@
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
           <div id="plan-free" onclick="selectPlan('free','')" style="border:1.5px solid #4f46e5;border-radius:10px;padding:12px;cursor:pointer;background:#eef2ff;transition:all 0.15s;"><div style="font-size:13px;font-weight:700;color:#4f46e5;">🆓 Gratuit</div><div style="font-size:11px;color:#9191aa;margin-top:3px;">3 devis/mois</div></div>
           <div id="plan-pro" onclick="selectPlan('pro','price_1T7fizHC2XfsvJOqaNIpgBlP')" style="border:1.5px solid #e4e2da;border-radius:10px;padding:12px;cursor:pointer;background:#fff;transition:all 0.15s;"><div style="font-size:13px;font-weight:700;color:#16162a;">⭐ Pro</div><div style="font-size:11px;color:#9191aa;margin-top:3px;">19€/mois</div></div>
-          <div id="plan-annual" onclick="selectPlan('annual','price_1T7fjwHC2XfsvJOq4nBMN6h9')" style="border:1.5px solid #e4e2da;border-radius:10px;padding:12px;cursor:pointer;background:#fff;transition:all 0.15s;"><div style="font-size:13px;font-weight:700;color:#16162a;">📅 Pro Annuel</div><div style="font-size:11px;color:#059669;font-weight:600;margin-top:3px;">149€/an — économisez 35%</div></div>
-          <div id="plan-business" onclick="selectPlan('business','price_1T7flAHC2XfsvJOqB8WxDrTu')" style="border:1.5px solid #e4e2da;border-radius:10px;padding:12px;cursor:pointer;background:#fff;transition:all 0.15s;"><div style="font-size:13px;font-weight:700;color:#16162a;">👑 Business</div><div style="font-size:11px;color:#9191aa;font-weight:600;margin-top:3px;">497€ — accès permanent*</div></div>
+          <div id="plan-annual" onclick="selectPlan('annual','price_1T7fjwHC2XfsvJOq4nBMN6h9')" style="border:1.5px solid #e4e2da;border-radius:10px;padding:12px;cursor:pointer;background:#fff;transition:all 0.15s;"><div style="font-size:13px;font-weight:700;color:#16162a;"><svg class="icon"><use href="#icon-calendar"></use></svg> Pro Annuel</div><div style="font-size:11px;color:#059669;font-weight:600;margin-top:3px;">149€/an — économisez 35%</div></div>
+          <div id="plan-business" onclick="selectPlan('business','price_1T7flAHC2XfsvJOqB8WxDrTu')" style="border:1.5px solid #e4e2da;border-radius:10px;padding:12px;cursor:pointer;background:#fff;transition:all 0.15s;"><div style="font-size:13px;font-weight:700;color:#16162a;"><svg class="icon"><use href="#icon-crown"></use></svg> Business</div><div style="font-size:11px;color:#9191aa;font-weight:600;margin-top:3px;">497€ — accès permanent*</div></div>
         </div>
       </div>
       <!-- Stripe -->
       <div id="stripe-section" style="display:none;background:#f8f7f4;border:1px solid #e4e2da;border-radius:10px;padding:16px;margin-bottom:20px;">
-        <div style="font-size:13px;font-weight:700;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">💳 Paiement sécurisé<span style="font-size:10px;color:#9191aa;background:#e4e2da;padding:2px 10px;border-radius:100px;">via Stripe</span></div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;"><svg class="icon"><use href="#icon-credit-card"></use></svg> Paiement sécurisé<span style="font-size:10px;color:#9191aa;background:#e4e2da;padding:2px 10px;border-radius:100px;">via Stripe</span></div>
         <div style="margin-bottom:10px;"><label style="display:block;font-size:12px;font-weight:700;color:#42425e;margin-bottom:5px;">Numéro de carte</label><input id="card-number" type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)" style="width:100%;padding:11px 14px;border:1.5px solid #e4e2da;border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;"></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
           <div><label style="display:block;font-size:12px;font-weight:700;color:#42425e;margin-bottom:5px;">Expiration</label><input id="card-expiry" type="text" placeholder="MM/AA" maxlength="5" oninput="formatExpiry(this)" style="width:100%;padding:11px 14px;border:1.5px solid #e4e2da;border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;"></div>
           <div><label style="display:block;font-size:12px;font-weight:700;color:#42425e;margin-bottom:5px;">CVV</label><input id="card-cvv" type="text" placeholder="123" maxlength="3" style="width:100%;padding:11px 14px;border:1.5px solid #e4e2da;border-radius:8px;font-size:14px;font-family:Figtree,sans-serif;outline:none;box-sizing:border-box;"></div>
         </div>
-        <div style="margin-top:10px;font-size:11px;color:#9191aa;display:flex;align-items:center;gap:5px;">🔒 Paiement chiffré SSL — Quotly ne stocke jamais vos données bancaires</div>
+        <div style="margin-top:10px;font-size:11px;color:#9191aa;display:flex;align-items:center;gap:5px;"><svg class="icon"><use href="#icon-lock"></use></svg> Paiement chiffré SSL — Quotly ne stocke jamais vos données bancaires</div>
       </div>
       <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;">
         <input type="checkbox" id="reg-cgu" style="margin-top:2px;accent-color:#4f46e5;width:14px;height:14px;flex-shrink:0;cursor:pointer;">
@@ -371,16 +401,16 @@
     <div class="nav-section">
       <div class="nav-section-label" data-fr="Principal" data-en="Main">Principal</div>
       <button class="nav-item active" id="nav-dashboard" onclick="goTo('dashboard')">
-        <span class="nav-icon">📊</span>
+        <span class="nav-icon"><svg class="icon"><use href="#icon-bar-chart"></use></svg></span>
         <span data-fr="Tableau de bord" data-en="Dashboard">Tableau de bord</span>
       </button>
       <button class="nav-item" id="nav-devis" onclick="goTo('devis')">
-        <span class="nav-icon">📄</span>
+        <span class="nav-icon"><svg class="icon"><use href="#icon-file-text"></use></svg></span>
         <span data-fr="Mes devis" data-en="My quotes">Mes devis</span>
         <span class="nav-badge" id="badge-devis">3</span>
       </button>
       <button class="nav-item" id="nav-contrats" onclick="goTo('contrats')">
-        <span class="nav-icon">📋</span>
+        <span class="nav-icon"><svg class="icon"><use href="#icon-clipboard"></use></svg></span>
         <span data-fr="Mes contrats" data-en="My contracts">Mes contrats</span>
         <span class="nav-badge" id="badge-contrats">2</span>
       </button>
@@ -389,15 +419,15 @@
     <div class="nav-section">
       <div class="nav-section-label" data-fr="Outils" data-en="Tools">Outils</div>
       <button class="nav-item" id="nav-nouveau-devis" onclick="newDevis()">
-        <span class="nav-icon">✏️</span>
+        <span class="nav-icon"><svg class="icon"><use href="#icon-edit"></use></svg></span>
         <span data-fr="Nouveau devis" data-en="New quote">Nouveau devis</span>
       </button>
       <button class="nav-item" id="nav-nouveau-contrat" onclick="newContrat()">
-        <span class="nav-icon">📝</span>
+        <span class="nav-icon"><svg class="icon"><use href="#icon-edit"></use></svg></span>
         <span data-fr="Nouveau contrat" data-en="New contract">Nouveau contrat</span>
       </button>
       <button class="nav-item" id="nav-calculateur" onclick="goTo('calculateur')">
-        <span class="nav-icon">🧮</span>
+        <span class="nav-icon"><svg class="icon"><use href="#icon-calculator"></use></svg></span>
         <span data-fr="Calculateur TJM" data-en="Rate calculator">Calculateur TJM</span>
       </button>
     </div>
@@ -405,7 +435,7 @@
     <div class="nav-section">
       <div class="nav-section-label" data-fr="Compte" data-en="Account">Compte</div>
       <button class="nav-item" id="nav-profil" onclick="goTo('profil')">
-        <span class="nav-icon">⚙️</span>
+        <span class="nav-icon"><svg class="icon"><use href="#icon-settings"></use></svg></span>
         <span data-fr="Mon profil" data-en="My profile">Mon profil</span>
       </button>
     </div>
@@ -469,7 +499,7 @@
             <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#059669,#34d399);border-radius:16px 16px 0 0;"></div>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
               <div style="font-size:11px;font-weight:700;color:#9191aa;letter-spacing:0.5px;text-transform:uppercase;">CA cette année</div>
-              <div style="width:32px;height:32px;background:#ecfdf5;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;">💰</div>
+              <div style="width:32px;height:32px;background:#ecfdf5;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;"><svg class="icon"><use href="#icon-wallet"></use></svg></div>
             </div>
             <div id="kpi-ca" style="font-family:'Instrument Serif',serif;font-size:28px;color:#16162a;letter-spacing:-1px;margin-bottom:8px;">0 €</div>
             <div style="display:flex;align-items:center;gap:6px;">
@@ -480,7 +510,7 @@
             <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#4f46e5,#818cf8);border-radius:16px 16px 0 0;"></div>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
               <div style="font-size:11px;font-weight:700;color:#9191aa;letter-spacing:0.5px;text-transform:uppercase;">Devis créés</div>
-              <div style="width:32px;height:32px;background:#eef2ff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;">📄</div>
+              <div style="width:32px;height:32px;background:#eef2ff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;"><svg class="icon"><use href="#icon-file-text"></use></svg></div>
             </div>
             <div id="kpi-quotes-count" style="font-family:'Instrument Serif',serif;font-size:28px;color:#16162a;letter-spacing:-1px;margin-bottom:8px;">0</div>
             <div style="display:flex;align-items:center;gap:6px;">
@@ -503,7 +533,7 @@
             <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#4f46e5,#c084fc);border-radius:16px 16px 0 0;"></div>
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
               <div style="font-size:11px;font-weight:700;color:#9191aa;letter-spacing:0.5px;text-transform:uppercase;">Crédits IA</div>
-              <div style="width:32px;height:32px;background:#f5f3ff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;">✦</div>
+              <div style="width:32px;height:32px;background:#f5f3ff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;"><svg class="icon"><use href="#icon-sparkles"></use></svg></div>
             </div>
             <div style="font-family:'Instrument Serif',serif;font-size:28px;color:#16162a;letter-spacing:-1px;margin-bottom:8px;">22</div>
             <div style="background:#e4e2da;border-radius:100px;height:5px;overflow:hidden;">
@@ -541,15 +571,15 @@
               <div style="font-size:15px;font-weight:700;color:#16162a;margin-bottom:16px;">Actions rapides</div>
               <div style="display:flex;flex-direction:column;gap:8px;">
                 <button onclick="newDevis()" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#f8f7f4;border:1px solid #ece9e0;border-radius:10px;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.15s;text-align:left;" onmouseover="this.style.background='#eef2ff';this.style.borderColor='#c7d2fe'" onmouseout="this.style.background='#f8f7f4';this.style.borderColor='#ece9e0'">
-                  <div style="width:34px;height:34px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;">📄</div>
+                  <div style="width:34px;height:34px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;"><svg class="icon"><use href="#icon-file-text"></use></svg></div>
                   <div><div style="font-size:13px;font-weight:700;color:#16162a;">Nouveau devis</div><div style="font-size:11px;color:#9191aa;margin-top:1px;">Créer et envoyer</div></div>
                 </button>
                 <button onclick="newContrat()" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#f8f7f4;border:1px solid #ece9e0;border-radius:10px;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.15s;text-align:left;" onmouseover="this.style.background='#eef2ff';this.style.borderColor='#c7d2fe'" onmouseout="this.style.background='#f8f7f4';this.style.borderColor='#ece9e0'">
-                  <div style="width:34px;height:34px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;">📋</div>
+                  <div style="width:34px;height:34px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;"><svg class="icon"><use href="#icon-clipboard"></use></svg></div>
                   <div><div style="font-size:13px;font-weight:700;color:#16162a;">Nouveau contrat</div><div style="font-size:11px;color:#9191aa;margin-top:1px;">Prestation, NDA, CGV</div></div>
                 </button>
                 <button onclick="goTo('calculateur')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#f8f7f4;border:1px solid #ece9e0;border-radius:10px;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.15s;text-align:left;" onmouseover="this.style.background='#eef2ff';this.style.borderColor='#c7d2fe'" onmouseout="this.style.background='#f8f7f4';this.style.borderColor='#ece9e0'">
-                  <div style="width:34px;height:34px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;">🧮</div>
+                  <div style="width:34px;height:34px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;"><svg class="icon"><use href="#icon-calculator"></use></svg></div>
                   <div><div style="font-size:13px;font-weight:700;color:#16162a;">Calculateur TJM</div><div style="font-size:11px;color:#9191aa;margin-top:1px;">Optimiser mon tarif</div></div>
                 </button>
               </div>
@@ -653,9 +683,9 @@
           <div class="topbar-sub" data-fr="Remplissez les informations ou laissez l'IA vous aider" data-en="Fill in the info or let AI help you">Remplissez les informations ou laissez l'IA vous aider</div>
         </div>
         <div class="topbar-actions">
-          <button class="btn btn-ghost" onclick="saveDevis()" data-fr="💾 Sauvegarder" data-en="💾 Save">💾 Sauvegarder</button>
-          <button class="btn btn-ghost" onclick="downloadDevisPDF()" data-fr="📄 PDF" data-en="📄 PDF">📄 PDF</button>
-          <button class="btn btn-green" onclick="sendDevis()" data-fr="📧 Envoyer" data-en="📧 Send">📧 Envoyer</button>
+          <button class="btn btn-ghost" onclick="saveDevis()"><svg class="icon"><use href="#icon-save"></use></svg> <span data-fr="Sauvegarder" data-en="Save">Sauvegarder</span></button>
+          <button class="btn btn-ghost" onclick="downloadDevisPDF()"><svg class="icon"><use href="#icon-file-text"></use></svg> <span data-fr="PDF" data-en="PDF">PDF</span></button>
+          <button class="btn btn-green" onclick="sendDevis()"><svg class="icon"><use href="#icon-send"></use></svg> <span data-fr="Envoyer" data-en="Send">Envoyer</span></button>
         </div>
       </div>
       <div class="two-pane">
@@ -665,7 +695,7 @@
           <!-- AI BOX -->
           <div class="ai-box">
             <div class="ai-box-header">
-              <span>✦</span>
+              <span><svg class="icon"><use href="#icon-sparkles"></use></svg></span>
               <div>
                 <div class="ai-box-title" data-fr="Générer avec l'IA" data-en="Generate with AI">Générer avec l'IA</div>
               </div>
@@ -675,12 +705,12 @@
               <textarea id="ai-prompt" rows="3" placeholder="Ex : Site vitrine 5 pages pour un restaurant, développement WordPress, livraison 3 semaines..." data-en-placeholder="Ex: 5-page website for a restaurant, WordPress development, 3-week delivery..."></textarea>
             </div>
             <div class="ai-box-footer">
-              <div class="ai-credits">✦ <span id="ai-credits-count">22</span> <span data-fr="crédits IA restants" data-en="AI credits left">crédits IA restants</span></div>
+              <div class="ai-credits"><svg class="icon"><use href="#icon-sparkles"></use></svg> <span id="ai-credits-count">22</span> <span data-fr="crédits IA restants" data-en="AI credits left">crédits IA restants</span></div>
               <div style="display:flex;align-items:center;gap:8px;">
                 <span class="badge badge-amber" data-fr="Bientôt disponible" data-en="Coming soon">Bientôt disponible</span>
                 <button class="ai-btn" id="ai-gen-btn" onclick="generateDevisAI()" disabled>
                   <div class="spinner" id="ai-spinner"></div>
-                  <span id="ai-btn-text" data-fr="✦ Générer les lignes" data-en="✦ Generate lines">✦ Générer les lignes</span>
+                  <svg class="icon"><use href="#icon-sparkles"></use></svg> <span id="ai-btn-text" data-fr="Générer les lignes" data-en="Generate lines">Générer les lignes</span>
                 </button>
               </div>
             </div>
@@ -825,7 +855,7 @@
 
         <!-- PDF PREVIEW -->
         <div class="preview-col">
-          <div class="preview-label">👁 <span data-fr="Aperçu PDF en temps réel" data-en="Real-time PDF preview">Aperçu PDF en temps réel</span></div>
+          <div class="preview-label"><svg class="icon"><use href="#icon-eye"></use></svg> <span data-fr="Aperçu PDF en temps réel" data-en="Real-time PDF preview">Aperçu PDF en temps réel</span></div>
           <div class="pdf-sheet" id="pdf-preview">
             <div class="pdf-top">
               <div class="pdf-top-row">
@@ -898,9 +928,9 @@
           <div class="topbar-sub" data-fr="Choisissez un type et remplissez les informations" data-en="Choose a type and fill in the information">Choisissez un type et remplissez les informations</div>
         </div>
         <div class="topbar-actions">
-          <button class="btn btn-ghost" onclick="saveContrat()" data-fr="💾 Sauvegarder" data-en="💾 Save">💾 Sauvegarder</button>
-          <button class="btn btn-ghost" onclick="downloadContratPDF()" data-fr="📄 PDF" data-en="📄 PDF">📄 PDF</button>
-          <button class="btn btn-green" onclick="sendContrat()" data-fr="📧 Envoyer" data-en="📧 Send">📧 Envoyer</button>
+          <button class="btn btn-ghost" onclick="saveContrat()"><svg class="icon"><use href="#icon-save"></use></svg> <span data-fr="Sauvegarder" data-en="Save">Sauvegarder</span></button>
+          <button class="btn btn-ghost" onclick="downloadContratPDF()"><svg class="icon"><use href="#icon-file-text"></use></svg> <span data-fr="PDF" data-en="PDF">PDF</span></button>
+          <button class="btn btn-green" onclick="sendContrat()"><svg class="icon"><use href="#icon-send"></use></svg> <span data-fr="Envoyer" data-en="Send">Envoyer</span></button>
         </div>
       </div>
       <div class="two-pane">
@@ -910,17 +940,17 @@
           <div class="section-divider" data-fr="Type de contrat" data-en="Contract type">Type de contrat</div>
           <div class="contract-types">
             <div class="contract-type-card active" id="ct-prestation" onclick="selectContractType('prestation')">
-              <div class="contract-type-icon">📝</div>
+              <div class="contract-type-icon"><svg class="icon"><use href="#icon-file-text"></use></svg></div>
               <div class="contract-type-name" data-fr="Prestation" data-en="Service">Prestation</div>
               <div class="contract-type-desc" data-fr="Cadre légal pour vos missions" data-en="Legal framework for your missions">Cadre légal pour vos missions</div>
             </div>
             <div class="contract-type-card" id="ct-cgv" onclick="selectContractType('cgv')">
-              <div class="contract-type-icon">⚖️</div>
+              <div class="contract-type-icon"><svg class="icon"><use href="#icon-scale"></use></svg></div>
               <div class="contract-type-name">CGV</div>
               <div class="contract-type-desc" data-fr="Conditions Générales de Vente" data-en="General Terms of Sale">Conditions Générales de Vente</div>
             </div>
             <div class="contract-type-card" id="ct-nda" onclick="selectContractType('nda')">
-              <div class="contract-type-icon">🔒</div>
+              <div class="contract-type-icon"><svg class="icon"><use href="#icon-lock"></use></svg></div>
               <div class="contract-type-name">NDA</div>
               <div class="contract-type-desc" data-fr="Accord de confidentialité" data-en="Non-disclosure agreement">Accord de confidentialité</div>
             </div>
@@ -928,7 +958,7 @@
 
           <!-- IMPORT FROM DEVIS -->
           <div style="background:var(--accent-light);border:1.5px solid #c7d2fe;border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:14px;margin-bottom:20px;">
-            <div style="font-size:22px;">🔗</div>
+            <div style="font-size:22px;"><svg class="icon"><use href="#icon-link"></use></svg></div>
             <div style="flex:1;">
               <div style="font-size:13px;font-weight:700;color:var(--accent);" data-fr="Importer depuis un devis" data-en="Import from a quote">Importer depuis un devis</div>
               <div style="font-size:12px;color:var(--ink2);margin-top:2px;" data-fr="Les infos client et montant sont pré-remplies" data-en="Client info and amount are pre-filled">Les infos client et montant sont pré-remplies</div>
@@ -992,22 +1022,22 @@
           <!-- AI CLAUSES -->
           <div class="ai-box" style="margin-top:8px;">
             <div class="ai-box-header">
-              <span>✦</span>
+              <span><svg class="icon"><use href="#icon-sparkles"></use></svg></span>
               <div class="ai-box-title" data-fr="Personnaliser les clauses avec l'IA" data-en="Customize clauses with AI">Personnaliser les clauses avec l'IA</div>
             </div>
             <div class="ai-box-body">
               <textarea rows="2" placeholder="Ex : Ajouter une clause de non-concurrence 6 mois, limiter les allers-retours à 2..." data-en-placeholder="Ex: Add a 6-month non-compete clause, limit revisions to 2..."></textarea>
             </div>
             <div class="ai-box-footer">
-              <div class="ai-credits">✦ <span>22</span> <span data-fr="crédits restants" data-en="credits left">crédits restants</span></div>
-              <button class="ai-btn" onclick="toast('✦ Clauses personnalisées ajoutées !','success')" data-fr="✦ Personnaliser" data-en="✦ Customize">✦ Personnaliser</button>
+              <div class="ai-credits"><svg class="icon"><use href="#icon-sparkles"></use></svg> <span>22</span> <span data-fr="crédits restants" data-en="credits left">crédits restants</span></div>
+              <button class="ai-btn" onclick="toast('Clauses personnalisées ajoutées !','success')"><svg class="icon"><use href="#icon-sparkles"></use></svg> <span data-fr="Personnaliser" data-en="Customize">Personnaliser</span></button>
             </div>
           </div>
         </div>
 
         <!-- CONTRACT PREVIEW -->
         <div class="preview-col">
-          <div class="preview-label">👁 <span data-fr="Aperçu du contrat" data-en="Contract preview">Aperçu du contrat</span></div>
+          <div class="preview-label"><svg class="icon"><use href="#icon-eye"></use></svg> <span data-fr="Aperçu du contrat" data-en="Contract preview">Aperçu du contrat</span></div>
           <div class="contract-sheet" id="contract-preview">
             <div class="contract-title" id="ct-title">Contrat de prestation de services</div>
             <div class="contract-subtitle" id="ct-subtitle">Entre Jean Dupont et Acme Corp.</div>
@@ -1086,7 +1116,7 @@
                 <label class="field-label" data-fr="Semaines de congé par an" data-en="Vacation weeks per year">Semaines de congé par an</label>
                 <input class="field-input" id="tjm-conges" type="number" value="5" oninput="calcTJM()">
               </div>
-              <button class="btn btn-primary" style="width:100%;margin-top:8px;" onclick="calcTJM();toast('🧮 TJM calculé !','success')" data-fr="Calculer mon TJM" data-en="Calculate my rate">Calculer mon TJM</button>
+              <button class="btn btn-primary" style="width:100%;margin-top:8px;" onclick="calcTJM();toast('TJM calculé !','success')" data-fr="Calculer mon TJM" data-en="Calculate my rate">Calculer mon TJM</button>
             </div>
           </div>
           <div>
@@ -1129,7 +1159,7 @@
           <div class="topbar-sub" data-fr="Gérez vos informations et votre abonnement" data-en="Manage your info and subscription">Gérez vos informations et votre abonnement</div>
         </div>
         <div class="topbar-actions">
-          <button class="btn btn-primary" onclick="saveProfil()" data-fr="💾 Sauvegarder" data-en="💾 Save">💾 Sauvegarder</button>
+          <button class="btn btn-primary" onclick="saveProfil()"><svg class="icon"><use href="#icon-save"></use></svg> <span data-fr="Sauvegarder" data-en="Save">Sauvegarder</span></button>
         </div>
       </div>
       <div class="page-content">
@@ -1143,7 +1173,7 @@
               <div style="display:flex;align-items:center;gap:16px;">
                 <div id="logo-preview-box" style="width:80px;height:80px;border-radius:12px;background:#f8f7f4;border:2px dashed #e4e2da;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;cursor:pointer;" onclick="document.getElementById('logo-input').click()">
                   <img id="logo-preview-img" src="" alt="" style="width:100%;height:100%;object-fit:contain;display:none;">
-                  <span id="logo-preview-placeholder" style="font-size:28px;">🏢</span>
+                  <span id="logo-preview-placeholder" style="font-size:28px;"><svg class="icon"><use href="#icon-building"></use></svg></span>
                 </div>
                 <div style="flex:1;">
                   <div style="font-size:13px;font-weight:600;color:#16162a;margin-bottom:4px;">Importez votre logo</div>
@@ -1228,11 +1258,11 @@
             <div style="font-family:'Instrument Serif',serif;font-size:40px;letter-spacing:-1px;margin-bottom:4px;">0€</div>
             <div style="font-size:12px;color:var(--muted);margin-bottom:20px;" data-fr="Pour découvrir Quotly" data-en="To discover Quotly">Pour découvrir Quotly</div>
             <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;font-size:13px;">
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="Calculateur TJM" data-en="Rate calculator">Calculateur TJM</span></div>
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="3 devis manuels/mois" data-en="3 manual quotes/mo">3 devis manuels/mois</span></div>
-              <div style="display:flex;gap:8px;align-items:center;color:var(--muted)"><span style="font-weight:700;">✗</span> <span data-fr="Génération IA" data-en="AI generation">Génération IA</span></div>
-              <div style="display:flex;gap:8px;align-items:center;color:var(--muted)"><span style="font-weight:700;">✗</span> <span data-fr="Contrats" data-en="Contracts">Contrats</span></div>
-              <div style="display:flex;gap:8px;align-items:center;color:var(--muted)"><span style="font-weight:700;">✗</span> <span data-fr="Export PDF" data-en="PDF export">Export PDF</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="Calculateur TJM" data-en="Rate calculator">Calculateur TJM</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="3 devis manuels/mois" data-en="3 manual quotes/mo">3 devis manuels/mois</span></div>
+              <div style="display:flex;gap:8px;align-items:center;color:var(--muted)"><span><svg class="icon"><use href="#icon-x"></use></svg></span> <span data-fr="Génération IA" data-en="AI generation">Génération IA</span></div>
+              <div style="display:flex;gap:8px;align-items:center;color:var(--muted)"><span><svg class="icon"><use href="#icon-x"></use></svg></span> <span data-fr="Contrats" data-en="Contracts">Contrats</span></div>
+              <div style="display:flex;gap:8px;align-items:center;color:var(--muted)"><span><svg class="icon"><use href="#icon-x"></use></svg></span> <span data-fr="Export PDF" data-en="PDF export">Export PDF</span></div>
             </div>
             <button class="btn btn-ghost" style="width:100%;" data-fr="Plan actuel" data-en="Current plan">Plan actuel</button>
           </div>
@@ -1243,11 +1273,11 @@
             <div style="font-family:'Instrument Serif',serif;font-size:40px;letter-spacing:-1px;margin-bottom:4px;">19€<span style="font-size:16px;color:var(--muted)">/mois</span></div>
             <div style="font-size:12px;color:var(--muted);margin-bottom:20px;" data-fr="Sans engagement" data-en="No commitment">Sans engagement</div>
             <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;font-size:13px;">
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="Devis illimités" data-en="Unlimited quotes">Devis illimités</span></div>
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="30 crédits IA/mois" data-en="30 AI credits/mo">30 crédits IA/mois</span></div>
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="Contrats (Prestation, CGV, NDA)" data-en="Contracts">Contrats</span></div>
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="Export PDF avec logo" data-en="PDF export with logo">Export PDF avec logo</span></div>
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="Tableau de bord" data-en="Dashboard">Tableau de bord</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="Devis illimités" data-en="Unlimited quotes">Devis illimités</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="30 crédits IA/mois" data-en="30 AI credits/mo">30 crédits IA/mois</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="Contrats (Prestation, CGV, NDA)" data-en="Contracts">Contrats</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="Export PDF avec logo" data-en="PDF export with logo">Export PDF avec logo</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="Tableau de bord" data-en="Dashboard">Tableau de bord</span></div>
             </div>
             <button class="btn btn-primary" style="width:100%;" onclick="toast('🚀 Redirection vers le paiement...','info')" data-fr="Commencer l'essai 7 jours" data-en="Start 7-day trial">Commencer l'essai 7 jours</button>
           </div>
@@ -1257,11 +1287,11 @@
             <div style="font-family:'Instrument Serif',serif;font-size:40px;letter-spacing:-1px;margin-bottom:4px;">149€<span style="font-size:16px;color:var(--muted)">/an</span></div>
             <div style="font-size:12px;color:var(--green);font-weight:600;margin-bottom:20px;" data-fr="soit 12,40€/mois — économisez 35%" data-en="only €12.40/mo — save 35%">soit 12,40€/mois — économisez 35%</div>
             <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;font-size:13px;">
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="Tout du plan Pro" data-en="Everything in Pro">Tout du plan Pro</span></div>
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="30 crédits IA/mois" data-en="30 AI credits/mo">30 crédits IA/mois</span></div>
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="Facturé une fois/an" data-en="Billed once/year">Facturé une fois/an</span></div>
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="Export PDF avec logo" data-en="PDF export with logo">Export PDF avec logo</span></div>
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="Tableau de bord" data-en="Dashboard">Tableau de bord</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="Tout du plan Pro" data-en="Everything in Pro">Tout du plan Pro</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="30 crédits IA/mois" data-en="30 AI credits/mo">30 crédits IA/mois</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="Facturé une fois/an" data-en="Billed once/year">Facturé une fois/an</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="Export PDF avec logo" data-en="PDF export with logo">Export PDF avec logo</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="Tableau de bord" data-en="Dashboard">Tableau de bord</span></div>
             </div>
             <button class="btn btn-green" style="width:100%;" onclick="toast('🚀 Redirection vers le paiement...','info')" data-fr="Choisir l'annuel" data-en="Choose annual">Choisir l'annuel</button>
           </div>
@@ -1271,11 +1301,11 @@
             <div style="font-family:'Instrument Serif',serif;font-size:40px;letter-spacing:-1px;margin-bottom:4px;">497€<span style="font-size:16px;color:var(--muted)" data-fr=" unique" data-en=" once"> unique</span></div>
             <div style="font-size:12px;color:var(--muted);margin-bottom:20px;" data-fr="Accès permanent, payez une fois" data-en="Permanent access, pay once">Accès permanent, payez une fois</div>
             <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;font-size:13px;">
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="Tout du plan Pro" data-en="Everything in Pro">Tout du plan Pro</span></div>
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="30 crédits IA/mois permanent" data-en="30 AI credits/mo permanent">30 crédits IA/mois permanent</span></div>
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="Futures fonctionnalités incluses" data-en="Future features included">Futures fonctionnalités incluses</span></div>
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="Support prioritaire" data-en="Priority support">Support prioritaire</span></div>
-              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);font-weight:700;">✓</span> <span data-fr="Accès anticipé nouveautés" data-en="Early access to new features">Accès anticipé nouveautés</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="Tout du plan Pro" data-en="Everything in Pro">Tout du plan Pro</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="30 crédits IA/mois permanent" data-en="30 AI credits/mo permanent">30 crédits IA/mois permanent</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="Futures fonctionnalités incluses" data-en="Future features included">Futures fonctionnalités incluses</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="Support prioritaire" data-en="Priority support">Support prioritaire</span></div>
+              <div style="display:flex;gap:8px;align-items:center;"><span style="color:var(--green);"><svg class="icon"><use href="#icon-check"></use></svg></span> <span data-fr="Accès anticipé nouveautés" data-en="Early access to new features">Accès anticipé nouveautés</span></div>
             </div>
             <button class="btn" style="width:100%;background:var(--gold);color:#fff;" onclick="toast('🚀 Redirection vers le paiement...','info')" data-fr="Obtenir l'accès permanent" data-en="Get permanent access">Obtenir l'accès permanent</button>
           </div>
@@ -1287,7 +1317,7 @@
 </div>
 
 <!-- TOAST -->
-<div class="toast" id="toast"><span id="toast-msg">✓</span></div>
+<div class="toast" id="toast"><svg class="icon" id="toast-icon"><use href="#icon-check"></use></svg><span id="toast-msg"></span></div>
 
 
 

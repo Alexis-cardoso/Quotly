@@ -73,7 +73,7 @@ function formatExpiry(input) { var v=input.value.replace(/[^0-9]/g,'').substring
 async function doLogin() {
   var email = ((document.getElementById('login-email')||{}).value||'').trim();
   var pwd = (document.getElementById('login-password')||{}).value||'';
-  if (!email||!pwd) { toast('⚠️ Remplissez tous les champs','error'); return; }
+  if (!email||!pwd) { toast('Remplissez tous les champs','error'); return; }
   var btn = document.querySelector('#form-login button[onclick="doLogin()"]');
   if (btn) { btn.textContent='Connexion...'; btn.disabled=true; }
 
@@ -96,16 +96,16 @@ async function doLogin() {
       }
       var p = prof.data || {};
       enterApp(email, p.plan||'free', p.full_name||'', p.company||'');
-      toast('✅ Connecté !','success');
+      toast('Connecté !','success');
     } catch(e) {
       var msg = e.message||'Erreur de connexion';
       if (msg.includes('Invalid login')) msg = 'Email ou mot de passe incorrect';
-      toast('⚠️ ' + msg,'error');
+      toast(msg,'error');
       if (btn) { btn.textContent='Se connecter'; btn.disabled=false; }
     }
   } else {
     enterApp(email,'free','','');
-    toast('✅ Connecté !','success');
+    toast('Connecté !','success');
     if (btn) { btn.textContent='Se connecter'; btn.disabled=false; }
   }
 }
@@ -121,10 +121,10 @@ async function doRegister() {
   var phone = ((document.getElementById('reg-phone')||{}).value||'').trim();
   var cgu = (document.getElementById('reg-cgu')||{}).checked;
 
-  if (!fn||!ln||!email||!pwd) { toast('⚠️ Remplissez les champs obligatoires','error'); return; }
-  if (!email.includes('@')) { toast('⚠️ Email invalide','error'); return; }
-  if (pwd.length<8) { toast('⚠️ Mot de passe trop court (8 min.)','error'); return; }
-  if (!cgu) { toast('⚠️ Acceptez les CGU pour continuer','error'); return; }
+  if (!fn||!ln||!email||!pwd) { toast('Remplissez les champs obligatoires','error'); return; }
+  if (!email.includes('@')) { toast('Email invalide','error'); return; }
+  if (pwd.length<8) { toast('Mot de passe trop court (8 min.)','error'); return; }
+  if (!cgu) { toast('Acceptez les CGU pour continuer','error'); return; }
 
   var btn = document.getElementById('reg-btn');
   if (btn) { btn.textContent='Création...'; btn.disabled=true; }
@@ -140,7 +140,7 @@ async function doRegister() {
         customerEmail: email
       });
     } catch(e) {
-      toast('⚠️ Stripe: '+e.message,'error');
+      toast('Stripe: '+e.message,'error');
       if (btn) { btn.disabled=false; btn.textContent='Réessayer'; }
     }
     return;
@@ -163,7 +163,7 @@ async function doRegister() {
     } catch(e) {
       var msg = e.message||'Erreur';
       if (msg.includes('already registered')) msg='Cet email est déjà utilisé. Connectez-vous.';
-      toast('⚠️ '+msg,'error');
+      toast(msg,'error');
       if (btn) { btn.disabled=false; btn.textContent='Créer mon compte gratuitement'; }
     }
   } else {
@@ -174,14 +174,14 @@ async function doRegister() {
 
 async function doForgot() {
   var email = ((document.getElementById('forgot-email')||{}).value||'').trim();
-  if (!email) { toast('⚠️ Entrez votre email','error'); return; }
+  if (!email) { toast('Entrez votre email','error'); return; }
   var btn = document.querySelector('#form-forgot button[onclick="doForgot()"]');
   if (btn) { btn.textContent='Envoi...'; btn.disabled=true; }
   if (_supabase) {
     try { await _supabase.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin }); }
     catch(e) { console.log(e); }
   }
-  toast('📧 Lien envoyé ! Vérifiez votre email.','success');
+  toast('Lien envoyé ! Vérifiez votre email.','success');
   if (btn) { btn.textContent='Envoyer le lien'; btn.disabled=false; }
   closeAuth();
 }

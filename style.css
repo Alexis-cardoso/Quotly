@@ -1,4 +1,16 @@
 /* ═══════════════════════════════════
+   ICONS
+═══════════════════════════════════ */
+.icon {
+  width: 1em; height: 1em;
+  display: inline-block; vertical-align: -0.15em;
+  fill: none; stroke: currentColor;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.icon-fill { fill: currentColor; stroke: none; }
+
+/* ═══════════════════════════════════
    VARIABLES & RESET
 ═══════════════════════════════════ */
 :root {

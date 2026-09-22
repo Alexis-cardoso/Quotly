@@ -49,6 +49,9 @@ function newContrat() {
 function toast(msg, type = 'info') {
   const el = document.getElementById('toast');
   document.getElementById('toast-msg').textContent = msg;
+  const iconIds = { success: 'icon-check', error: 'icon-alert-triangle', info: 'icon-info' };
+  const useEl = document.querySelector('#toast-icon use');
+  if (useEl) useEl.setAttribute('href', '#' + (iconIds[type] || iconIds.info));
   el.className = 'toast ' + type;
   el.classList.add('show');
   setTimeout(() => el.classList.remove('show'), 2800);
@@ -188,7 +191,7 @@ function updatePDF() {
 // AI GENERATION
 // ══════════════════════════════
 function generateDevisAI() {
-  toast('✦ Fonctionnalité IA bientôt disponible', 'info');
+  toast('Fonctionnalité IA bientôt disponible', 'info');
 }
 
 // ══════════════════════════════
@@ -237,7 +240,7 @@ function importFromDevis() {
   const ttc = document.getElementById('t-ttc')?.textContent || '4 920 €';
   setVal('ct-amount', ttc);
   updateContract();
-  toast('✅ Données du devis importées !', 'success');
+  toast('Données du devis importées !', 'success');
 }
 
 // ══════════════════════════════
@@ -291,7 +294,7 @@ function useTJM() {
   const tjmInput = document.getElementById('f-tjm');
   if (tjmInput) tjmInput.value = tjmVal;
   goTo('nouveau-devis');
-  toast('🧮 TJM appliqué à vos devis !', 'success');
+  toast('TJM appliqué à vos devis !', 'success');
 }
 
 // ══════════════════════════════
@@ -359,7 +362,7 @@ function handleLogoUpload(input) {
     // Refresh everywhere
     updateSidebar();
     updatePDF();
-    toast('✅ Logo importé avec succès !', 'success');
+    toast('Logo importé avec succès !', 'success');
   };
   reader.readAsDataURL(file);
 }
@@ -391,11 +394,11 @@ async function saveProfil() {
       var r = await _supabase.from('profiles').upsert({ id:currentUser.id, full_name:name, email, company, siret, address, tva, updated_at:new Date().toISOString() });
       if (r.error) throw r.error;
     } catch(e) {
-      toast('⚠️ Erreur lors de la sauvegarde : '+(e.message||'inconnue'),'error');
+      toast('Erreur lors de la sauvegarde : '+(e.message||'inconnue'),'error');
       return;
     }
   }
-  toast('💾 Profil sauvegardé !','success');
+  toast('Profil sauvegardé !','success');
   updateSidebar(); updatePDF();
 }
 
@@ -434,13 +437,13 @@ async function buildPdf(elementId) {
 }
 
 async function downloadPDF(elementId, filename) {
-  toast('📄 Génération du PDF…','info');
+  toast('Génération du PDF…','info');
   try {
     const pdf = await buildPdf(elementId);
     pdf.save(filename);
-    toast('✅ PDF téléchargé !','success');
+    toast('PDF téléchargé !','success');
   } catch(e) {
-    toast('⚠️ Erreur PDF : '+(e.message||'inconnue'),'error');
+    toast('Erreur PDF : '+(e.message||'inconnue'),'error');
   }
 }
 
@@ -459,9 +462,9 @@ function downloadContratPDF() {
 // ══════════════════════════════
 async function sendDevis() {
   const clientEmail = g('c-email');
-  if (!clientEmail) { toast('⚠️ Renseignez l\'email du client','error'); return; }
+  if (!clientEmail) { toast('Renseignez l\'email du client','error'); return; }
   if (!currentQuoteId) { await saveDevis(); if (!currentQuoteId) return; }
-  toast('📧 Envoi en cours…','info');
+  toast('Envoi en cours…','info');
   try {
     const pdf = await buildPdf('pdf-preview');
     const pdfBase64 = pdf.output('datauristring').split(',')[1];
@@ -486,17 +489,17 @@ async function sendDevis() {
     if (_supabase && currentUser && currentQuoteId) {
       await _supabase.from('quotes').update({ status: 'envoye' }).eq('id', currentQuoteId);
     }
-    toast('✅ Devis envoyé à ' + clientEmail + ' !','success');
+    toast('Devis envoyé à ' + clientEmail + ' !','success');
   } catch(e) {
-    toast('⚠️ Erreur envoi : '+(e.message||'inconnue'),'error');
+    toast('Erreur envoi : '+(e.message||'inconnue'),'error');
   }
 }
 
 async function sendContrat() {
   const clientEmail = g('ct-client-email');
-  if (!clientEmail) { toast('⚠️ Renseignez l\'email du client','error'); return; }
+  if (!clientEmail) { toast('Renseignez l\'email du client','error'); return; }
   if (!currentContractId) { await saveContrat(); if (!currentContractId) return; }
-  toast('📧 Envoi en cours…','info');
+  toast('Envoi en cours…','info');
   try {
     const pdf = await buildPdf('contract-preview');
     const pdfBase64 = pdf.output('datauristring').split(',')[1];
@@ -521,9 +524,9 @@ async function sendContrat() {
     if (_supabase && currentUser && currentContractId) {
       await _supabase.from('contracts').update({ status: 'envoye' }).eq('id', currentContractId);
     }
-    toast('✅ Contrat envoyé à ' + clientEmail + ' !','success');
+    toast('Contrat envoyé à ' + clientEmail + ' !','success');
   } catch(e) {
-    toast('⚠️ Erreur envoi : '+(e.message||'inconnue'),'error');
+    toast('Erreur envoi : '+(e.message||'inconnue'),'error');
   }
 }
 
@@ -532,7 +535,7 @@ async function sendContrat() {
 // ══════════════════════════════
 
 async function saveDevis() {
-  if (!_supabase || !currentUser) { toast('⚠️ Connectez-vous pour sauvegarder','error'); return; }
+  if (!_supabase || !currentUser) { toast('Connectez-vous pour sauvegarder','error'); return; }
   const tvaRate = parseFloat(document.getElementById('f-tva-rate')?.value) / 100 || 0.2;
   const ht = items.reduce((s, i) => s + (i.qty||0) * (i.price||0), 0);
   const ttc = ht * (1 + tvaRate);
@@ -553,9 +556,9 @@ async function saveDevis() {
     }
     if (r.error) throw r.error;
     currentQuoteId = r.data.id;
-    toast('💾 Devis sauvegardé !','success');
+    toast('Devis sauvegardé !','success');
   } catch(e) {
-    toast('⚠️ Erreur : '+(e.message||'inconnue'),'error');
+    toast('Erreur : '+(e.message||'inconnue'),'error');
   }
 }
 
@@ -663,7 +666,7 @@ async function viewDevis(id) {
     updateTotals();
     updatePDF();
   } catch(e) {
-    toast('⚠️ Erreur de chargement du devis','error');
+    toast('Erreur de chargement du devis','error');
   }
 }
 
@@ -671,7 +674,7 @@ async function viewDevis(id) {
 // CONTRAT PERSISTENCE
 // ══════════════════════════════
 async function saveContrat() {
-  if (!_supabase || !currentUser) { toast('⚠️ Connectez-vous pour sauvegarder','error'); return; }
+  if (!_supabase || !currentUser) { toast('Connectez-vous pour sauvegarder','error'); return; }
   const preview = document.getElementById('contract-preview');
   const payload = {
     user_id: currentUser.id,
@@ -689,9 +692,9 @@ async function saveContrat() {
     }
     if (r.error) throw r.error;
     currentContractId = r.data.id;
-    toast('💾 Contrat sauvegardé !','success');
+    toast('Contrat sauvegardé !','success');
   } catch(e) {
-    toast('⚠️ Erreur : '+(e.message||'inconnue'),'error');
+    toast('Erreur : '+(e.message||'inconnue'),'error');
   }
 }
 
@@ -742,7 +745,7 @@ async function viewContrat(id) {
     if (c.type) selectContractType(c.type);
     updateContract();
   } catch(e) {
-    toast('⚠️ Erreur de chargement du contrat','error');
+    toast('Erreur de chargement du contrat','error');
   }
 }
 
