@@ -401,33 +401,37 @@ function escapeHtml(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 }
 
-async function downloadPDF(elementId, filename) {
+async function buildPdf(elementId) {
   const el = document.getElementById(elementId);
-  if (!el) { toast('⚠️ Aperçu introuvable','error'); return; }
+  if (!el) throw new Error('Aperçu introuvable');
   if (typeof html2canvas === 'undefined' || typeof window.jspdf === 'undefined') {
-    toast('⚠️ Bibliothèque PDF non chargée','error');
-    return;
+    throw new Error('Bibliothèque PDF non chargée');
   }
-  toast('📄 Génération du PDF…','info');
-  try {
-    const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
-    const imgData = canvas.toDataURL('image/jpeg', 0.95);
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-    const imgWidth = pageWidth;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    let heightLeft = imgHeight;
-    let position = 0;
+  const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
+  const imgData = canvas.toDataURL('image/jpeg', 0.95);
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF('p', 'mm', 'a4');
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+  const imgWidth = pageWidth;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  let heightLeft = imgHeight;
+  let position = 0;
+  pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+  heightLeft -= pageHeight;
+  while (heightLeft > 0) {
+    position = heightLeft - imgHeight;
+    pdf.addPage();
     pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
     heightLeft -= pageHeight;
-    while (heightLeft > 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
+  }
+  return pdf;
+}
+
+async function downloadPDF(elementId, filename) {
+  toast('📄 Génération du PDF…','info');
+  try {
+    const pdf = await buildPdf(elementId);
     pdf.save(filename);
     toast('✅ PDF téléchargé !','success');
   } catch(e) {
@@ -443,6 +447,79 @@ function downloadDevisPDF() {
 function downloadContratPDF() {
   const client = g('ct-client') || 'contrat';
   downloadPDF('contract-preview', 'Contrat-' + client.replace(/[^a-zA-Z0-9]/g,'_') + '.pdf');
+}
+
+// ══════════════════════════════
+// EMAIL SENDING
+// ══════════════════════════════
+async function sendDevis() {
+  const clientEmail = g('c-email');
+  if (!clientEmail) { toast('⚠️ Renseignez l\'email du client','error'); return; }
+  if (!currentQuoteId) { await saveDevis(); if (!currentQuoteId) return; }
+  toast('📧 Envoi en cours…','info');
+  try {
+    const pdf = await buildPdf('pdf-preview');
+    const pdfBase64 = pdf.output('datauristring').split(',')[1];
+    const num = g('q-num') || 'devis';
+    const providerName = g('f-name');
+    const r = await fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        toEmail: clientEmail,
+        toName: g('c-name'),
+        fromEmail: g('f-email'),
+        fromName: providerName,
+        subject: 'Devis ' + num + ' — ' + providerName,
+        htmlContent: '<p>Bonjour,</p><p>Veuillez trouver ci-joint votre devis <strong>' + escapeHtml(num) + '</strong>.</p><p>N\'hésitez pas à répondre directement à cet email pour toute question.</p><p>Cordialement,<br>' + escapeHtml(providerName) + '</p>',
+        attachmentBase64: pdfBase64,
+        attachmentName: 'Devis-' + num.replace(/[^a-zA-Z0-9-]/g,'') + '.pdf'
+      })
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Erreur d\'envoi');
+    if (_supabase && currentUser && currentQuoteId) {
+      await _supabase.from('quotes').update({ status: 'envoye' }).eq('id', currentQuoteId);
+    }
+    toast('✅ Devis envoyé à ' + clientEmail + ' !','success');
+  } catch(e) {
+    toast('⚠️ Erreur envoi : '+(e.message||'inconnue'),'error');
+  }
+}
+
+async function sendContrat() {
+  const clientEmail = g('ct-client-email');
+  if (!clientEmail) { toast('⚠️ Renseignez l\'email du client','error'); return; }
+  if (!currentContractId) { await saveContrat(); if (!currentContractId) return; }
+  toast('📧 Envoi en cours…','info');
+  try {
+    const pdf = await buildPdf('contract-preview');
+    const pdfBase64 = pdf.output('datauristring').split(',')[1];
+    const client = g('ct-client') || 'contrat';
+    const providerName = g('ct-provider');
+    const r = await fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        toEmail: clientEmail,
+        toName: client,
+        fromEmail: g('f-email'),
+        fromName: providerName,
+        subject: 'Contrat — ' + providerName,
+        htmlContent: '<p>Bonjour,</p><p>Veuillez trouver ci-joint le contrat.</p><p>N\'hésitez pas à répondre directement à cet email pour toute question.</p><p>Cordialement,<br>' + escapeHtml(providerName) + '</p>',
+        attachmentBase64: pdfBase64,
+        attachmentName: 'Contrat-' + client.replace(/[^a-zA-Z0-9]/g,'_') + '.pdf'
+      })
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Erreur d\'envoi');
+    if (_supabase && currentUser && currentContractId) {
+      await _supabase.from('contracts').update({ status: 'envoye' }).eq('id', currentContractId);
+    }
+    toast('✅ Contrat envoyé à ' + clientEmail + ' !','success');
+  } catch(e) {
+    toast('⚠️ Erreur envoi : '+(e.message||'inconnue'),'error');
+  }
 }
 
 // ══════════════════════════════
