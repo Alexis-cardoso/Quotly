@@ -4,6 +4,9 @@
 var items = [];
 var lang = 'fr';
 var userLogoData = null;
+var contractType = 'prestation';
+var currentQuoteId = null;
+var currentContractId = null;
 
 // ══════════════════════════════
 // NAVIGATION
@@ -16,9 +19,27 @@ function goTo(page) {
   const navEl = document.getElementById('nav-' + page);
   if (navEl) navEl.classList.add('active');
   window.scrollTo(0, 0);
+  if (page === 'devis') loadQuotesList();
+  if (page === 'contrats') loadContractsList();
   const bnPages = ['dashboard','devis','nouveau-devis','calculateur'];
   if (typeof setBN === 'function' && bnPages.includes(page)) setBN(page);
   if (typeof closeMore === 'function') closeMore();
+}
+
+function newDevis() {
+  currentQuoteId = null;
+  items = [];
+  const clear = id => { const el = document.getElementById(id); if (el) el.value = ''; };
+  clear('c-name'); clear('c-siret'); clear('c-addr'); clear('c-contact'); clear('c-email');
+  goTo('nouveau-devis');
+  renderItems(); updateTotals(); updatePDF();
+}
+function newContrat() {
+  currentContractId = null;
+  const clear = id => { const el = document.getElementById(id); if (el) el.value = ''; };
+  clear('ct-client'); clear('ct-cli-siret'); clear('ct-client-email');
+  goTo('nouveau-contrat');
+  updateContract();
 }
 
 // ══════════════════════════════
@@ -150,7 +171,7 @@ function updatePDF() {
   set('p-fname', g('f-name'));
   set('p-fdetail', g('f-addr') + '<br>SIRET : ' + g('f-siret') + '<br>TVA : ' + g('f-tva-num'));
   set('p-cname', g('c-name'));
-  set('p-cdetail', g('c-addr') + '<br>SIRET : ' + g('c-siret') + '<br>' + g('c-contact'));
+  set('p-cdetail', g('c-addr') + '<br>SIRET : ' + g('c-siret') + '<br>' + g('c-contact') + (g('c-email') ? ' · ' + g('c-email') : ''));
   set('p-note', g('f-note'));
   set('p-footer', g('f-email') + ' · ' + g('f-phone') + '<br>' + g('f-addr'));
   set('p-sign-client', g('c-name'));
@@ -372,8 +393,173 @@ async function saveProfil() {
   updateSidebar(); updatePDF();
 }
 
-function viewDevis(id) {
+// ══════════════════════════════
+// DEVIS PERSISTENCE
+// ══════════════════════════════
+function escapeHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
+async function saveDevis() {
+  if (!_supabase || !currentUser) { toast('⚠️ Connectez-vous pour sauvegarder','error'); return; }
+  const tvaRate = parseFloat(document.getElementById('f-tva-rate')?.value) / 100 || 0.2;
+  const ht = items.reduce((s, i) => s + (i.qty||0) * (i.price||0), 0);
+  const ttc = ht * (1 + tvaRate);
+  const payload = {
+    user_id: currentUser.id,
+    client_name: g('c-name') || '',
+    client_email: g('c-email') || '',
+    items: items,
+    total_ht: ht,
+    total_ttc: ttc
+  };
+  try {
+    let r;
+    if (currentQuoteId) {
+      r = await _supabase.from('quotes').update(payload).eq('id', currentQuoteId).select().single();
+    } else {
+      r = await _supabase.from('quotes').insert(payload).select().single();
+    }
+    if (r.error) throw r.error;
+    currentQuoteId = r.data.id;
+    toast('💾 Devis sauvegardé !','success');
+  } catch(e) {
+    toast('⚠️ Erreur : '+(e.message||'inconnue'),'error');
+  }
+}
+
+async function loadQuotesList() {
+  const tbody = document.getElementById('devis-tbody');
+  if (!tbody) return;
+  if (!_supabase || !currentUser) { tbody.innerHTML = ''; return; }
+  try {
+    const r = await _supabase.from('quotes').select('*').eq('user_id', currentUser.id).order('created_at', { ascending: false });
+    if (r.error) throw r.error;
+    const rows = r.data || [];
+    const sub = document.getElementById('devis-count-sub');
+    if (sub) sub.textContent = rows.length + (lang === 'en' ? ' quotes total' : ' devis au total');
+    const badge = document.getElementById('badge-devis');
+    if (badge) badge.textContent = rows.length;
+    if (rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">' + (lang==='en' ? 'No quotes yet — create your first one.' : 'Aucun devis pour l\'instant — créez le premier.') + '</td></tr>';
+      return;
+    }
+    const statusMap = { brouillon: ['badge-amber','Brouillon'], envoye: ['badge-blue','Envoyé'], accepte: ['badge-green','Accepté'], refuse: ['badge-red','Refusé'] };
+    tbody.innerHTML = rows.map(q => {
+      const st = statusMap[q.status] || statusMap.brouillon;
+      const date = q.created_at ? new Date(q.created_at).toLocaleDateString('fr-FR') : '';
+      return '<tr>' +
+        '<td class="bold">' + escapeHtml(q.id.slice(0,8)) + '</td>' +
+        '<td class="bold">' + escapeHtml(q.client_name || '—') + '</td>' +
+        '<td style="color:var(--muted)">' + escapeHtml(q.subject || '') + '</td>' +
+        '<td style="color:var(--muted)">' + date + '</td>' +
+        '<td class="bold">' + fmt(q.total_ttc || 0) + '</td>' +
+        '<td><span class="badge ' + st[0] + '">' + st[1] + '</span></td>' +
+        '<td><button class="btn btn-ghost btn-sm" onclick="viewDevis(\'' + q.id + '\')">' + (lang==='en'?'View':'Voir') + '</button></td>' +
+      '</tr>';
+    }).join('');
+  } catch(e) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--red);padding:32px;">Erreur de chargement</td></tr>';
+  }
+}
+
+async function viewDevis(id) {
+  currentQuoteId = id;
   goTo('nouveau-devis');
+  if (!_supabase || !currentUser) return;
+  try {
+    const r = await _supabase.from('quotes').select('*').eq('id', id).eq('user_id', currentUser.id).single();
+    if (r.error) throw r.error;
+    const q = r.data;
+    const setVal = (elId, val) => { const el = document.getElementById(elId); if (el) el.value = val || ''; };
+    setVal('c-name', q.client_name);
+    setVal('c-email', q.client_email);
+    items = Array.isArray(q.items) ? q.items : [];
+    renderItems();
+    updateTotals();
+    updatePDF();
+  } catch(e) {
+    toast('⚠️ Erreur de chargement du devis','error');
+  }
+}
+
+// ══════════════════════════════
+// CONTRAT PERSISTENCE
+// ══════════════════════════════
+async function saveContrat() {
+  if (!_supabase || !currentUser) { toast('⚠️ Connectez-vous pour sauvegarder','error'); return; }
+  const preview = document.getElementById('contract-preview');
+  const payload = {
+    user_id: currentUser.id,
+    type: contractType,
+    client_name: g('ct-client') || '',
+    client_email: g('ct-client-email') || '',
+    content: preview ? preview.innerHTML : ''
+  };
+  try {
+    let r;
+    if (currentContractId) {
+      r = await _supabase.from('contracts').update(payload).eq('id', currentContractId).select().single();
+    } else {
+      r = await _supabase.from('contracts').insert(payload).select().single();
+    }
+    if (r.error) throw r.error;
+    currentContractId = r.data.id;
+    toast('💾 Contrat sauvegardé !','success');
+  } catch(e) {
+    toast('⚠️ Erreur : '+(e.message||'inconnue'),'error');
+  }
+}
+
+async function loadContractsList() {
+  const tbody = document.getElementById('contrats-tbody');
+  if (!tbody) return;
+  if (!_supabase || !currentUser) { tbody.innerHTML = ''; return; }
+  try {
+    const r = await _supabase.from('contracts').select('*').eq('user_id', currentUser.id).order('created_at', { ascending: false });
+    if (r.error) throw r.error;
+    const rows = r.data || [];
+    const sub = document.getElementById('contrats-count-sub');
+    if (sub) sub.textContent = rows.length + (lang === 'en' ? ' contracts total' : ' contrats au total');
+    const badge = document.getElementById('badge-contrats');
+    if (badge) badge.textContent = rows.length;
+    if (rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:32px;">' + (lang==='en' ? 'No contracts yet — create your first one.' : 'Aucun contrat pour l\'instant — créez le premier.') + '</td></tr>';
+      return;
+    }
+    const typeLabel = { prestation: 'Prestation', cgv: 'CGV', nda: 'NDA' };
+    tbody.innerHTML = rows.map(c => {
+      const date = c.created_at ? new Date(c.created_at).toLocaleDateString('fr-FR') : '';
+      return '<tr>' +
+        '<td class="bold">' + escapeHtml(c.id.slice(0,8)) + '</td>' +
+        '<td><span class="badge badge-blue">' + (typeLabel[c.type] || escapeHtml(c.type || '')) + '</span></td>' +
+        '<td class="bold">' + escapeHtml(c.client_name || '—') + '</td>' +
+        '<td style="color:var(--muted)">' + date + '</td>' +
+        '<td><span class="badge badge-amber">' + (c.status || 'brouillon') + '</span></td>' +
+        '<td><button class="btn btn-ghost btn-sm" onclick="viewContrat(\'' + c.id + '\')">' + (lang==='en'?'View':'Voir') + '</button></td>' +
+      '</tr>';
+    }).join('');
+  } catch(e) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--red);padding:32px;">Erreur de chargement</td></tr>';
+  }
+}
+
+async function viewContrat(id) {
+  currentContractId = id;
+  goTo('nouveau-contrat');
+  if (!_supabase || !currentUser) return;
+  try {
+    const r = await _supabase.from('contracts').select('*').eq('id', id).eq('user_id', currentUser.id).single();
+    if (r.error) throw r.error;
+    const c = r.data;
+    const setVal = (elId, val) => { const el = document.getElementById(elId); if (el) el.value = val || ''; };
+    setVal('ct-client', c.client_name);
+    setVal('ct-client-email', c.client_email);
+    if (c.type) selectContractType(c.type);
+    updateContract();
+  } catch(e) {
+    toast('⚠️ Erreur de chargement du contrat','error');
+  }
 }
 
 // ══════════════════════════════

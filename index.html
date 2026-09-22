@@ -388,11 +388,11 @@
 
     <div class="nav-section">
       <div class="nav-section-label" data-fr="Outils" data-en="Tools">Outils</div>
-      <button class="nav-item" id="nav-nouveau-devis" onclick="goTo('nouveau-devis')">
+      <button class="nav-item" id="nav-nouveau-devis" onclick="newDevis()">
         <span class="nav-icon">✏️</span>
         <span data-fr="Nouveau devis" data-en="New quote">Nouveau devis</span>
       </button>
-      <button class="nav-item" id="nav-nouveau-contrat" onclick="goTo('nouveau-contrat')">
+      <button class="nav-item" id="nav-nouveau-contrat" onclick="newContrat()">
         <span class="nav-icon">📝</span>
         <span data-fr="Nouveau contrat" data-en="New contract">Nouveau contrat</span>
       </button>
@@ -434,7 +434,7 @@
           <div class="topbar-sub" id="dash-date">Vendredi 6 mars 2026</div>
         </div>
         <div class="topbar-actions">
-          <button class="btn btn-primary" onclick="goTo('nouveau-devis')">
+          <button class="btn btn-primary" onclick="newDevis()">
             <span>＋</span> <span data-fr="Nouveau devis" data-en="New quote">Nouveau devis</span>
           </button>
         </div>
@@ -458,8 +458,8 @@
             <div style="font-size:13px;color:rgba(255,255,255,0.4);max-width:400px;line-height:1.6;">Votre espace freelance. Créez, gérez et envoyez vos devis en quelques clics.</div>
           </div>
           <div style="display:flex;gap:10px;flex-shrink:0;position:relative;z-index:1;">
-            <button onclick="goTo('nouveau-devis')" style="padding:10px 18px;background:#4f46e5;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;white-space:nowrap;">+ Nouveau devis</button>
-            <button onclick="goTo('nouveau-contrat')" style="padding:10px 18px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.12);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:Figtree,sans-serif;white-space:nowrap;">+ Contrat</button>
+            <button onclick="newDevis()" style="padding:10px 18px;background:#4f46e5;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;white-space:nowrap;">+ Nouveau devis</button>
+            <button onclick="newContrat()" style="padding:10px 18px;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.12);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:Figtree,sans-serif;white-space:nowrap;">+ Contrat</button>
           </div>
         </div>
 
@@ -572,11 +572,11 @@
             <div style="background:#fff;border-radius:16px;border:1px solid #ece9e0;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
               <div style="font-size:15px;font-weight:700;color:#16162a;margin-bottom:16px;">Actions rapides</div>
               <div style="display:flex;flex-direction:column;gap:8px;">
-                <button onclick="goTo('nouveau-devis')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#f8f7f4;border:1px solid #ece9e0;border-radius:10px;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.15s;text-align:left;" onmouseover="this.style.background='#eef2ff';this.style.borderColor='#c7d2fe'" onmouseout="this.style.background='#f8f7f4';this.style.borderColor='#ece9e0'">
+                <button onclick="newDevis()" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#f8f7f4;border:1px solid #ece9e0;border-radius:10px;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.15s;text-align:left;" onmouseover="this.style.background='#eef2ff';this.style.borderColor='#c7d2fe'" onmouseout="this.style.background='#f8f7f4';this.style.borderColor='#ece9e0'">
                   <div style="width:34px;height:34px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;">📄</div>
                   <div><div style="font-size:13px;font-weight:700;color:#16162a;">Nouveau devis</div><div style="font-size:11px;color:#9191aa;margin-top:1px;">Créer et envoyer</div></div>
                 </button>
-                <button onclick="goTo('nouveau-contrat')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#f8f7f4;border:1px solid #ece9e0;border-radius:10px;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.15s;text-align:left;" onmouseover="this.style.background='#eef2ff';this.style.borderColor='#c7d2fe'" onmouseout="this.style.background='#f8f7f4';this.style.borderColor='#ece9e0'">
+                <button onclick="newContrat()" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:#f8f7f4;border:1px solid #ece9e0;border-radius:10px;cursor:pointer;font-family:Figtree,sans-serif;transition:all 0.15s;text-align:left;" onmouseover="this.style.background='#eef2ff';this.style.borderColor='#c7d2fe'" onmouseout="this.style.background='#f8f7f4';this.style.borderColor='#ece9e0'">
                   <div style="width:34px;height:34px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;">📋</div>
                   <div><div style="font-size:13px;font-weight:700;color:#16162a;">Nouveau contrat</div><div style="font-size:11px;color:#9191aa;margin-top:1px;">Prestation, NDA, CGV</div></div>
                 </button>
@@ -617,10 +617,10 @@
       <div class="topbar">
         <div class="topbar-left">
           <div class="topbar-title" data-fr="Mes devis" data-en="My quotes">Mes devis</div>
-          <div class="topbar-sub" data-fr="3 devis au total" data-en="3 quotes total">3 devis au total</div>
+          <div class="topbar-sub" id="devis-count-sub" data-fr="3 devis au total" data-en="3 quotes total">3 devis au total</div>
         </div>
         <div class="topbar-actions">
-          <button class="btn btn-primary" onclick="goTo('nouveau-devis')">
+          <button class="btn btn-primary" onclick="newDevis()">
             <span>＋</span> <span data-fr="Nouveau devis" data-en="New quote">Nouveau devis</span>
           </button>
         </div>
@@ -637,39 +637,8 @@
               <th data-fr="Statut" data-en="Status">Statut</th>
               <th data-fr="Actions" data-en="Actions">Actions</th>
             </tr></thead>
-            <tbody>
-              <tr>
-                <td class="bold">DEV-2026-042</td>
-                <td class="bold">Acme Corp.</td>
-                <td style="color:var(--muted)">Site vitrine WordPress</td>
-                <td style="color:var(--muted)">01/03/2026</td>
-                <td class="bold">4 920 €</td>
-                <td><span class="badge badge-green" data-fr="Accepté" data-en="Accepted">Accepté</span></td>
-                <td>
-                  <div style="display:flex;gap:6px;">
-                    <button class="btn btn-ghost btn-sm" onclick="viewDevis(1)" data-fr="Voir" data-en="View">Voir</button>
-                    <button class="btn btn-ghost btn-sm" onclick="goTo('nouveau-contrat')" data-fr="→ Contrat" data-en="→ Contract">→ Contrat</button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="bold">DEV-2026-041</td>
-                <td class="bold">Studio Pixel</td>
-                <td style="color:var(--muted)">Identité visuelle</td>
-                <td style="color:var(--muted)">20/02/2026</td>
-                <td class="bold">2 880 €</td>
-                <td><span class="badge badge-amber" data-fr="En attente" data-en="Pending">En attente</span></td>
-                <td><button class="btn btn-ghost btn-sm" onclick="viewDevis(2)" data-fr="Voir" data-en="View">Voir</button></td>
-              </tr>
-              <tr>
-                <td class="bold">DEV-2026-040</td>
-                <td class="bold">MKT Agency</td>
-                <td style="color:var(--muted)">Campagne SEO</td>
-                <td style="color:var(--muted)">10/02/2026</td>
-                <td class="bold">2 160 €</td>
-                <td><span class="badge badge-red" data-fr="Refusé" data-en="Refused">Refusé</span></td>
-                <td><button class="btn btn-ghost btn-sm" data-fr="Voir" data-en="View">Voir</button></td>
-              </tr>
+            <tbody id="devis-tbody">
+              <tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">Chargement…</td></tr>
             </tbody>
           </table>
         </div>
@@ -681,10 +650,10 @@
       <div class="topbar">
         <div class="topbar-left">
           <div class="topbar-title" data-fr="Mes contrats" data-en="My contracts">Mes contrats</div>
-          <div class="topbar-sub" data-fr="2 contrats au total" data-en="2 contracts total">2 contrats au total</div>
+          <div class="topbar-sub" id="contrats-count-sub" data-fr="2 contrats au total" data-en="2 contracts total">2 contrats au total</div>
         </div>
         <div class="topbar-actions">
-          <button class="btn btn-primary" onclick="goTo('nouveau-contrat')">
+          <button class="btn btn-primary" onclick="newContrat()">
             <span>＋</span> <span data-fr="Nouveau contrat" data-en="New contract">Nouveau contrat</span>
           </button>
         </div>
@@ -700,23 +669,8 @@
               <th data-fr="Statut" data-en="Status">Statut</th>
               <th data-fr="Actions" data-en="Actions">Actions</th>
             </tr></thead>
-            <tbody>
-              <tr>
-                <td class="bold">CONT-2026-012</td>
-                <td><span class="badge badge-blue">Prestation</span></td>
-                <td class="bold">Acme Corp.</td>
-                <td style="color:var(--muted)">01/03/2026</td>
-                <td><span class="badge badge-green" data-fr="Signé" data-en="Signed">Signé</span></td>
-                <td><button class="btn btn-ghost btn-sm" data-fr="Voir" data-en="View">Voir</button></td>
-              </tr>
-              <tr>
-                <td class="bold">CONT-2026-011</td>
-                <td><span class="badge badge-blue">NDA</span></td>
-                <td class="bold">Studio Pixel</td>
-                <td style="color:var(--muted)">20/02/2026</td>
-                <td><span class="badge badge-amber" data-fr="En attente" data-en="Pending">En attente</span></td>
-                <td><button class="btn btn-ghost btn-sm" data-fr="Voir" data-en="View">Voir</button></td>
-              </tr>
+            <tbody id="contrats-tbody">
+              <tr><td colspan="6" style="text-align:center;color:var(--muted);padding:32px;">Chargement…</td></tr>
             </tbody>
           </table>
         </div>
@@ -731,9 +685,10 @@
           <div class="topbar-sub" data-fr="Remplissez les informations ou laissez l'IA vous aider" data-en="Fill in the info or let AI help you">Remplissez les informations ou laissez l'IA vous aider</div>
         </div>
         <div class="topbar-actions">
-          <button class="btn btn-ghost" onclick="toast('💾 Brouillon sauvegardé !','success')" data-fr="💾 Sauvegarder" data-en="💾 Save">💾 Sauvegarder</button>
-          <button class="btn btn-ghost" onclick="toast('📄 Export PDF en cours...','info')" data-fr="📄 PDF" data-en="📄 PDF">📄 PDF</button>
-          <button class="btn btn-green" onclick="toast('📧 Devis envoyé !','success')" data-fr="📧 Envoyer" data-en="📧 Send">📧 Envoyer</button>
+          <button class="btn btn-ghost" onclick="saveDevis()" data-fr="💾 Sauvegarder" data-en="💾 Save">💾 Sauvegarder</button>
+          <span class="badge badge-amber" data-fr="Bientôt disponible" data-en="Coming soon">Bientôt disponible</span>
+          <button class="btn btn-ghost" disabled data-fr="📄 PDF" data-en="📄 PDF">📄 PDF</button>
+          <button class="btn btn-green" disabled data-fr="📧 Envoyer" data-en="📧 Send">📧 Envoyer</button>
         </div>
       </div>
       <div class="two-pane">
@@ -809,8 +764,12 @@
               <input class="field-input" id="c-addr" value="45 av. des Champs, 75008 Paris" oninput="updatePDF()">
             </div>
             <div class="field">
-              <label class="field-label" data-fr="Contact" data-en="Contact">Contact</label>
-              <input class="field-input" id="c-contact" value="Marie Martin — marie@acme.com" oninput="updatePDF()">
+              <label class="field-label" data-fr="Nom du contact" data-en="Contact name">Nom du contact</label>
+              <input class="field-input" id="c-contact" value="Marie Martin" oninput="updatePDF()">
+            </div>
+            <div class="field">
+              <label class="field-label" data-fr="Email client" data-en="Client email">Email client</label>
+              <input class="field-input" id="c-email" type="email" value="marie@acme.com" oninput="updatePDF()">
             </div>
           </div>
 
@@ -969,8 +928,10 @@
           <div class="topbar-sub" data-fr="Choisissez un type et remplissez les informations" data-en="Choose a type and fill in the information">Choisissez un type et remplissez les informations</div>
         </div>
         <div class="topbar-actions">
-          <button class="btn btn-ghost" onclick="toast('📄 Contrat exporté en PDF !','success')" data-fr="📄 PDF" data-en="📄 PDF">📄 PDF</button>
-          <button class="btn btn-green" onclick="toast('📧 Contrat envoyé !','success')" data-fr="📧 Envoyer" data-en="📧 Send">📧 Envoyer</button>
+          <button class="btn btn-ghost" onclick="saveContrat()" data-fr="💾 Sauvegarder" data-en="💾 Save">💾 Sauvegarder</button>
+          <span class="badge badge-amber" data-fr="Bientôt disponible" data-en="Coming soon">Bientôt disponible</span>
+          <button class="btn btn-ghost" disabled data-fr="📄 PDF" data-en="📄 PDF">📄 PDF</button>
+          <button class="btn btn-green" disabled data-fr="📧 Envoyer" data-en="📧 Send">📧 Envoyer</button>
         </div>
       </div>
       <div class="two-pane">
@@ -1024,6 +985,10 @@
             <div class="field">
               <label class="field-label" data-fr="SIRET client" data-en="Client SIRET">SIRET client</label>
               <input class="field-input" id="ct-cli-siret" value="987 654 321 00034" oninput="updateContract()">
+            </div>
+            <div class="field">
+              <label class="field-label" data-fr="Email client" data-en="Client email">Email client</label>
+              <input class="field-input" id="ct-client-email" type="email" value="marie@acme.com" oninput="updateContract()">
             </div>
           </div>
 
