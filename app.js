@@ -9,6 +9,193 @@ var currentQuoteId = null;
 var currentContractId = null;
 
 // ══════════════════════════════
+// I18N — dynamic (JS-generated) strings
+// Static markup translations are handled separately via data-fr/data-en.
+// ══════════════════════════════
+const I18N = {
+  fr: {
+    fillAllFields: 'Remplissez tous les champs',
+    adminActivated: '👑 Accès Admin activé !',
+    connected: 'Connecté !',
+    fillRequiredFields: 'Remplissez les champs obligatoires',
+    invalidEmail: 'Email invalide',
+    pwdTooShort: 'Mot de passe trop court (8 min.)',
+    acceptCgu: 'Acceptez les CGU pour continuer',
+    stripeError: 'Stripe : ',
+    welcomeQuotly: '🎉 Bienvenue sur Quotly !',
+    enterEmail: 'Entrez votre email',
+    resetLinkSent: 'Lien envoyé ! Vérifiez votre email.',
+    paymentConfirmed: '🎉 Paiement confirmé ! Bienvenue sur Quotly ',
+    paymentCancelled: 'Paiement annulé.',
+    aiComingSoon: 'Fonctionnalité IA bientôt disponible',
+    quoteDataImported: 'Données du devis importées !',
+    tjmApplied: 'TJM appliqué à vos devis !',
+    logoImported: 'Logo importé avec succès !',
+    logoRemoved: 'Logo supprimé',
+    saveError: 'Erreur lors de la sauvegarde : ',
+    profileSaved: 'Profil sauvegardé !',
+    generatingPdf: 'Génération du PDF…',
+    pdfDownloaded: 'PDF téléchargé !',
+    pdfError: 'Erreur PDF : ',
+    fillClientEmail: "Renseignez l'email du client",
+    sending: 'Envoi en cours…',
+    quoteSentTo: 'Devis envoyé à ',
+    sendError: "Erreur d'envoi : ",
+    contractSentTo: 'Contrat envoyé à ',
+    loginToSave: 'Connectez-vous pour sauvegarder',
+    quoteSaved: 'Devis sauvegardé !',
+    genericError: 'Erreur : ',
+    quoteLoadError: 'Erreur de chargement du devis',
+    contractSaved: 'Contrat sauvegardé !',
+    contractLoadError: 'Erreur de chargement du contrat',
+    unknown: 'inconnue',
+    hello: 'Bonjour',
+    loadingEllipsis: 'Chargement…',
+    noQuotesYet: "Aucun devis pour l'instant — créez le premier.",
+    noContractsYet: "Aucun contrat pour l'instant — créez le premier.",
+    loadingError: 'Erreur de chargement',
+    view: 'Voir',
+    statusDraft: 'Brouillon',
+    statusSent: 'Envoyé',
+    statusAccepted: 'Accepté',
+    statusRefused: 'Refusé',
+    quotesTotal: ' devis au total',
+    contractsTotal: ' contrats au total',
+    quotesThisYear: ' devis cette année',
+    accepted1: ' accepté',
+    acceptedN: ' acceptés',
+    rateSuffix: '% taux',
+    toRelaunch: ' à relancer',
+    noActivityYet: "Aucune activité pour l'instant.",
+    quoteCreated: 'Devis créé — ',
+    contractCreated: 'Contrat créé — ',
+    withoutName: 'Sans nom',
+    emailQuoteSubject: 'Devis ',
+    emailQuoteBody: p => `<p>Bonjour,</p><p>Veuillez trouver ci-joint votre devis <strong>${p.num}</strong>.</p><p>N'hésitez pas à répondre directement à cet email pour toute question.</p><p>Cordialement,<br>${p.name}</p>`,
+    emailContractSubject: 'Contrat — ',
+    emailContractBody: p => `<p>Bonjour,</p><p>Veuillez trouver ci-joint le contrat.</p><p>N'hésitez pas à répondre directement à cet email pour toute question.</p><p>Cordialement,<br>${p.name}</p>`,
+    planFreeBtn: 'Créer mon compte gratuitement',
+    planProBtn: "S'abonner — 19€/mois",
+    planAnnualBtn: "S'abonner — 149€/an",
+    planBusinessBtn: "Obtenir l'accès permanent — 497€",
+    planContinueBtn: 'Continuer',
+    btnLoggingIn: 'Connexion...',
+    btnLogin: 'Se connecter',
+    btnCreating: 'Création...',
+    btnRetry: 'Réessayer',
+    btnSending: 'Envoi...',
+    btnSendLink: 'Envoyer le lien',
+    pwdStrength: ['Très faible','Faible','Moyen','Fort'],
+    loginError: 'Erreur de connexion',
+    wrongCredentials: 'Email ou mot de passe incorrect',
+    emailAlreadyUsed: 'Cet email est déjà utilisé. Connectez-vous.'
+  },
+  en: {
+    fillAllFields: 'Please fill in all fields',
+    adminActivated: '👑 Admin access activated!',
+    connected: 'Logged in!',
+    fillRequiredFields: 'Please fill in the required fields',
+    invalidEmail: 'Invalid email',
+    pwdTooShort: 'Password too short (8 min.)',
+    acceptCgu: 'Please accept the Terms to continue',
+    stripeError: 'Stripe: ',
+    welcomeQuotly: '🎉 Welcome to Quotly!',
+    enterEmail: 'Enter your email',
+    resetLinkSent: 'Link sent! Check your email.',
+    paymentConfirmed: '🎉 Payment confirmed! Welcome to Quotly ',
+    paymentCancelled: 'Payment cancelled.',
+    aiComingSoon: 'AI feature coming soon',
+    quoteDataImported: 'Quote data imported!',
+    tjmApplied: 'Rate applied to your quotes!',
+    logoImported: 'Logo imported successfully!',
+    logoRemoved: 'Logo removed',
+    saveError: 'Error while saving: ',
+    profileSaved: 'Profile saved!',
+    generatingPdf: 'Generating PDF…',
+    pdfDownloaded: 'PDF downloaded!',
+    pdfError: 'PDF error: ',
+    fillClientEmail: "Please enter the client's email",
+    sending: 'Sending…',
+    quoteSentTo: 'Quote sent to ',
+    sendError: 'Send error: ',
+    contractSentTo: 'Contract sent to ',
+    loginToSave: 'Log in to save',
+    quoteSaved: 'Quote saved!',
+    genericError: 'Error: ',
+    quoteLoadError: 'Error loading the quote',
+    contractSaved: 'Contract saved!',
+    contractLoadError: 'Error loading the contract',
+    unknown: 'unknown',
+    hello: 'Hello',
+    loadingEllipsis: 'Loading…',
+    noQuotesYet: 'No quotes yet — create your first one.',
+    noContractsYet: 'No contracts yet — create your first one.',
+    loadingError: 'Loading error',
+    view: 'View',
+    statusDraft: 'Draft',
+    statusSent: 'Sent',
+    statusAccepted: 'Accepted',
+    statusRefused: 'Refused',
+    quotesTotal: ' quotes total',
+    contractsTotal: ' contracts total',
+    quotesThisYear: ' quotes this year',
+    accepted1: ' accepted',
+    acceptedN: ' accepted',
+    rateSuffix: '% rate',
+    toRelaunch: ' to follow up',
+    noActivityYet: 'No activity yet.',
+    quoteCreated: 'Quote created — ',
+    contractCreated: 'Contract created — ',
+    withoutName: 'No name',
+    emailQuoteSubject: 'Quote ',
+    emailQuoteBody: p => `<p>Hello,</p><p>Please find your quote <strong>${p.num}</strong> attached.</p><p>Feel free to reply directly to this email with any questions.</p><p>Best regards,<br>${p.name}</p>`,
+    emailContractSubject: 'Contract — ',
+    emailContractBody: p => `<p>Hello,</p><p>Please find the contract attached.</p><p>Feel free to reply directly to this email with any questions.</p><p>Best regards,<br>${p.name}</p>`,
+    planFreeBtn: 'Create my free account',
+    planProBtn: 'Subscribe — €19/mo',
+    planAnnualBtn: 'Subscribe — €149/yr',
+    planBusinessBtn: 'Get permanent access — €497',
+    planContinueBtn: 'Continue',
+    btnLoggingIn: 'Logging in...',
+    btnLogin: 'Log in',
+    btnCreating: 'Creating...',
+    btnRetry: 'Retry',
+    btnSending: 'Sending...',
+    btnSendLink: 'Send link',
+    pwdStrength: ['Very weak','Weak','Medium','Strong'],
+    loginError: 'Login error',
+    wrongCredentials: 'Incorrect email or password',
+    emailAlreadyUsed: 'This email is already in use. Please log in.'
+  }
+};
+function t(key) {
+  const d = I18N[lang] || I18N.fr;
+  return d[key] !== undefined ? d[key] : (I18N.fr[key] !== undefined ? I18N.fr[key] : key);
+}
+function timeAgo(dateStr) {
+  const diffMs = Date.now() - new Date(dateStr).getTime();
+  const min = Math.floor(diffMs / 60000);
+  if (lang === 'en') {
+    if (min < 1) return 'Just now';
+    if (min < 60) return min + ' min ago';
+    const h = Math.floor(min / 60);
+    if (h < 24) return h + 'h ago';
+    const d = Math.floor(h / 24);
+    if (d === 1) return 'Yesterday';
+    if (d < 7) return d + ' days ago';
+    return new Date(dateStr).toLocaleDateString('en-US');
+  }
+  if (min < 1) return "À l'instant";
+  if (min < 60) return 'Il y a ' + min + ' min';
+  const h = Math.floor(min / 60);
+  if (h < 24) return 'Il y a ' + h + 'h';
+  const d = Math.floor(h / 24);
+  if (d === 1) return 'Hier';
+  if (d < 7) return 'Il y a ' + d + ' jours';
+  return new Date(dateStr).toLocaleDateString('fr-FR');
+}
+
+// ══════════════════════════════
 // NAVIGATION
 // ══════════════════════════════
 function goTo(page) {
@@ -79,6 +266,13 @@ function setLang(l) {
   document.querySelectorAll('[data-' + l + '-placeholder]').forEach(el => {
     el.placeholder = el.getAttribute('data-' + l + '-placeholder');
   });
+
+  // Re-render dynamic (JS-generated) content so it reflects the new language immediately
+  if (typeof updateDashWelcome === 'function') updateDashWelcome();
+  if (typeof updateDashDate === 'function') updateDashDate();
+  if (typeof loadDashboardStats === 'function') loadDashboardStats();
+  if (typeof loadQuotesList === 'function') loadQuotesList();
+  if (typeof loadContractsList === 'function') loadContractsList();
 }
 
 // ══════════════════════════════
@@ -191,7 +385,7 @@ function updatePDF() {
 // AI GENERATION
 // ══════════════════════════════
 function generateDevisAI() {
-  toast('Fonctionnalité IA bientôt disponible', 'info');
+  toast(t('aiComingSoon'), 'info');
 }
 
 // ══════════════════════════════
@@ -240,7 +434,7 @@ function importFromDevis() {
   const ttc = document.getElementById('t-ttc')?.textContent || '4 920 €';
   setVal('ct-amount', ttc);
   updateContract();
-  toast('Données du devis importées !', 'success');
+  toast(t('quoteDataImported'), 'success');
 }
 
 // ══════════════════════════════
@@ -294,7 +488,7 @@ function useTJM() {
   const tjmInput = document.getElementById('f-tjm');
   if (tjmInput) tjmInput.value = tjmVal;
   goTo('nouveau-devis');
-  toast('TJM appliqué à vos devis !', 'success');
+  toast(t('tjmApplied'), 'success');
 }
 
 // ══════════════════════════════
@@ -332,7 +526,7 @@ function updateDashWelcome() {
   const logoPreview = document.getElementById('dash-logo-preview');
 
   const firstName = name.split(' ')[0] || '';
-  if (welcomeEl) welcomeEl.textContent = firstName ? 'Bonjour, ' + firstName + ' 👋' : 'Bonjour 👋';
+  if (welcomeEl) welcomeEl.textContent = firstName ? t('hello') + ', ' + firstName + ' 👋' : t('hello') + ' 👋';
   if (companyEl) companyEl.textContent = company || '';
 
   // Logo or initials in dashboard banner
@@ -362,7 +556,7 @@ function handleLogoUpload(input) {
     // Refresh everywhere
     updateSidebar();
     updatePDF();
-    toast('Logo importé avec succès !', 'success');
+    toast(t('logoImported'), 'success');
   };
   reader.readAsDataURL(file);
 }
@@ -379,7 +573,7 @@ function removeLogo() {
   if (input) input.value = '';
   updateSidebar();
   updatePDF();
-  toast('Logo supprimé', 'info');
+  toast(t('logoRemoved'), 'info');
 }
 
 async function saveProfil() {
@@ -394,11 +588,11 @@ async function saveProfil() {
       var r = await _supabase.from('profiles').upsert({ id:currentUser.id, full_name:name, email, company, siret, address, tva, updated_at:new Date().toISOString() });
       if (r.error) throw r.error;
     } catch(e) {
-      toast('Erreur lors de la sauvegarde : '+(e.message||'inconnue'),'error');
+      toast(t('saveError')+(e.message||t('unknown')),'error');
       return;
     }
   }
-  toast('Profil sauvegardé !','success');
+  toast(t('profileSaved'),'success');
   updateSidebar(); updatePDF();
 }
 
@@ -437,13 +631,13 @@ async function buildPdf(elementId) {
 }
 
 async function downloadPDF(elementId, filename) {
-  toast('Génération du PDF…','info');
+  toast(t('generatingPdf'),'info');
   try {
     const pdf = await buildPdf(elementId);
     pdf.save(filename);
-    toast('PDF téléchargé !','success');
+    toast(t('pdfDownloaded'),'success');
   } catch(e) {
-    toast('Erreur PDF : '+(e.message||'inconnue'),'error');
+    toast(t('pdfError')+(e.message||t('unknown')),'error');
   }
 }
 
@@ -462,9 +656,9 @@ function downloadContratPDF() {
 // ══════════════════════════════
 async function sendDevis() {
   const clientEmail = g('c-email');
-  if (!clientEmail) { toast('Renseignez l\'email du client','error'); return; }
+  if (!clientEmail) { toast(t('fillClientEmail'),'error'); return; }
   if (!currentQuoteId) { await saveDevis(); if (!currentQuoteId) return; }
-  toast('Envoi en cours…','info');
+  toast(t('sending'),'info');
   try {
     const pdf = await buildPdf('pdf-preview');
     const pdfBase64 = pdf.output('datauristring').split(',')[1];
@@ -478,8 +672,8 @@ async function sendDevis() {
         toName: g('c-name'),
         fromEmail: g('f-email'),
         fromName: providerName,
-        subject: 'Devis ' + num + ' — ' + providerName,
-        htmlContent: '<p>Bonjour,</p><p>Veuillez trouver ci-joint votre devis <strong>' + escapeHtml(num) + '</strong>.</p><p>N\'hésitez pas à répondre directement à cet email pour toute question.</p><p>Cordialement,<br>' + escapeHtml(providerName) + '</p>',
+        subject: t('emailQuoteSubject') + num + ' — ' + providerName,
+        htmlContent: t('emailQuoteBody')({ num: escapeHtml(num), name: escapeHtml(providerName) }),
         attachmentBase64: pdfBase64,
         attachmentName: 'Devis-' + num.replace(/[^a-zA-Z0-9-]/g,'') + '.pdf'
       })
@@ -489,17 +683,17 @@ async function sendDevis() {
     if (_supabase && currentUser && currentQuoteId) {
       await _supabase.from('quotes').update({ status: 'envoye' }).eq('id', currentQuoteId);
     }
-    toast('Devis envoyé à ' + clientEmail + ' !','success');
+    toast(t('quoteSentTo') + clientEmail + ' !','success');
   } catch(e) {
-    toast('Erreur envoi : '+(e.message||'inconnue'),'error');
+    toast(t('sendError')+(e.message||t('unknown')),'error');
   }
 }
 
 async function sendContrat() {
   const clientEmail = g('ct-client-email');
-  if (!clientEmail) { toast('Renseignez l\'email du client','error'); return; }
+  if (!clientEmail) { toast(t('fillClientEmail'),'error'); return; }
   if (!currentContractId) { await saveContrat(); if (!currentContractId) return; }
-  toast('Envoi en cours…','info');
+  toast(t('sending'),'info');
   try {
     const pdf = await buildPdf('contract-preview');
     const pdfBase64 = pdf.output('datauristring').split(',')[1];
@@ -513,8 +707,8 @@ async function sendContrat() {
         toName: client,
         fromEmail: g('f-email'),
         fromName: providerName,
-        subject: 'Contrat — ' + providerName,
-        htmlContent: '<p>Bonjour,</p><p>Veuillez trouver ci-joint le contrat.</p><p>N\'hésitez pas à répondre directement à cet email pour toute question.</p><p>Cordialement,<br>' + escapeHtml(providerName) + '</p>',
+        subject: t('emailContractSubject') + providerName,
+        htmlContent: t('emailContractBody')({ name: escapeHtml(providerName) }),
         attachmentBase64: pdfBase64,
         attachmentName: 'Contrat-' + client.replace(/[^a-zA-Z0-9]/g,'_') + '.pdf'
       })
@@ -524,9 +718,9 @@ async function sendContrat() {
     if (_supabase && currentUser && currentContractId) {
       await _supabase.from('contracts').update({ status: 'envoye' }).eq('id', currentContractId);
     }
-    toast('Contrat envoyé à ' + clientEmail + ' !','success');
+    toast(t('contractSentTo') + clientEmail + ' !','success');
   } catch(e) {
-    toast('Erreur envoi : '+(e.message||'inconnue'),'error');
+    toast(t('sendError')+(e.message||t('unknown')),'error');
   }
 }
 
@@ -535,7 +729,7 @@ async function sendContrat() {
 // ══════════════════════════════
 
 async function saveDevis() {
-  if (!_supabase || !currentUser) { toast('Connectez-vous pour sauvegarder','error'); return; }
+  if (!_supabase || !currentUser) { toast(t('loginToSave'),'error'); return; }
   const tvaRate = parseFloat(document.getElementById('f-tva-rate')?.value) / 100 || 0.2;
   const ht = items.reduce((s, i) => s + (i.qty||0) * (i.price||0), 0);
   const ttc = ht * (1 + tvaRate);
@@ -556,9 +750,9 @@ async function saveDevis() {
     }
     if (r.error) throw r.error;
     currentQuoteId = r.data.id;
-    toast('Devis sauvegardé !','success');
+    toast(t('quoteSaved'),'success');
   } catch(e) {
-    toast('Erreur : '+(e.message||'inconnue'),'error');
+    toast(t('genericError')+(e.message||t('unknown')),'error');
   }
 }
 
@@ -571,17 +765,17 @@ async function loadQuotesList() {
     if (r.error) throw r.error;
     const rows = r.data || [];
     const sub = document.getElementById('devis-count-sub');
-    if (sub) sub.textContent = rows.length + (lang === 'en' ? ' quotes total' : ' devis au total');
+    if (sub) sub.textContent = rows.length + t('quotesTotal');
     const badge = document.getElementById('badge-devis');
     if (badge) badge.textContent = rows.length;
     if (rows.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">' + (lang==='en' ? 'No quotes yet — create your first one.' : 'Aucun devis pour l\'instant — créez le premier.') + '</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">' + t('noQuotesYet') + '</td></tr>';
       return;
     }
-    const statusMap = { brouillon: ['badge-amber','Brouillon'], envoye: ['badge-blue','Envoyé'], accepte: ['badge-green','Accepté'], refuse: ['badge-red','Refusé'] };
+    const statusMap = { brouillon: ['badge-amber', t('statusDraft')], envoye: ['badge-blue', t('statusSent')], accepte: ['badge-green', t('statusAccepted')], refuse: ['badge-red', t('statusRefused')] };
     tbody.innerHTML = rows.map(q => {
       const st = statusMap[q.status] || statusMap.brouillon;
-      const date = q.created_at ? new Date(q.created_at).toLocaleDateString('fr-FR') : '';
+      const date = q.created_at ? new Date(q.created_at).toLocaleDateString(lang === 'en' ? 'en-US' : 'fr-FR') : '';
       return '<tr>' +
         '<td class="bold">' + escapeHtml(q.id.slice(0,8)) + '</td>' +
         '<td class="bold">' + escapeHtml(q.client_name || '—') + '</td>' +
@@ -589,11 +783,11 @@ async function loadQuotesList() {
         '<td style="color:var(--muted)">' + date + '</td>' +
         '<td class="bold">' + fmt(q.total_ttc || 0) + '</td>' +
         '<td><span class="badge ' + st[0] + '">' + st[1] + '</span></td>' +
-        '<td><button class="btn btn-ghost btn-sm" onclick="viewDevis(\'' + q.id + '\')">' + (lang==='en'?'View':'Voir') + '</button></td>' +
+        '<td><button class="btn btn-ghost btn-sm" onclick="viewDevis(\'' + q.id + '\')">' + t('view') + '</button></td>' +
       '</tr>';
     }).join('');
   } catch(e) {
-    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--red);padding:32px;">Erreur de chargement</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--red);padding:32px;">' + t('loadingError') + '</td></tr>';
   }
 }
 
@@ -611,31 +805,31 @@ async function loadDashboardStats() {
     const quotesThisYear = quotes.filter(q => q.created_at && new Date(q.created_at).getFullYear() === thisYear);
     const ca = quotesThisYear.reduce((s, q) => s + (q.total_ttc || 0), 0);
     set('kpi-ca', fmt(ca));
-    set('kpi-ca-sub', quotesThisYear.length + ' devis cette année');
+    set('kpi-ca-sub', quotesThisYear.length + t('quotesThisYear'));
 
     set('kpi-quotes-count', quotes.length);
     const accepted = quotes.filter(q => q.status === 'accepte');
     const sent = quotes.filter(q => q.status !== 'brouillon');
     const rate = sent.length ? Math.round(accepted.length / sent.length * 100) : 0;
-    set('kpi-quotes-accepted', accepted.length + (accepted.length > 1 ? ' acceptés' : ' accepté'));
-    set('kpi-quotes-rate', rate + '% taux');
+    set('kpi-quotes-accepted', accepted.length + (accepted.length > 1 ? t('acceptedN') : t('accepted1')));
+    set('kpi-quotes-rate', rate + t('rateSuffix'));
 
     const pending = quotes.filter(q => q.status === 'envoye');
     const pendingSum = pending.reduce((s, q) => s + (q.total_ttc || 0), 0);
     set('kpi-pending', fmt(pendingSum));
-    set('kpi-pending-sub', pending.length + ' à relancer');
+    set('kpi-pending-sub', pending.length + t('toRelaunch'));
 
     const tbody = document.getElementById('dash-recent-devis');
     if (tbody) {
       const recent = quotes.slice().sort((a,b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 4);
       if (recent.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" style="padding:20px 22px;color:#9191aa;font-size:13px;">Aucun devis pour l\'instant.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="3" style="padding:20px 22px;color:#9191aa;font-size:13px;">' + t('noQuotesYet') + '</td></tr>';
       } else {
         const statusStyle = {
-          brouillon: ['#eef2ff','#4f46e5','Brouillon'],
-          envoye: ['#fffbeb','#d97706','Envoyé'],
-          accepte: ['#ecfdf5','#059669','Accepté'],
-          refuse: ['#fef2f2','#dc2626','Refusé']
+          brouillon: ['#eef2ff','#4f46e5', t('statusDraft')],
+          envoye: ['#fffbeb','#d97706', t('statusSent')],
+          accepte: ['#ecfdf5','#059669', t('statusAccepted')],
+          refuse: ['#fef2f2','#dc2626', t('statusRefused')]
         };
         tbody.innerHTML = recent.map(q => {
           const st = statusStyle[q.status] || statusStyle.brouillon;
@@ -658,12 +852,12 @@ async function loadDashboardStats() {
       ].filter(e => e.date).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
 
       if (events.length === 0) {
-        activityEl.innerHTML = '<div style="font-size:12px;color:#9191aa;">Aucune activité pour l\'instant.</div>';
+        activityEl.innerHTML = '<div style="font-size:12px;color:#9191aa;">' + t('noActivityYet') + '</div>';
       } else {
         const iconFor = { devis: ['#eef2ff', 'file-text'], contrat: ['#f5f3ff', 'clipboard'] };
         activityEl.innerHTML = events.map(e => {
           const [bg, ic] = iconFor[e.type];
-          const label = (e.type === 'devis' ? 'Devis créé' : 'Contrat créé') + ' — ' + escapeHtml(e.client || 'Sans nom');
+          const label = t(e.type === 'devis' ? 'quoteCreated' : 'contractCreated') + escapeHtml(e.client || t('withoutName'));
           return '<div style="display:flex;align-items:flex-start;gap:10px;">' +
             '<div style="width:28px;height:28px;background:' + bg + ';border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#16162a;font-size:13px;"><svg class="icon"><use href="#icon-' + ic + '"></use></svg></div>' +
             '<div><div style="font-size:12px;font-weight:600;color:#16162a;">' + label + '</div><div style="font-size:11px;color:#9191aa;margin-top:1px;">' + timeAgo(e.date) + '</div></div>' +
@@ -672,19 +866,6 @@ async function loadDashboardStats() {
       }
     }
   } catch(e) { console.error(e); }
-}
-
-function timeAgo(dateStr) {
-  const diffMs = Date.now() - new Date(dateStr).getTime();
-  const min = Math.floor(diffMs / 60000);
-  if (min < 1) return 'À l\'instant';
-  if (min < 60) return 'Il y a ' + min + ' min';
-  const h = Math.floor(min / 60);
-  if (h < 24) return 'Il y a ' + h + 'h';
-  const d = Math.floor(h / 24);
-  if (d === 1) return 'Hier';
-  if (d < 7) return 'Il y a ' + d + ' jours';
-  return new Date(dateStr).toLocaleDateString('fr-FR');
 }
 
 async function viewDevis(id) {
@@ -703,7 +884,7 @@ async function viewDevis(id) {
     updateTotals();
     updatePDF();
   } catch(e) {
-    toast('Erreur de chargement du devis','error');
+    toast(t('quoteLoadError'),'error');
   }
 }
 
@@ -711,7 +892,7 @@ async function viewDevis(id) {
 // CONTRAT PERSISTENCE
 // ══════════════════════════════
 async function saveContrat() {
-  if (!_supabase || !currentUser) { toast('Connectez-vous pour sauvegarder','error'); return; }
+  if (!_supabase || !currentUser) { toast(t('loginToSave'),'error'); return; }
   const preview = document.getElementById('contract-preview');
   const payload = {
     user_id: currentUser.id,
@@ -729,9 +910,9 @@ async function saveContrat() {
     }
     if (r.error) throw r.error;
     currentContractId = r.data.id;
-    toast('Contrat sauvegardé !','success');
+    toast(t('contractSaved'),'success');
   } catch(e) {
-    toast('Erreur : '+(e.message||'inconnue'),'error');
+    toast(t('genericError')+(e.message||t('unknown')),'error');
   }
 }
 
@@ -744,27 +925,28 @@ async function loadContractsList() {
     if (r.error) throw r.error;
     const rows = r.data || [];
     const sub = document.getElementById('contrats-count-sub');
-    if (sub) sub.textContent = rows.length + (lang === 'en' ? ' contracts total' : ' contrats au total');
+    if (sub) sub.textContent = rows.length + t('contractsTotal');
     const badge = document.getElementById('badge-contrats');
     if (badge) badge.textContent = rows.length;
     if (rows.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:32px;">' + (lang==='en' ? 'No contracts yet — create your first one.' : 'Aucun contrat pour l\'instant — créez le premier.') + '</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:32px;">' + t('noContractsYet') + '</td></tr>';
       return;
     }
     const typeLabel = { prestation: 'Prestation', cgv: 'CGV', nda: 'NDA' };
+    const statusMap = { brouillon: t('statusDraft'), envoye: t('statusSent'), accepte: t('statusAccepted'), refuse: t('statusRefused') };
     tbody.innerHTML = rows.map(c => {
-      const date = c.created_at ? new Date(c.created_at).toLocaleDateString('fr-FR') : '';
+      const date = c.created_at ? new Date(c.created_at).toLocaleDateString(lang === 'en' ? 'en-US' : 'fr-FR') : '';
       return '<tr>' +
         '<td class="bold">' + escapeHtml(c.id.slice(0,8)) + '</td>' +
         '<td><span class="badge badge-blue">' + (typeLabel[c.type] || escapeHtml(c.type || '')) + '</span></td>' +
         '<td class="bold">' + escapeHtml(c.client_name || '—') + '</td>' +
         '<td style="color:var(--muted)">' + date + '</td>' +
-        '<td><span class="badge badge-amber">' + (c.status || 'brouillon') + '</span></td>' +
-        '<td><button class="btn btn-ghost btn-sm" onclick="viewContrat(\'' + c.id + '\')">' + (lang==='en'?'View':'Voir') + '</button></td>' +
+        '<td><span class="badge badge-amber">' + (statusMap[c.status] || statusMap.brouillon) + '</span></td>' +
+        '<td><button class="btn btn-ghost btn-sm" onclick="viewContrat(\'' + c.id + '\')">' + t('view') + '</button></td>' +
       '</tr>';
     }).join('');
   } catch(e) {
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--red);padding:32px;">Erreur de chargement</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--red);padding:32px;">' + t('loadingError') + '</td></tr>';
   }
 }
 
@@ -782,7 +964,7 @@ async function viewContrat(id) {
     if (c.type) selectContractType(c.type);
     updateContract();
   } catch(e) {
-    toast('Erreur de chargement du contrat','error');
+    toast(t('contractLoadError'),'error');
   }
 }
 
@@ -810,8 +992,11 @@ document.addEventListener('DOMContentLoaded', () => {
   updatePDF();
   updateContract();
   calcTJM();
-  const today = new Date();
+  updateDashDate();
+});
+
+function updateDashDate() {
   const opts = { weekday:'long', day:'numeric', month:'long', year:'numeric' };
   const dateEl = document.getElementById('dash-date');
-  if (dateEl) dateEl.textContent = today.toLocaleDateString('fr-FR', opts);
-});
+  if (dateEl) dateEl.textContent = new Date().toLocaleDateString(lang === 'en' ? 'en-US' : 'fr-FR', opts);
+}

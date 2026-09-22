@@ -49,11 +49,11 @@ function selectPlan(plan, priceId) {
   var btn = document.getElementById('reg-btn');
   if (plan === 'free') {
     if (stripeEl) stripeEl.style.display = 'none';
-    if (btn) btn.textContent = 'Créer mon compte gratuitement';
+    if (btn) btn.textContent = t('planFreeBtn');
   } else {
     if (stripeEl) stripeEl.style.display = 'block';
-    var labels = { pro: "S'abonner — 19€/mois", annual: "S'abonner — 149€/an", business: "Obtenir l'accès permanent — 497€" };
-    if (btn) btn.textContent = labels[plan] || 'Continuer';
+    var labels = { pro: t('planProBtn'), annual: t('planAnnualBtn'), business: t('planBusinessBtn') };
+    if (btn) btn.textContent = labels[plan] || t('planContinueBtn');
   }
 }
 function checkPwdStrength(pwd) {
@@ -65,7 +65,7 @@ function checkPwdStrength(pwd) {
   var colors = ['#ef4444','#f97316','#eab308','#22c55e'];
   for (var i = 1; i <= 4; i++) { var b = document.getElementById('pwd-bar-'+i); if (b) b.style.background = i<=score?colors[score-1]:'#e4e2da'; }
   var lbl = document.getElementById('pwd-strength-label');
-  if (lbl) { lbl.textContent = pwd.length>0?(['Très faible','Faible','Moyen','Fort'][score-1]||''):''; if(score>0) lbl.style.color=colors[score-1]; }
+  if (lbl) { lbl.textContent = pwd.length>0?(t('pwdStrength')[score-1]||''):''; if(score>0) lbl.style.color=colors[score-1]; }
 }
 function formatCard(input) { var v=input.value.replace(/[^0-9]/g,'').substring(0,16); input.value=v.replace(/(.{4})/g,'$1 ').trim(); }
 function formatExpiry(input) { var v=input.value.replace(/[^0-9]/g,'').substring(0,4); if(v.length>=3) v=v.substring(0,2)+'/'+v.substring(2); input.value=v; }
@@ -73,14 +73,14 @@ function formatExpiry(input) { var v=input.value.replace(/[^0-9]/g,'').substring
 async function doLogin() {
   var email = ((document.getElementById('login-email')||{}).value||'').trim();
   var pwd = (document.getElementById('login-password')||{}).value||'';
-  if (!email||!pwd) { toast('Remplissez tous les champs','error'); return; }
+  if (!email||!pwd) { toast(t('fillAllFields'),'error'); return; }
   var btn = document.querySelector('#form-login button[onclick="doLogin()"]');
-  if (btn) { btn.textContent='Connexion...'; btn.disabled=true; }
+  if (btn) { btn.textContent=t('btnLoggingIn'); btn.disabled=true; }
 
   if (email==='admin@quotly.app' && pwd==='Quotly2026!') {
     enterApp(email,'business','Admin Quotly','Quotly');
-    toast('👑 Accès Admin activé !','success');
-    if (btn) { btn.textContent='Se connecter'; btn.disabled=false; }
+    toast(t('adminActivated'),'success');
+    if (btn) { btn.textContent=t('btnLogin'); btn.disabled=false; }
     return;
   }
 
@@ -96,17 +96,17 @@ async function doLogin() {
       }
       var p = prof.data || {};
       enterApp(email, p.plan||'free', p.full_name||'', p.company||'');
-      toast('Connecté !','success');
+      toast(t('connected'),'success');
     } catch(e) {
-      var msg = e.message||'Erreur de connexion';
-      if (msg.includes('Invalid login')) msg = 'Email ou mot de passe incorrect';
+      var msg = e.message||t('loginError');
+      if (msg.includes('Invalid login')) msg = t('wrongCredentials');
       toast(msg,'error');
-      if (btn) { btn.textContent='Se connecter'; btn.disabled=false; }
+      if (btn) { btn.textContent=t('btnLogin'); btn.disabled=false; }
     }
   } else {
     enterApp(email,'free','','');
-    toast('Connecté !','success');
-    if (btn) { btn.textContent='Se connecter'; btn.disabled=false; }
+    toast(t('connected'),'success');
+    if (btn) { btn.textContent=t('btnLogin'); btn.disabled=false; }
   }
 }
 
@@ -121,13 +121,13 @@ async function doRegister() {
   var phone = ((document.getElementById('reg-phone')||{}).value||'').trim();
   var cgu = (document.getElementById('reg-cgu')||{}).checked;
 
-  if (!fn||!ln||!email||!pwd) { toast('Remplissez les champs obligatoires','error'); return; }
-  if (!email.includes('@')) { toast('Email invalide','error'); return; }
-  if (pwd.length<8) { toast('Mot de passe trop court (8 min.)','error'); return; }
-  if (!cgu) { toast('Acceptez les CGU pour continuer','error'); return; }
+  if (!fn||!ln||!email||!pwd) { toast(t('fillRequiredFields'),'error'); return; }
+  if (!email.includes('@')) { toast(t('invalidEmail'),'error'); return; }
+  if (pwd.length<8) { toast(t('pwdTooShort'),'error'); return; }
+  if (!cgu) { toast(t('acceptCgu'),'error'); return; }
 
   var btn = document.getElementById('reg-btn');
-  if (btn) { btn.textContent='Création...'; btn.disabled=true; }
+  if (btn) { btn.textContent=t('btnCreating'); btn.disabled=true; }
 
   if (selectedPlan !== 'free' && selectedPriceId && typeof Stripe !== 'undefined') {
     try {
@@ -140,8 +140,8 @@ async function doRegister() {
         customerEmail: email
       });
     } catch(e) {
-      toast('Stripe: '+e.message,'error');
-      if (btn) { btn.disabled=false; btn.textContent='Réessayer'; }
+      toast(t('stripeError')+e.message,'error');
+      if (btn) { btn.disabled=false; btn.textContent=t('btnRetry'); }
     }
     return;
   }
@@ -159,30 +159,30 @@ async function doRegister() {
         });
       }
       enterApp(email,'free',fn+' '+ln,company);
-      toast('🎉 Bienvenue sur Quotly !','success');
+      toast(t('welcomeQuotly'),'success');
     } catch(e) {
       var msg = e.message||'Erreur';
-      if (msg.includes('already registered')) msg='Cet email est déjà utilisé. Connectez-vous.';
+      if (msg.includes('already registered')) msg=t('emailAlreadyUsed');
       toast(msg,'error');
-      if (btn) { btn.disabled=false; btn.textContent='Créer mon compte gratuitement'; }
+      if (btn) { btn.disabled=false; btn.textContent=t('planFreeBtn'); }
     }
   } else {
     enterApp(email,'free',fn+' '+ln,company);
-    toast('🎉 Bienvenue sur Quotly !','success');
+    toast(t('welcomeQuotly'),'success');
   }
 }
 
 async function doForgot() {
   var email = ((document.getElementById('forgot-email')||{}).value||'').trim();
-  if (!email) { toast('Entrez votre email','error'); return; }
+  if (!email) { toast(t('enterEmail'),'error'); return; }
   var btn = document.querySelector('#form-forgot button[onclick="doForgot()"]');
-  if (btn) { btn.textContent='Envoi...'; btn.disabled=true; }
+  if (btn) { btn.textContent=t('btnSending'); btn.disabled=true; }
   if (_supabase) {
     try { await _supabase.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin }); }
     catch(e) { console.log(e); }
   }
-  toast('Lien envoyé ! Vérifiez votre email.','success');
-  if (btn) { btn.textContent='Envoyer le lien'; btn.disabled=false; }
+  toast(t('resetLinkSent'),'success');
+  if (btn) { btn.textContent=t('btnSendLink'); btn.disabled=false; }
   closeAuth();
 }
 
@@ -211,10 +211,10 @@ function checkPaymentReturn() {
     var name=decodeURIComponent(params.get('name')||'');
     var company=decodeURIComponent(params.get('company')||'');
     enterApp(email,plan,name,company);
-    setTimeout(function(){toast('🎉 Paiement confirmé ! Bienvenue sur Quotly '+plan,'success');},600);
+    setTimeout(function(){toast(t('paymentConfirmed')+plan,'success');},600);
     window.history.replaceState({},'',window.location.pathname);
   } else if (params.get('payment')==='cancel') {
-    toast('Paiement annulé.','error');
+    toast(t('paymentCancelled'),'error');
     window.history.replaceState({},'',window.location.pathname);
   }
 }
