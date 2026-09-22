@@ -395,11 +395,59 @@ async function saveProfil() {
 }
 
 // ══════════════════════════════
-// DEVIS PERSISTENCE
+// PDF EXPORT
 // ══════════════════════════════
 function escapeHtml(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 }
+
+async function downloadPDF(elementId, filename) {
+  const el = document.getElementById(elementId);
+  if (!el) { toast('⚠️ Aperçu introuvable','error'); return; }
+  if (typeof html2canvas === 'undefined' || typeof window.jspdf === 'undefined') {
+    toast('⚠️ Bibliothèque PDF non chargée','error');
+    return;
+  }
+  toast('📄 Génération du PDF…','info');
+  try {
+    const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
+    const imgData = canvas.toDataURL('image/jpeg', 0.95);
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const imgWidth = pageWidth;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    let heightLeft = imgHeight;
+    let position = 0;
+    pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+    pdf.save(filename);
+    toast('✅ PDF téléchargé !','success');
+  } catch(e) {
+    toast('⚠️ Erreur PDF : '+(e.message||'inconnue'),'error');
+  }
+}
+
+function downloadDevisPDF() {
+  const num = g('q-num') || 'devis';
+  downloadPDF('pdf-preview', 'Devis-' + num.replace(/[^a-zA-Z0-9-]/g,'') + '.pdf');
+}
+
+function downloadContratPDF() {
+  const client = g('ct-client') || 'contrat';
+  downloadPDF('contract-preview', 'Contrat-' + client.replace(/[^a-zA-Z0-9]/g,'_') + '.pdf');
+}
+
+// ══════════════════════════════
+// DEVIS PERSISTENCE
+// ══════════════════════════════
 
 async function saveDevis() {
   if (!_supabase || !currentUser) { toast('⚠️ Connectez-vous pour sauvegarder','error'); return; }

@@ -654,8 +654,8 @@
         </div>
         <div class="topbar-actions">
           <button class="btn btn-ghost" onclick="saveDevis()" data-fr="💾 Sauvegarder" data-en="💾 Save">💾 Sauvegarder</button>
+          <button class="btn btn-ghost" onclick="downloadDevisPDF()" data-fr="📄 PDF" data-en="📄 PDF">📄 PDF</button>
           <span class="badge badge-amber" data-fr="Bientôt disponible" data-en="Coming soon">Bientôt disponible</span>
-          <button class="btn btn-ghost" disabled data-fr="📄 PDF" data-en="📄 PDF">📄 PDF</button>
           <button class="btn btn-green" disabled data-fr="📧 Envoyer" data-en="📧 Send">📧 Envoyer</button>
         </div>
       </div>
@@ -897,8 +897,8 @@
         </div>
         <div class="topbar-actions">
           <button class="btn btn-ghost" onclick="saveContrat()" data-fr="💾 Sauvegarder" data-en="💾 Save">💾 Sauvegarder</button>
+          <button class="btn btn-ghost" onclick="downloadContratPDF()" data-fr="📄 PDF" data-en="📄 PDF">📄 PDF</button>
           <span class="badge badge-amber" data-fr="Bientôt disponible" data-en="Coming soon">Bientôt disponible</span>
-          <button class="btn btn-ghost" disabled data-fr="📄 PDF" data-en="📄 PDF">📄 PDF</button>
           <button class="btn btn-green" disabled data-fr="📧 Envoyer" data-en="📧 Send">📧 Envoyer</button>
         </div>
       </div>
@@ -1292,6 +1292,8 @@
 
 <script src="https://js.stripe.com/v3/"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script src="auth.js"></script>
 <script src="app.js"></script>
 <div id="legal-cgu" style="display:none;position:fixed;inset:0;z-index:300;background:#0a0a1a;overflow-y:auto;">
