@@ -647,7 +647,44 @@ async function loadDashboardStats() {
         }).join('');
       }
     }
+
+    const activityEl = document.getElementById('dash-activity');
+    if (activityEl) {
+      const cr = await _supabase.from('contracts').select('*').eq('user_id', currentUser.id);
+      const contracts = cr.error ? [] : (cr.data || []);
+      const events = [
+        ...quotes.map(q => ({ type: 'devis', client: q.client_name, date: q.created_at })),
+        ...contracts.map(c => ({ type: 'contrat', client: c.client_name, date: c.created_at }))
+      ].filter(e => e.date).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
+
+      if (events.length === 0) {
+        activityEl.innerHTML = '<div style="font-size:12px;color:#9191aa;">Aucune activité pour l\'instant.</div>';
+      } else {
+        const iconFor = { devis: ['#eef2ff', 'file-text'], contrat: ['#f5f3ff', 'clipboard'] };
+        activityEl.innerHTML = events.map(e => {
+          const [bg, ic] = iconFor[e.type];
+          const label = (e.type === 'devis' ? 'Devis créé' : 'Contrat créé') + ' — ' + escapeHtml(e.client || 'Sans nom');
+          return '<div style="display:flex;align-items:flex-start;gap:10px;">' +
+            '<div style="width:28px;height:28px;background:' + bg + ';border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#16162a;font-size:13px;"><svg class="icon"><use href="#icon-' + ic + '"></use></svg></div>' +
+            '<div><div style="font-size:12px;font-weight:600;color:#16162a;">' + label + '</div><div style="font-size:11px;color:#9191aa;margin-top:1px;">' + timeAgo(e.date) + '</div></div>' +
+          '</div>';
+        }).join('');
+      }
+    }
   } catch(e) { console.error(e); }
+}
+
+function timeAgo(dateStr) {
+  const diffMs = Date.now() - new Date(dateStr).getTime();
+  const min = Math.floor(diffMs / 60000);
+  if (min < 1) return 'À l\'instant';
+  if (min < 60) return 'Il y a ' + min + ' min';
+  const h = Math.floor(min / 60);
+  if (h < 24) return 'Il y a ' + h + 'h';
+  const d = Math.floor(h / 24);
+  if (d === 1) return 'Hier';
+  if (d < 7) return 'Il y a ' + d + ' jours';
+  return new Date(dateStr).toLocaleDateString('fr-FR');
 }
 
 async function viewDevis(id) {
