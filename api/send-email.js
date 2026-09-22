@@ -20,7 +20,10 @@ module.exports = async (req, res) => {
   }
 
   const senderEmail = process.env.BREVO_SENDER_EMAIL || 'contact.quotly@gmail.com';
-  const senderName = process.env.BREVO_SENDER_NAME || 'Quotly';
+  // Show the freelancer's own name as the visible sender (more professional for
+  // their client) while the underlying verified address stays fixed — Brevo only
+  // allows sending from addresses verified on this account.
+  const senderName = fromName || process.env.BREVO_SENDER_NAME || 'Quotly';
 
   const payload = {
     sender: { email: senderEmail, name: senderName },
